@@ -1,5 +1,4 @@
 
-
 const multer = require('multer');
 global.upload = multer({ dest: 'uploads/' });
 const express = require("express");
