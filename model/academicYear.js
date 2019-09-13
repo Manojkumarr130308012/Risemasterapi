@@ -1,0 +1,25 @@
+const mongoose = require("mongoose");
+
+const academicYearSchema = new mongoose.Schema({
+    year: {
+        type: String,
+        required: true
+    },
+    short_code: {
+        type: String,
+        required: true
+    },
+    start_date: {
+        type: String,
+        required: true
+    },
+    end_date: {
+        type: String,
+        required: true
+    },
+    status: {
+        type: String,
+        required: true
+    }
+})
+module.exports = new mongoose.model('academicYear', academicYearSchema);
