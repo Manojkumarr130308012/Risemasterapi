@@ -59,8 +59,7 @@ class institutionController{
     }
     async fetchdata(id){
 		try{
-			let response = await institutionSchema.find({'_id':id});
-			return response;
+			return response = await institutionSchema.find({'_id':id});
 			
 		} catch(error){
 			return {

@@ -1,9 +1,10 @@
 
-const multer = require('multer');
-global.upload = multer({ dest: 'uploads/' });
 const express = require("express");
 const server = express();
 const config = require('./config/config');
+// File Upload
+const multer = require('multer');
+global.upload = multer({ dest: 'uploads/' });
 
 const userDesignationRouter = require('./router/userDesignation');
 const academicYearRouter = require('./router/academicYear');
@@ -94,7 +95,7 @@ server.use("/mode-of-enquiry", modeOfEnquiryRouter);
 //server.use(cors({origin: 'http://localhost:4200'}));
 
 
-
+// File Upload
 server.use('/uploads', express.static('uploads'));
 server.set('view engine', 'pug')
 
