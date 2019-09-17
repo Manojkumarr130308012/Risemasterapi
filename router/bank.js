@@ -27,4 +27,9 @@ router.put('/update', async (req, res) => {
 	res.send(response);
 })
 
+router.get('/aggregation', async (req, res) =>{
+	let response = await bankController.aggregation();
+	res.send(response);
+	
+})
 module.exports = router;

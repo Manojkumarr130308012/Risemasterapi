@@ -1,7 +1,7 @@
 
 const bankSchema = require('./../model/bank');
 const errorHandler = require('./../utils/error.handler');
-
+const institutionSchema = require('./../model/institution');
 class bankController{
 	async add(newBank){
 		try{
@@ -70,6 +70,33 @@ class bankController{
             return { status: "error", err: err };
         }
 
+	}
+	async aggregation() {
+		try {
+			
+            let result =  await institutionSchema.aggregate([
+				{$project: {
+					_id:0
+					
+		 }}
+		]);
+		return  await bankSchema.aggregate([
+				{$lookup:
+					  {
+						from: "institutions",
+						localField: "institution",
+						foreignField: "_id",
+						as: "InstitutionDetails"
+					  }
+				 },				 
+				]);
+				
+		} catch (error) {
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
     }
 
 }
