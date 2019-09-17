@@ -26,6 +26,7 @@ router.put('/update', async (req, res) => {
 router.get('/aggregation', async (req, res) =>{
 	let response = await admissionCategoryController.aggregation();
 	res.send(response);
+	
 })
 
 module.exports = router;

@@ -89,12 +89,11 @@ class admissionCategoryController{
 						as: "InstitutionDetails"
 					  }
 				 },
-				 {
-					 $addFields: {
-						 InstitutionDetails: "$InstitutionDetails.institution_name"
-					 },
-				 },
-				 
+				//  {
+				// 	$addFields: {
+				// 		InstitutionDetails: "$InstitutionDetails.institution_name"
+				// 	},
+				// },				 
 				]);
 				
 		} catch (error) {
@@ -105,7 +104,11 @@ class admissionCategoryController{
 		}
     }
 
-
+	/*{
+		$addFields: {
+			InstitutionDetails: "$InstitutionDetails.institution_name"
+		},
+	},*/
 
 }
 module.exports = new admissionCategoryController();
