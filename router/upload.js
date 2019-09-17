@@ -21,7 +21,7 @@ router.post('/upload',upload.single('photo'), async (req, res) => {
 
 router.get('/list', async (req, res) => {
     try{
-        let response = await taskController.list(req.query);
+        let response = await fileController.list(req.query);
         res.send({status: 'success', result: response});
     } catch(err) {
         console.log(err);
