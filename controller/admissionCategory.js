@@ -1,7 +1,6 @@
 const admissionCategorySchema = require('./../model/admissionCategory');
 const institutionSchema = require('./../model/institution');
 const errorHandler = require('./../utils/error.handler');
-const request = require('request');
 
 class admissionCategoryController{
 	async add(newAdmissionCategory){

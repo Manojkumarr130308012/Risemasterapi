@@ -49,8 +49,6 @@ const modeOfEnquiryRouter = require("./router/mode-of-enquiry");
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 
-var cors = require('cors');
-
 server.use(middleware);
 
 server.use("/user-designation", userDesignationRouter);
