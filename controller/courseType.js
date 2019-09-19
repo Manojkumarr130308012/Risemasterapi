@@ -1,5 +1,6 @@
 const courseTypeSchema = require('./../model/courseType');
 const errorHandler = require('./../utils/error.handler');
+const qualificationTypeSchema = require('./../model/qualification-type');
 
 class courseTypeController{
 	async add(newAddress){
@@ -67,6 +68,33 @@ class courseTypeController{
             return { status: "error", err: err };
         }
 
+	}
+	async aggregation() {
+		try {
+			
+            let result =  await qualificationTypeSchema.aggregate([
+				{$project: {
+					_id:0
+					
+		 }}
+		]);
+		return  await courseTypeSchema.aggregate([
+				{$lookup:
+					  {
+						from: "qualificationtypes",
+						localField: "qualificationType",
+						foreignField: "_id",
+						as: "qualificationetypes"
+					  }
+				 },				 
+				]);
+				
+		} catch (error) {
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
     }
 
 }
