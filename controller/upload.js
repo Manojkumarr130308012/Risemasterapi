@@ -1,5 +1,6 @@
 var fs = require('fs');
 const Uploadimage  = require('../model/upload');
+const config = require('./../config');
 
 class uploadController{
 
@@ -13,7 +14,7 @@ class uploadController{
         })
 
         let FileDetails = await fileloc.save();
-        return { status: 'successfully added', result:FileDetails.logoLocation};
+        return { status: 'successfully added', result:`${config.app.protocal}://${config.app.host}:${config.app.port}/${FileDetails.logoLocation}`};
     }
 
     saveProfilePic(fileMeta){
