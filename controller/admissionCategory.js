@@ -87,13 +87,13 @@ class admissionCategoryController{
 						foreignField: "_id",
 						as: "InstitutionDetails"
 					  }
-				 },
+				 },			 
+				]);
 				//  {
 				// 	$addFields: {
 				// 		InstitutionDetails: "$InstitutionDetails.institution_name"
 				// 	},
-				// },				 
-				]);
+				// },	
 				
 		} catch (error) {
 			return {

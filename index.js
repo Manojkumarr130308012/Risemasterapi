@@ -47,6 +47,9 @@ const departmentRouter = require("./router/department");
 const feeTypeRouter = require("./router/fee-type");
 const modeOfEnquiryRouter = require("./router/mode-of-enquiry");
 
+//CandiadateEnquiry
+const basicDetailsRouter = require("./router/ce_basicdetails");
+
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 
@@ -92,7 +95,8 @@ server.use("/department", departmentRouter);
 server.use("/fee-type", feeTypeRouter);
 server.use("/mode-of-enquiry", modeOfEnquiryRouter);
 
-
+//CandidateEnquiry
+server.use("/ce_basicdetails", basicDetailsRouter);
 //server.use(cors({origin: 'http://localhost:4200'}));
 
 
