@@ -1,23 +1,12 @@
-const basicDetailsSchema = require('./../model/ce_basicdetails');
-const errorHandler = require('./../utils/error.handler');
+const basicDetailsSchema = require('../model/ce-basicdetails');
+const errorHandler = require('../utils/error.handler');
 
-class communityController{
-	async add(newCommunity){
+class basicDetailsController{
+	async add(newDetails){
 		try{
-			let response = await basicDetailsSchema.create(newCommunity);
-			return { status: "Success", result: response, message: "Added Successfully" };
-		} catch(error){
+			let response = await basicDetailsSchema.create(newDetails);
 			return {
-				status: "error",
-				error: errorHandler.parseMongoError(error)
-			};
-		}
-	}
-	
-	async fetch(){
-		try{
-			let response = await basicDetailsSchema.find({});
-			return {
+				status: "success",
 				response: response
 			};
 		} catch(error){
@@ -27,12 +16,26 @@ class communityController{
 			};
 		}
 	}
+	
 
 	async fetchdata(id){
 		try{
 			let response = await basicDetailsSchema.find({'_id':id});
 			return response;
 			
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
+	async fetch(){
+		try{
+			let response = await basicDetailsSchema.find({});
+			return {
+				response: response
+			};
 		} catch(error){
 			return {
 				status: "error",
@@ -55,12 +58,12 @@ class communityController{
 			};
 		}
 	}
-
+	
 	async update(id, body) {
 
         try {
             let response = await basicDetailsSchema.updateOne({_id: id}, body);
-            return { status: "Success", result: response, message: "Updated Successfully" };
+            return { status: "success", result: response };
 
         } catch (err) {
             return { status: "error", err: err };
@@ -69,4 +72,4 @@ class communityController{
     }
 
 }
-module.exports = new communityController();
+module.exports = new basicDetailsController();

@@ -1,9 +1,5 @@
 const mongoose = require("mongoose");
-
 const basicDetailsSchema = new mongoose.Schema({
-    // s-> student ; f-> father ; m-> mother; p-> parent
-    //ce/CE -> CandidateEnquiry
-   
     firstName: {
         type: String,
         required: true
@@ -24,11 +20,11 @@ const basicDetailsSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    RegNo12th: {
+    regNo12th: {
         type: String,
         required: true
     },
-    Mark12th: {
+    mark12th: {
         type: String,
         required: true
     },
@@ -80,7 +76,7 @@ const basicDetailsSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    courseType: {
+    courseCategory: {
         type: String,
         required: true
     },
@@ -159,12 +155,14 @@ const basicDetailsSchema = new mongoose.Schema({
     relativeName: {
         type: String,
         required: true
-    },
-    sPhoto: {
-        type: String
     }
-
-
+    // sPhoto: {
+    //     type: String
+    // }
    
 })
-module.exports = new mongoose.model('CE_basicdetails', basicDetailsSchema);
+module.exports = new mongoose.model('ce-basicdetail', basicDetailsSchema);
+
+
+// s-> student ; f-> father ; m-> mother; p-> parent
+    //ce/CE -> CandidateEnquiry
