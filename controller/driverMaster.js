@@ -85,7 +85,7 @@ class driverController{
 			{$lookup:
 
 					{
-						from: "vehicles",
+						from: "vehicle-masters",
 						localField: "vehicleNo",
 						foreignField: "_id",
 						as: "VehicleDetails"

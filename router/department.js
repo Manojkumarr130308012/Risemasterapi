@@ -26,7 +26,7 @@ router.put('/update', async (req, res) => {
 router.get('/aggregation', async function  (req, res) {
 	let response = await departmentController.aggregation();
 	res.send(response);
-	console.log(response);
+	//console.log(response);
 })
 
 module.exports = router;
