@@ -8,4 +8,4 @@ const uploadSchema = new mongoose.Schema({
 	}
 });
 
-module.exports = mongoose.model('upload', uploadSchema);
+module.exports = mongoose.model('ins_logo_file', uploadSchema);

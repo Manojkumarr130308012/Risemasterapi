@@ -1,29 +1,29 @@
 const courseProgramSchema = require('./../model/course-program');
-const errorHandler = require('./../utils/error.handler');
+const errorHandler = require('../utils/error.handler');
 const institutionSchema = require('./../model/institution');
 const courseCategorySchema = require('./../model/course-category');
 
-class courseProgramController{
-	async add(newCourseProgram){
-		try{
+class courseProgramController {
+	async add(newCourseProgram) {
+		try {
 			let response = await courseProgramSchema.create(newCourseProgram);
 			return { status: "Success", result: response, message: "Added Successfully" };
 
-		} catch(error){
+		} catch (error) {
 			return {
 				status: "error",
 				error: errorHandler.parseMongoError(error)
 			};
 		}
 	}
-	
-	async fetch(){
-		try{
+
+	async fetch() {
+		try {
 			let response = await courseProgramSchema.find({});
 			return {
 				response: response
 			};
-		} catch(error){
+		} catch (error) {
 			return {
 				status: "error",
 				error: errorHandler.parseMongoError(error)
@@ -31,12 +31,12 @@ class courseProgramController{
 		}
 	}
 
-	async fetchdata(id){
-		try{
-			let response = await courseProgramSchema.find({'_id':id});
+	async fetchdata(id) {
+		try {
+			let response = await courseProgramSchema.find({ '_id': id });
 			return response;
-			
-		} catch(error){
+
+		} catch (error) {
 			return {
 				status: "error",
 				error: errorHandler.parseMongoError(error)
@@ -44,14 +44,14 @@ class courseProgramController{
 		}
 	}
 
-	async delete(id){
-		try{
-			let response = await courseProgramSchema.deleteOne({_id: id});
+	async delete(id) {
+		try {
+			let response = await courseProgramSchema.deleteOne({ _id: id });
 			return {
 				status: "success",
 				response: response
 			};
-		} catch(error){
+		} catch (error) {
 			return {
 				status: "error",
 				error: errorHandler.parseMongoError(error)
@@ -61,67 +61,45 @@ class courseProgramController{
 
 	async update(id, body) {
 
-        try {
-            let response = await courseProgramSchema.updateOne({_id: id}, body);
-            return { status: "Success", result: response, message: "Updated Successfully" };
+		try {
+			let response = await courseProgramSchema.updateOne({ _id: id }, body);
+			return { status: "Success", result: response, message: "Updated Successfully" };
 
-        } catch (err) {
-            return { status: "error", err: err };
-        }
+		} catch (err) {
+			return { status: "error", err: err };
+		}
 
 	}
 	async aggregation() {
-        try {
-			let result1 =  await institutionSchema.aggregate([
-				{$project: {
-						_id:1
-	
-					   }}
-					
-				]);
-				let result2 =  await courseProgramSchema.aggregate([
-					{$lookup:
-		
-							{
-								from: "institutions",
-								localField: "institution",
-								foreignField: "_id",
-								as: "details1"
-							}},
-						]);
+		try {
+			let result1 = await institutionSchema.aggregate([
+				{
+					$project: {
+						_id: 0
 
-			let result3 =  await courseCategorySchema.aggregate([
-					{$project: {
-							_id:1
-		
-						   }}
-						
-					]);
+					}
+				}
 
-                let result4 =  await courseProgramSchema.aggregate([
+			]);
+			return await courseProgramSchema.aggregate([
+				{
+					$lookup:
+					{
+						from: "institutions",
+						localField: "institution",
+						foreignField: "_id",
+						as: "InstitutionDetails"
+					}
+				},
+			]);
 
-					{$lookup:
-
-						{
-							from: "course-categories",
-							localField: "coursecategory",
-							foreignField: "_id",
-							as: "details2"
-						}}
-				]);
-			
-       return {
-	  result1, result2, result3, result4
-		};
-
-        } catch (error) {
-            return {
-                status: "error",
-                error: errorHandler.parseMongoError(error)
-            };
-        }
+		} catch (error) {
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
 	}
-
 
 }
 module.exports = new courseProgramController();

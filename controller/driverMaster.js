@@ -1,12 +1,13 @@
-const courseCategorySchema = require('./../model/course-category');
+const driverSchema = require('./../model/driverMaster');
 const errorHandler = require('./../utils/error.handler');
-const institutionSchema = require('./../model/institution');
+const vehicleSchema = require('./../model/vehicleMaster');
 
-class courseCategoryController{
-	async add(newCourseCategory){
+class driverController{
+	async add(newDriver){
 		try{
-			let response = await courseCategorySchema.create(newCourseCategory);
+			let response = await driverSchema.create(newDriver);
 			return { status: "Success", result: response, message: "Added Successfully" };
+
 		} catch(error){
 			return {
 				status: "error",
@@ -17,7 +18,7 @@ class courseCategoryController{
 	
 	async fetch(){
 		try{
-			let response = await courseCategorySchema.find({});
+			let response = await driverSchema.find({});
 			return {
 				response: response
 			};
@@ -31,23 +32,8 @@ class courseCategoryController{
 
 	async fetchdata(id){
 		try{
-			let response = await courseCategorySchema.find({'_id':id});
+			let response = await driverSchema.find({'_id':id});
 			return response;
-			
-		} catch(error){
-			return {
-				status: "error",
-				error: errorHandler.parseMongoError(error)
-			};
-		}
-	}
-
-	async fetchbyIns(institution){
-		try{
-			let response = await courseCategorySchema.find({'institution':institution});
-			return {
-				response: response
-			};
 			
 		} catch(error){
 			return {
@@ -59,7 +45,7 @@ class courseCategoryController{
 
 	async delete(id){
 		try{
-			let response = await courseCategorySchema.deleteOne({_id: id});
+			let response = await driverSchema.deleteOne({_id: id});
 			return {
 				status: "success",
 				response: response
@@ -75,7 +61,7 @@ class courseCategoryController{
 	async update(id, body) {
 
         try {
-            let response = await courseCategorySchema.updateOne({_id: id}, body);
+            let response = await driverSchema.updateOne({_id: id}, body);
             return { status: "Success", result: response, message: "Updated Successfully" };
 
         } catch (err) {
@@ -85,23 +71,29 @@ class courseCategoryController{
 	}
 	async aggregation() {
         try {
-			let result1 =  await institutionSchema.aggregate([
+			let result1 =  await vehicleSchema.aggregate([
+
 				{$project: {
 						_id:0
 	
 					   }}
 					
 				]);
-           return  await courseCategorySchema.aggregate([
+
+           return  await driverSchema.aggregate([
+
 			{$lookup:
-				{
-				  from: "institutions",
-				  localField: "institution",
-				  foreignField: "_id",
-				  as: "InstitutionDetails"
-				}
-		   },				 
-		  ]);
+
+					{
+						from: "vehicles",
+						localField: "vehicleNo",
+						foreignField: "_id",
+						as: "VehicleDetails"
+					}}
+					
+				]);
+			
+
         } catch (error) {
             return {
                 status: "error",
@@ -111,4 +103,4 @@ class courseCategoryController{
 	}
 
 }
-module.exports = new courseCategoryController();
+module.exports = new driverController();

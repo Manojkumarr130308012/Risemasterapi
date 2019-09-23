@@ -1,5 +1,5 @@
 const departmentSchema = require('./../model/department');
-const errorHandler = require('./../utils/error.handler');
+const errorHandler = require('../utils/error.handler');
 const institutionSchema = require('./../model/institution');
 
 class departmentController{
@@ -75,13 +75,13 @@ class departmentController{
 			let result1 =  await institutionSchema.aggregate([
 
 				{$project: {
-						_id:1
+						_id:0
 	
 					   }}
 					
 				]);
 
-           let result2 =  await departmentSchema.aggregate([
+           return  await departmentSchema.aggregate([
 
 			{$lookup:
 
@@ -89,15 +89,10 @@ class departmentController{
 						from: "institutions",
 						localField: "institution",
 						foreignField: "_id",
-						as: "details"
+						as: "InstitutionDetails"
 					}}
 					
 				]);
-			
-			
-       return {
-	       result2
-		};
 
         } catch (error) {
             return {

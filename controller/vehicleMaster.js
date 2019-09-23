@@ -1,12 +1,11 @@
-const admissionTypeSchema = require('./../model/admission-type');
+const vehicleSchema = require('./../model/vehicleMaster');
 const errorHandler = require('./../utils/error.handler');
 const institutionSchema = require('./../model/institution');
 
-class admissionTypeController{
-	async add(newAdmissionType){
+class vehicleController{
+	async add(newVehicle){
 		try{
-			let response = await admissionTypeSchema.create(newAdmissionType);
-
+			let response = await vehicleSchema.create(newVehicle);
 			return { status: "Success", result: response, message: "Added Successfully" };
 
 		} catch(error){
@@ -19,7 +18,7 @@ class admissionTypeController{
 	
 	async fetch(){
 		try{
-			let response = await admissionTypeSchema.find({});
+			let response = await vehicleSchema.find({});
 			return {
 				response: response
 			};
@@ -33,7 +32,7 @@ class admissionTypeController{
 
 	async fetchdata(id){
 		try{
-			let response = await admissionTypeSchema.find({'_id':id});
+			let response = await vehicleSchema.find({'_id':id});
 			return response;
 			
 		} catch(error){
@@ -46,7 +45,7 @@ class admissionTypeController{
 
 	async delete(id){
 		try{
-			let response = await admissionTypeSchema.deleteOne({_id: id});
+			let response = await vehicleSchema.deleteOne({_id: id});
 			return {
 				status: "success",
 				response: response
@@ -62,7 +61,7 @@ class admissionTypeController{
 	async update(id, body) {
 
         try {
-            let response = await admissionTypeSchema.updateOne({_id: id}, body);
+            let response = await vehicleSchema.updateOne({_id: id}, body);
            return { status: "Success", result: response, message: "Updated Successfully" };
 
         } catch (err) {
@@ -80,7 +79,7 @@ class admissionTypeController{
 
 		 }}
 		]);
-		return  await admissionTypeSchema.aggregate([
+		return  await vehicleSchema.aggregate([
 				{$lookup:
 					  {
 						from: "institutions",
@@ -98,6 +97,5 @@ class admissionTypeController{
 			};
 		}
     }
-
 }
-module.exports = new admissionTypeController();
+module.exports = new vehicleController();
