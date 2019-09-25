@@ -26,5 +26,11 @@ router.put('/update', async (req, res) => {
 	const response = await basicDetailsController.update(req.query.id, req.body);
 	res.send(response);
 })
+router.get('/aggregation', async (req, res) =>{
+	let response = await basicDetailsController.aggregation();
+	res.send(response);
+	
+})
+
 
 module.exports = router;

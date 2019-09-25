@@ -1,33 +1,32 @@
 const router = require('express').Router();
-const addressDetailsController = require('./../controller/ce-addressdetails');
+const paymentDetailsController = require('./../controller/ce-paymentdetails');
 
 router.post('/add', async (req, res) => {
-	const response = await addressDetailsController.add(req.body);
+	const response = await paymentDetailsController.add(req.body);
 	res.send(response);
 })
 router.get('/', async (req, res) => {
 	res.setHeader('Access-Control-Allow-Origin', '*');
-	const response = await addressDetailsController.fetch();
+	const response = await paymentDetailsController.fetch();
 	res.send(response);
 })
 router.get('/fetchdata', async (req, res) => {
 	//res.setHeader('Access-Control-Allow-Origin', '*');
-	const response = await addressDetailsController.fetchdata(req.query.id);
+	const response = await paymentDetailsController.fetchdata(req.query.id);
 	res.send(response);
 })
 router.delete('/delete', async (req, res) => {
-	const response = await addressDetailsController.delete(req.query.id);
+	const response = await paymentDetailsController.delete(req.query.id);
 	res.send(response);
 })
 router.put('/update', async (req, res) => {
-	const response = await addressDetailsController.update(req.query.id, req.body);
+	const response = await paymentDetailsController.update(req.query.id, req.body);
 	res.send(response);
 })
 router.get('/aggregation', async (req, res) =>{
-	let response = await addressDetailsController.aggregation();
+	let response = await paymentDetailsController.aggregation();
 	res.send(response);
 	
 })
-
 
 module.exports = router;

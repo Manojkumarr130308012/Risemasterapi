@@ -1,11 +1,11 @@
-const addressDetailsSchema = require('../model/ce-addressdetails');
-const addressTypeSchema = require('./../model/addressType');
+const paymentDetailsSchema = require('../model/ce-paymentdetails');
+const paymentMethodSchema = require('./../model/paymentMethod');
 const errorHandler = require('../utils/error.handler');
 
-class addressDetailsController{
+class paymentDetailsController{
 	async add(newDetails){
 		try{
-			let response = await addressDetailsSchema.create(newDetails);
+			let response = await paymentDetailsSchema.create(newDetails);
 			return {
 				status: "success",
 				response: response
@@ -21,7 +21,7 @@ class addressDetailsController{
 
 	async fetchdata(id){
 		try{
-			let response = await addressDetailsSchema.find({'_id':id});
+			let response = await paymentDetailsSchema.find({'_id':id});
 			return response;
 			
 		} catch(error){
@@ -33,7 +33,7 @@ class addressDetailsController{
 	}
 	async fetch(){
 		try{
-			let response = await addressDetailsSchema.find({});
+			let response = await paymentDetailsSchema.find({});
 			return {
 				response: response
 			};
@@ -47,7 +47,7 @@ class addressDetailsController{
 
 	async delete(id){
 		try{
-			let response = await addressDetailsSchema.deleteOne({_id: id});
+			let response = await paymentDetailsSchema.deleteOne({_id: id});
 			return {
 				status: "success",
 				response: response
@@ -63,32 +63,32 @@ class addressDetailsController{
 	async update(id, body) {
 
         try {
-            let response = await addressDetailsSchema.updateOne({_id: id}, body);
+            let response = await paymentDetailsSchema.updateOne({_id: id}, body);
             return { status: "success", result: response };
 
         } catch (err) {
             return { status: "error", err: err };
         }
 
-    }
+	}
 
 	async aggregation() {
 		try {
 			
-            let result =  await addressTypeSchema.aggregate([
+            let result =  await paymentMethodSchema.aggregate([
 				{$project: {
 					_id:0
 					
 		 }}
 		]);
 		// return result;
-		return  await addressDetailsSchema.aggregate([
+		return  await paymentDetailsSchema.aggregate([
 				{$lookup:
 					  {
-						from: "addresstypes",
-						localField: "addresstype",
+						from: "paymentmethods",
+						localField: "paymentmethod",
 						foreignField: "_id",
-						as: "AddressTypeDetails"
+						as: "paymentMethodDetails"
 					  }
 				 },			 
 				]);
@@ -99,5 +99,6 @@ class addressDetailsController{
 			};
 		}
     }
+
 }
-module.exports = new addressDetailsController();
+module.exports = new paymentDetailsController();

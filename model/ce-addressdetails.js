@@ -2,8 +2,8 @@
 const mongoose = require("mongoose");
 
 const addressDetailsSchema = new mongoose.Schema({
-    addressType: {
-        type: String,
+    addresstype: {
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     flatNo: {

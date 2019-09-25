@@ -1,10 +1,8 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
-
 
 const admissionTypeSchema = new mongoose.Schema({
     institution: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     admissiontype: {

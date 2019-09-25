@@ -50,6 +50,9 @@ const modeOfEnquiryRouter = require("./router/mode-of-enquiry");
 //CandiadateEnquiry
 const basicDetailsRouter = require("./router/ce-basicdetails");
 const addressDetailsRouter = require("./router/ce-addressdetails");
+const paymentDetailsRouter = require("./router/ce-paymentdetails");
+const followupsRouter = require("./router/ce-followups");
+
 
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
@@ -99,6 +102,9 @@ server.use("/mode-of-enquiry", modeOfEnquiryRouter);
 //CandidateEnquiry
 server.use("/ce-basicdetails", basicDetailsRouter);
 server.use("/ce-addressdetails", addressDetailsRouter);
+server.use("/ce-paymentdetails", paymentDetailsRouter);
+server.use("/ce-followups", followupsRouter);
+
 //server.use(cors({origin: 'http://localhost:4200'}));
 
 

@@ -18,7 +18,7 @@ class admissionTypeController{
 	}
 	
 	async fetch(){
-		try{
+		try{  
 			let response = await admissionTypeSchema.find({});
 			return {
 				response: response
@@ -72,41 +72,30 @@ class admissionTypeController{
 	}
 	
 	async aggregation() {
-        try {
-			let result1 =  await institutionSchema.aggregate([
-
+		try {
+			
+            let result =  await institutionSchema.aggregate([
 				{$project: {
-						_id:1
-	
-					   }}
+					_id:0
 					
-				]);
-
-           let result2 =  await admissionTypeSchema.aggregate([
-
-			{$lookup:
-
-					{
+		 }}
+		]);
+		return  await admissionTypeSchema.aggregate([
+				{$lookup:
+					  {
 						from: "institutions",
 						localField: "institution",
 						foreignField: "_id",
-						as: "details"
-					}}
-					
+						as: "InstitutionDetails"
+					  }
+				 },			 
 				]);
-			
-			
-       return {
-	       result2
-		};
-
-        } catch (error) {
-            return {
-                status: "error",
-                error: errorHandler.parseMongoError(error)
-            };
-        }
-	}
-
+		} catch (error) {
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+    }
 }
 module.exports = new admissionTypeController();

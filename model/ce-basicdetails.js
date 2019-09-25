@@ -13,7 +13,7 @@ const basicDetailsSchema = new mongoose.Schema({
         required: true
     },
     gender: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     aadharNo: {
@@ -49,15 +49,15 @@ const basicDetailsSchema = new mongoose.Schema({
         required: true
     },
     institution: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     board: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     referenceType: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     referenceBy: {
@@ -69,7 +69,7 @@ const basicDetailsSchema = new mongoose.Schema({
         required: true
     },
     admissionType: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     admissionCategory: {
@@ -77,15 +77,15 @@ const basicDetailsSchema = new mongoose.Schema({
         required: true
     },
     courseCategory: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     courseProgram: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     scholarshipCategory: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     remark: {
@@ -93,19 +93,19 @@ const basicDetailsSchema = new mongoose.Schema({
         required: true
     },
     nationality: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     religion: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     community: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     caste: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     motherTongue: {
