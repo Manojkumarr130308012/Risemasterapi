@@ -5,7 +5,7 @@ class genderController{
 	async add(newGender){
 		try{
 			let response = await genderSchema.create(newGender);
-			return { status: "Success", result: response, message: "Added Successfully" };
+			return { status: "success", result: response, message: "Added Successfully" };
 
 		} catch(error){
 			return {
@@ -61,7 +61,7 @@ class genderController{
 
         try {
             let response = await genderSchema.updateOne({_id: id}, body);
-            return { status: "Success", result: response, message: "Updated Successfully" };
+            return { status: "success", result: response, message: "Updated Successfully" };
 
         } catch (err) {
             return { status: "error", err: err };

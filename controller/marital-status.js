@@ -5,7 +5,7 @@ class maritalStatusController{
 	async add(newMaritalstatus){
 		try{
 			let response = await maritalStatusSchema.create(newMaritalstatus);
-			return { status: "Success", result: response, message: "Added Successfully" };
+			return { status: "success", result: response, message: "Added Successfully" };
 
 		} catch(error){
 			return {
@@ -61,7 +61,7 @@ class maritalStatusController{
 
         try {
             let response = await maritalStatusSchema.updateOne({_id: id}, body);
-            return { status: "Success", result: response, message: "Updated Successfully" };
+            return { status: "success", result: response, message: "Updated Successfully" };
 
         } catch (err) {
             return { status: "error", err: err };
