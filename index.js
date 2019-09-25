@@ -4,7 +4,6 @@ const server = express();
 const config = require('./config/config');
 // File Upload
 const multer = require('multer');
-global.upload = multer({ dest: 'uploads/' });
 
 const userDesignationRouter = require('./router/userDesignation');
 const academicYearRouter = require('./router/academicYear');
@@ -12,6 +11,7 @@ const institutionRouter = require('./router/institution');
 const boardOfEducationRouter = require('./router/boardOfEducation');
 const admissionCategoryRouter = require('./router/admissionCategory');
 const uploadRouter = require('./router/upload');
+const driverFileUploadRouter = require('./router/driverFileUpload');
 const middleware = require('./middleware/middleware');
 const bodyParser = require('body-parser');
 const nationalityRouter = require("./router/nationality");
@@ -54,6 +54,11 @@ const paymentDetailsRouter = require("./router/ce-paymentdetails");
 const followupsRouter = require("./router/ce-followups");
 
 
+const vehicleRouter = require("./router/vehicleMaster");
+const expenseRouter = require("./router/vehicleExpenses");
+const stationRouter = require("./router/fillingStations");
+const driverRouter = require("./router/driverMaster");
+
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 
@@ -71,6 +76,8 @@ server.use("/institution", institutionRouter);
 server.use("/boardOfEducation", boardOfEducationRouter);
 server.use("/admissionCategory", admissionCategoryRouter);
 server.use("/upload", uploadRouter);
+server.use("/driverFileUpload", driverFileUploadRouter);
+
 server.use("/course-category", courseCategoryRouter);
 server.use("/course-program", courseProgramRouter);
 
@@ -107,9 +114,16 @@ server.use("/ce-followups", followupsRouter);
 
 //server.use(cors({origin: 'http://localhost:4200'}));
 
+server.use("/vehicle",vehicleRouter);
+server.use("/vehicle-expenses", expenseRouter);
+server.use("/filling-stations",stationRouter);
+server.use("/driver",driverRouter)
+
 
 // File Upload
 server.use('/uploads', express.static('uploads'));
+server.use('/driverFiles', express.static('driverFiles'));
+
 server.set('view engine', 'pug')
 
 server.listen(config.app.port, () => {

@@ -1,11 +1,11 @@
-const departmentSchema = require('./../model/department');
-const errorHandler = require('../utils/error.handler');
+const vehicleSchema = require('./../model/vehicleMaster');
+const errorHandler = require('./../utils/error.handler');
 const institutionSchema = require('./../model/institution');
 
-class departmentController{
-	async add(newDepartment){
+class vehicleController{
+	async add(newVehicle){
 		try{
-			let response = await departmentSchema.create(newDepartment);
+			let response = await vehicleSchema.create(newVehicle);
 			return { status: "Success", result: response, message: "Added Successfully" };
 
 		} catch(error){
@@ -18,7 +18,7 @@ class departmentController{
 	
 	async fetch(){
 		try{
-			let response = await departmentSchema.find({});
+			let response = await vehicleSchema.find({});
 			return {
 				response: response
 			};
@@ -32,7 +32,7 @@ class departmentController{
 
 	async fetchdata(id){
 		try{
-			let response = await departmentSchema.find({'_id':id});
+			let response = await vehicleSchema.find({'_id':id});
 			return response;
 			
 		} catch(error){
@@ -45,7 +45,7 @@ class departmentController{
 
 	async delete(id){
 		try{
-			let response = await departmentSchema.deleteOne({_id: id});
+			let response = await vehicleSchema.deleteOne({_id: id});
 			return {
 				status: "success",
 				response: response
@@ -61,7 +61,7 @@ class departmentController{
 	async update(id, body) {
 
         try {
-            let response = await departmentSchema.updateOne({_id: id}, body);
+            let response = await vehicleSchema.updateOne({_id: id}, body);
            return { status: "Success", result: response, message: "Updated Successfully" };
 
         } catch (err) {
@@ -71,36 +71,31 @@ class departmentController{
 	}
 	
 	async aggregation() {
-        try {
-			let result1 =  await institutionSchema.aggregate([
+		try {
 
+            let result =  await institutionSchema.aggregate([
 				{$project: {
-						_id:0
-	
-					   }}
-					
-				]);
+					_id:0
 
-           return  await departmentSchema.aggregate([
-
-			{$lookup:
-
-					{
+		 }}
+		]);
+		return  await vehicleSchema.aggregate([
+				{$lookup:
+					  {
 						from: "institutions",
 						localField: "institution",
 						foreignField: "_id",
 						as: "InstitutionDetails"
-					}}
-					
+					  }
+				 },				 
 				]);
 
-        } catch (error) {
-            return {
-                status: "error",
-                error: errorHandler.parseMongoError(error)
-            };
-        }
-	}
-
+		} catch (error) {
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+    }
 }
-module.exports = new departmentController();
+module.exports = new vehicleController();

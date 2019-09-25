@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const departmentSchema = new mongoose.Schema({
     institution: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     department: {
