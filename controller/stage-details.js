@@ -46,9 +46,7 @@ class stageDetailsController{
 		try{
 			let response = await stageDetailsSchema.find({'IdValue':IdValue});
 			
-			return {
-				response: response
-			};
+			return  response;
 			
 		} catch(error){
 			return {
