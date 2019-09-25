@@ -73,19 +73,11 @@ class admissionTypeController{
 	
 	async aggregation() {
 		try {
-<<<<<<< HEAD
 			
             let result =  await institutionSchema.aggregate([
 				{$project: {
 					_id:0
 					
-=======
-
-            let result =  await institutionSchema.aggregate([
-				{$project: {
-					_id:0
-
->>>>>>> 7b45bc78965bc936277e217eb557415de518f76b
 		 }}
 		]);
 		return  await admissionTypeSchema.aggregate([
@@ -96,14 +88,8 @@ class admissionTypeController{
 						foreignField: "_id",
 						as: "InstitutionDetails"
 					  }
-<<<<<<< HEAD
 				 },			 
 				]);
-=======
-				 },				 
-				]);
-
->>>>>>> 7b45bc78965bc936277e217eb557415de518f76b
 		} catch (error) {
 			return {
 				status: "error",
@@ -111,9 +97,5 @@ class admissionTypeController{
 			};
 		}
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> 7b45bc78965bc936277e217eb557415de518f76b
 }
 module.exports = new admissionTypeController();

@@ -52,6 +52,10 @@ const basicDetailsRouter = require("./router/ce-basicdetails");
 const addressDetailsRouter = require("./router/ce-addressdetails");
 const paymentDetailsRouter = require("./router/ce-paymentdetails");
 const followupsRouter = require("./router/ce-followups");
+const sslcDetailsRouter = require("./router/ce-qd-sslcdetails");
+const hscDetailsRouter = require("./router/ce-qd-hscdetails");
+const diplomaDetailsRouter = require("./router/ce-qd-diplomadetails");
+const degreeDetailsRouter = require("./router/ce-qd-degreedetails");
 
 
 const vehicleRouter = require("./router/vehicleMaster");
@@ -111,6 +115,10 @@ server.use("/ce-basicdetails", basicDetailsRouter);
 server.use("/ce-addressdetails", addressDetailsRouter);
 server.use("/ce-paymentdetails", paymentDetailsRouter);
 server.use("/ce-followups", followupsRouter);
+server.use("/ce-qd-sslcdetails", sslcDetailsRouter);
+server.use("/ce-qd-hscdetails", hscDetailsRouter);
+server.use("/ce-qd-diplomadetails", diplomaDetailsRouter);
+server.use("/ce-qd-degreedetails", degreeDetailsRouter);
 
 //server.use(cors({origin: 'http://localhost:4200'}));
 
