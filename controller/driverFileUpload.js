@@ -1,5 +1,6 @@
 var fs = require('fs');
 const Uploadimage  = require('../model/driverFileUpload');
+const config = require('./../config');
 
 class uploadController{
 
@@ -13,7 +14,7 @@ class uploadController{
         })
 
         let FileDetails = await fileloc.save();
-        return { status: 'Successfully added', driverFileResult1:FileDetails.photoLocation};
+        return { status: 'Successfully added', driverFileResult1:`${config.app.protocal}://${config.app.host}:${config.app.port}/${FileDetails.photoLocation}`};
     }
     saveProfilePic(fileMeta){
         return fileMeta.path;
@@ -30,7 +31,7 @@ class uploadController{
         })
 
         let FileDetails2 = await fileloc2.save();
-        return { status: 'Successfully added', driverFileResult2:FileDetails2.fileLocation};
+        return { status: 'Successfully added', driverFileResult2:`${config.app.protocal}://${config.app.host}:${config.app.port}/${FileDetails2.fileLocation}`};
     }
 
     saveProfilePic2(fileMeta2){
