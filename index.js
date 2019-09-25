@@ -57,11 +57,12 @@ const hscDetailsRouter = require("./router/ce-qd-hscdetails");
 const diplomaDetailsRouter = require("./router/ce-qd-diplomadetails");
 const degreeDetailsRouter = require("./router/ce-qd-degreedetails");
 
-
+// Vehicle Management 
 const vehicleRouter = require("./router/vehicleMaster");
 const expenseRouter = require("./router/vehicleExpenses");
 const stationRouter = require("./router/fillingStations");
 const driverRouter = require("./router/driverMaster");
+const stageDetailsRouter = require("./router/stage-details");
 
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
@@ -122,10 +123,12 @@ server.use("/ce-qd-degreedetails", degreeDetailsRouter);
 
 //server.use(cors({origin: 'http://localhost:4200'}));
 
+// Vehicle Management
 server.use("/vehicle",vehicleRouter);
 server.use("/vehicle-expenses", expenseRouter);
 server.use("/filling-stations",stationRouter);
 server.use("/driver",driverRouter)
+server.use("/stage-details",stageDetailsRouter)
 
 
 // File Upload

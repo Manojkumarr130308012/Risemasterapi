@@ -14,7 +14,7 @@ class uploadController{
         })
 
         let FileDetails = await fileloc.save();
-        return { status: 'successfully added', result:`${config.app.protocal}://${config.app.host}:${config.app.port}/${FileDetails.logoLocation}`};
+        return { status: 'Successfully added', result:`${config.app.protocal}://${config.app.host}:${config.app.port}/${FileDetails.logoLocation}`};
     }
 
     saveProfilePic(fileMeta){

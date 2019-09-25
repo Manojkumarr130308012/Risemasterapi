@@ -60,6 +60,9 @@ const vehicleSchema = new mongoose.Schema({
     notes: {
         type: String,
         required: true
+    },
+    stage: {
+        type: String,
     }
 
 

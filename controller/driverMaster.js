@@ -6,7 +6,7 @@ class driverController{
 	async add(newDriver){
 		try{
 			let response = await driverSchema.create(newDriver);
-			return { status: "Success", result: response, message: "Added Successfully" };
+			return { status: "success", result: response, message: "Added Successfully" };
 
 		} catch(error){
 			return {
@@ -62,7 +62,7 @@ class driverController{
 
         try {
             let response = await driverSchema.updateOne({_id: id}, body);
-            return { status: "Success", result: response, message: "Updated Successfully" };
+            return { status: "success", result: response, message: "Updated Successfully" };
 
         } catch (err) {
             return { status: "error", err: err };

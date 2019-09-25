@@ -13,7 +13,7 @@ class uploadController{
         })
 
         let FileDetails = await fileloc.save();
-        return { status: 'successfully added', driverFileResult1:FileDetails.photoLocation};
+        return { status: 'Successfully added', driverFileResult1:FileDetails.photoLocation};
     }
     saveProfilePic(fileMeta){
         return fileMeta.path;
@@ -30,7 +30,7 @@ class uploadController{
         })
 
         let FileDetails2 = await fileloc2.save();
-        return { status: 'successfully added', driverFileResult2:FileDetails2.fileLocation};
+        return { status: 'Successfully added', driverFileResult2:FileDetails2.fileLocation};
     }
 
     saveProfilePic2(fileMeta2){

@@ -6,7 +6,7 @@ class institutionController{
 		try{
 			let response = await institutionSchema.create(newinstitution);
 			
-			return { status: "Success", result: response, message: "Added Successfully" };
+			return { status: "success", result: response, message: "Added Successfully" };
 			
 		} catch(error){
 			return {
@@ -47,7 +47,7 @@ class institutionController{
 
         try {
             let response = await institutionSchema.updateOne({_id: id}, body);
-			return { status: "Success", result: response, message: "Updated Successfully" };
+			return { status: "success", result: response, message: "Updated Successfully" };
 
         } catch (err) {
             return { 

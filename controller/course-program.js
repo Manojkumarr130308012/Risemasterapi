@@ -7,7 +7,7 @@ class courseProgramController {
 	async add(newCourseProgram) {
 		try {
 			let response = await courseProgramSchema.create(newCourseProgram);
-			return { status: "Success", result: response, message: "Added Successfully" };
+			return { status: "success", result: response, message: "Added Successfully" };
 
 		} catch (error) {
 			return {
@@ -63,7 +63,7 @@ class courseProgramController {
 
 		try {
 			let response = await courseProgramSchema.updateOne({ _id: id }, body);
-			return { status: "Success", result: response, message: "Updated Successfully" };
+			return { status: "success", result: response, message: "Updated Successfully" };
 
 		} catch (err) {
 			return { status: "error", err: err };

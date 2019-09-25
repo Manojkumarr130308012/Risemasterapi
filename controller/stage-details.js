@@ -1,13 +1,12 @@
-const paymentMethodSchema = require('./../model/paymentMethod');
+const stageDetailsSchema = require('./../model/stage-details');
 const errorHandler = require('./../utils/error.handler');
 
-class paymentMethodController{
-	async add(newAddress){
+class stageDetailsController{
+	async add(newStageDetails){
 		try{
-			let response = await paymentMethodSchema.create(newAddress);
-			
+			let response = await stageDetailsSchema.create(newStageDetails);
 			return { status: "success", result: response, message: "Added Successfully" };
-			
+
 		} catch(error){
 			return {
 				status: "error",
@@ -18,7 +17,7 @@ class paymentMethodController{
 	
 	async fetch(){
 		try{
-			let response = await paymentMethodSchema.find({});
+			let response = await stageDetailsSchema.find({});
 			return {
 				response: response
 			};
@@ -32,8 +31,24 @@ class paymentMethodController{
 
 	async fetchdata(id){
 		try{
-			let response = await paymentMethodSchema.find({'_id':id});
+			let response = await stageDetailsSchema.find({'_id':id});
 			return response;
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+    }
+    
+    async fetchbyVehicleId(IdValue){
+		try{
+			let response = await stageDetailsSchema.find({'IdValue':IdValue});
+			
+			return {
+				response: response
+			};
 			
 		} catch(error){
 			return {
@@ -45,7 +60,7 @@ class paymentMethodController{
 
 	async delete(id){
 		try{
-			let response = await paymentMethodSchema.deleteOne({_id: id});
+			let response = await stageDetailsSchema.deleteOne({_id: id});
 			return {
 				status: "success",
 				response: response
@@ -61,7 +76,7 @@ class paymentMethodController{
 	async update(id, body) {
 
         try {
-            let response = await paymentMethodSchema.updateOne({_id: id}, body);
+            let response = await stageDetailsSchema.updateOne({_id: id}, body);
             return { status: "success", result: response, message: "Updated Successfully" };
 
         } catch (err) {
@@ -71,4 +86,4 @@ class paymentMethodController{
     }
 
 }
-module.exports = new paymentMethodController();
+module.exports = new stageDetailsController();

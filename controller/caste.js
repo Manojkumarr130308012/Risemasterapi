@@ -5,7 +5,7 @@ class casteController{
 	async add(newCaste){
 		try{
 			let response = await casteSchema.create(newCaste);
-			return { status: "Success", result: response, message: "Added Successfully" };
+			return { status: "success", result: response, message: "Added Successfully" };
 		} catch(error){
 			return {
 				status: "error",
@@ -60,7 +60,7 @@ class casteController{
 
         try {
             let response = await casteSchema.updateOne({_id: id}, body);
-            return { status: "Success", result: response, message: "Updated Successfully" };
+            return { status: "success", result: response, message: "Updated Successfully" };
 
         } catch (err) {
             return { status: "error", err: err };

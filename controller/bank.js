@@ -7,7 +7,7 @@ class bankController{
 		try{
 			let response = await bankSchema.create(newBank);
 		
-			return { status: "Success", result: response, message: "Added Successfully" };
+			return { status: "success", result: response, message: "Added Successfully" };
 			
 		} catch(error){
 			return {
@@ -64,7 +64,7 @@ class bankController{
 
         try {
             let response = await bankSchema.updateOne({_id: id}, body);
-            return { status: "Success", result: response, message: "Updated Successfully" };
+            return { status: "success", result: response, message: "Updated Successfully" };
 
         } catch (err) {
             return { status: "error", err: err };

@@ -10,7 +10,7 @@ class userDesignationController {
 
             let response = await designationSchema.create(newDesignation);
 
-            return { status: "Success", result: response, message: "Added Successfully" };
+            return { status: "success", result: response, message: "Added Successfully" };
 
         } catch (err) {
             return {
@@ -25,7 +25,7 @@ class userDesignationController {
         try {
             let response = await designationSchema.updateOne({ _id: id}, designationData);
            // console.log(designationData, id);
-            return { status: "Success", result: response, message: "Updated Successfully" };
+            return { status: "success", result: response, message: "Updated Successfully" };
 
         } catch (err) {
             return { status: "error", err: errorHandler.parseMongoError(err) };
