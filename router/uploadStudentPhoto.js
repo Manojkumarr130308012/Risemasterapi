@@ -19,14 +19,4 @@ router.post('/upload',upload.single('photo'), async (req, res) => {
     }
 });
 
-router.get('/list', async (req, res) => {
-    try{
-        let response = await studentPhotoController.list(req.query);
-        res.send({status: 'success', result: response});
-    } catch(err) {
-        console.log(err);
-        res.status(500).send(JSON.stringify({status:'error', 'message':err.message}));
-    }
-})
-
 module.exports = router;
