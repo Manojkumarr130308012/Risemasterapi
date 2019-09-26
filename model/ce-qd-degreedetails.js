@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 
 const degreeDetailsSchema = new mongoose.Schema({
     degreecourseType: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     degreeinstitutionType: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     degreeschoolCollege: {
@@ -14,7 +14,7 @@ const degreeDetailsSchema = new mongoose.Schema({
         required: true
     },
     degreemedium: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     degreecity: {

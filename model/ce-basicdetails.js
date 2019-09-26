@@ -155,10 +155,10 @@ const basicDetailsSchema = new mongoose.Schema({
     relativeName: {
         type: String,
         required: true
+    },
+    sPhoto: {
+        type: String
     }
-    // sPhoto: {
-    //     type: String
-    // }
    
 })
 module.exports = new mongoose.model('ce-basicdetail', basicDetailsSchema);

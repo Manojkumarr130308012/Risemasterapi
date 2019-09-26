@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 
 const sslcDetailsSchema = new mongoose.Schema({
     sslccourseType: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     sslcinstitutionType: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     sslcschoolCollege: {
@@ -14,7 +14,7 @@ const sslcDetailsSchema = new mongoose.Schema({
         required: true
     },
     sslcmedium: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     sslccity: {
