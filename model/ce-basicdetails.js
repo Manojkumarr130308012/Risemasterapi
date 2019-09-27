@@ -161,7 +161,7 @@ const basicDetailsSchema = new mongoose.Schema({
     }
    
 })
-module.exports = new mongoose.model('ce-basicdetail', basicDetailsSchema);
+module.exports = new mongoose.model('basicdetail', basicDetailsSchema);
 
 
 // s-> student ; f-> father ; m-> mother; p-> parent

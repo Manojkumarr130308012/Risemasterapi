@@ -96,6 +96,19 @@ class courseTypeController{
 			};
 		}
     }
-
+	// async fetchbyQua(qualificationType){
+	// 	try{
+	// 		let response = await courseTypeSchema.find({'qualificationType':qualificationType});
+	// 		return {
+	// 			response: response
+	// 		};
+			
+	// 	} catch(error){
+	// 		return {
+	// 			status: "error",
+	// 			error: errorHandler.parseMongoError(error)
+	// 		};
+	// 	}
+	// }
 }
 module.exports = new courseTypeController();

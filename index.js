@@ -66,6 +66,11 @@ const stationRouter = require("./router/fillingStations");
 const driverRouter = require("./router/driverMaster");
 const stageDetailsRouter = require("./router/stage-details");
 
+////
+const addCECourseProgramRouter = require("./router/addCEcourseProgram");
+//
+
+
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 
@@ -139,6 +144,10 @@ server.use('/uploads', express.static('uploads'));
 server.use('/driverFiles', express.static('driverFiles'));
 server.use('/studentPhoto', express.static('studentPhoto'));
 server.set('view engine', 'pug')
+
+
+server.use("/addCEcourseProgram", addCECourseProgramRouter);
+////
 
 server.listen(config.app.port, () => {
 	console.log(`Listening on`, config.app.port);

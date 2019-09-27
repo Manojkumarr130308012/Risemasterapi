@@ -137,7 +137,8 @@ class sslcDetailsController{
 				error: errorHandler.parseMongoError(error)
 			};
 		}
-    }
+	}
+	
 
 }
 module.exports = new sslcDetailsController();
