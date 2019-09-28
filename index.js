@@ -56,6 +56,8 @@ const sslcDetailsRouter = require("./router/ce-qd-sslcdetails");
 const hscDetailsRouter = require("./router/ce-qd-hscdetails");
 const diplomaDetailsRouter = require("./router/ce-qd-diplomadetails");
 const degreeDetailsRouter = require("./router/ce-qd-degreedetails");
+const studentPhotoRouter = require("./router/uploadStudentPhoto");
+
 
 // Vehicle Management 
 const vehicleRouter = require("./router/vehicleMaster");
@@ -63,6 +65,11 @@ const expenseRouter = require("./router/vehicleExpenses");
 const stationRouter = require("./router/fillingStations");
 const driverRouter = require("./router/driverMaster");
 const stageDetailsRouter = require("./router/stage-details");
+
+////
+const addCECourseProgramRouter = require("./router/addCEcourseProgram");
+//
+
 
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
@@ -120,6 +127,7 @@ server.use("/ce-qd-sslcdetails", sslcDetailsRouter);
 server.use("/ce-qd-hscdetails", hscDetailsRouter);
 server.use("/ce-qd-diplomadetails", diplomaDetailsRouter);
 server.use("/ce-qd-degreedetails", degreeDetailsRouter);
+server.use("/uploadStudentPhoto", studentPhotoRouter);
 
 //server.use(cors({origin: 'http://localhost:4200'}));
 
@@ -134,8 +142,12 @@ server.use("/stage-details",stageDetailsRouter)
 // File Upload
 server.use('/uploads', express.static('uploads'));
 server.use('/driverFiles', express.static('driverFiles'));
-
+server.use('/studentPhoto', express.static('studentPhoto'));
 server.set('view engine', 'pug')
+
+
+server.use("/addCEcourseProgram", addCECourseProgramRouter);
+////
 
 server.listen(config.app.port, () => {
 	console.log(`Listening on`, config.app.port);

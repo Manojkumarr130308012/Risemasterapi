@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 
 const diplomaDetailsSchema = new mongoose.Schema({
     diplomacourseType: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     diplomainstitutionType: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     diplomaschoolCollege: {
@@ -14,7 +14,7 @@ const diplomaDetailsSchema = new mongoose.Schema({
         required: true
     },
     diplomamedium: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     diplomacity: {

@@ -28,7 +28,11 @@ router.put('/update', async (req, res) => {
 })
 router.get('/aggregation', async (req, res) =>{
 	let response = await courseTypeController.aggregation();
+	res.send(response);	
+})
+router.get('/fetchbyQua', async (req, res) => {
+	//res.setHeader('Access-Control-Allow-Origin', '*');
+	const response = await courseTypeController.fetchbyQua(req.query.qualificationType);
 	res.send(response);
-	
 })
 module.exports = router;

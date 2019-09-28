@@ -27,4 +27,9 @@ router.get('/aggregation', async function  (req, res) {
 	let response = await courseProgramController.aggregation();
 	res.send(response);
 })
+router.get('/fetchByCouCate', async (req, res) => {
+	//res.setHeader('Access-Control-Allow-Origin', '*');
+	const response = await courseProgramController.fetchByCouCate(req.query.coursecategory);
+	res.send(response);
+})
 module.exports = router;

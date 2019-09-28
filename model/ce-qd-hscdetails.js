@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 
 const hscDetailsSchema = new mongoose.Schema({
     hsccourseType: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     hscinstitutionType: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     hscschoolCollege: {
@@ -14,7 +14,7 @@ const hscDetailsSchema = new mongoose.Schema({
         required: true
     },
     hscmedium: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     hsccity: {
