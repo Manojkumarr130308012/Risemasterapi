@@ -66,8 +66,8 @@ class addressDetailsController{
             let response = await addressDetailsSchema.updateOne({_id: id}, body);
             return { status: "success", result: response };
 
-        } catch (err) {
-            return { status: "error", err: err };
+        } catch (error) {
+            return { status: "error", error: error };
         }
 
     }

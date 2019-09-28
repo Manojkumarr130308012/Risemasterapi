@@ -76,8 +76,8 @@ class basicDetailsController{
             let response = await basicDetailsSchema.updateOne({_id: id}, body);
             return { status: "success", result: response };
 
-        } catch (err) {
-            return { status: "error", err: err };
+        } catch (error) {
+            return { status: "error", error: error };
         }
 
 	}
@@ -157,7 +157,7 @@ class basicDetailsController{
 		    let ReferenceType = await basicDetailsSchema.aggregate([
 								{$lookup:
 									  {
-										from: "referraltypes",
+										from: "referroraltypes",
 										localField: "referenceType",
 										foreignField: "_id",
 										as: "ReferenceTypeDetails"

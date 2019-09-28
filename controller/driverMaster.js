@@ -64,8 +64,8 @@ class driverController{
             let response = await driverSchema.updateOne({_id: id}, body);
             return { status: "success", result: response, message: "Updated Successfully" };
 
-        } catch (err) {
-            return { status: "error", err: err };
+        } catch (error) {
+            return { status: "error", error: error };
         }
 
 	}

@@ -12,10 +12,12 @@ class userDesignationController {
 
             return { status: "success", result: response, message: "Added Successfully" };
 
-        } catch (err) {
+        } catch (error) {
+            
             return {
-                status: "error", err: errorHandler.parseMongoError(err)
+                status: "error", error: errorHandler.parseMongoError(error)
             };
+       
         }
 
     }
@@ -27,8 +29,8 @@ class userDesignationController {
            // console.log(designationData, id);
             return { status: "success", result: response, message: "Updated Successfully" };
 
-        } catch (err) {
-            return { status: "error", err: errorHandler.parseMongoError(err) };
+        } catch (error) {
+            return { status: "error", error: error };
         }
 
     }

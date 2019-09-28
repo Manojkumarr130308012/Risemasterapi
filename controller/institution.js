@@ -49,10 +49,10 @@ class institutionController{
             let response = await institutionSchema.updateOne({_id: id}, body);
 			return { status: "success", result: response, message: "Updated Successfully" };
 
-        } catch (err) {
+        } catch (error) {
             return { 
                 status: "error",
-                 err: err 
+                 error: error 
                 };
         }
 
