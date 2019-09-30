@@ -42,7 +42,7 @@ class basicDetailsController{
 	
 	async saveToken(userID, token){
         try{
-            await userSchema.update({_id: userID}, {token: token})
+            await basicDetailsSchema.update({_id: userID}, {token: token})
         } catch(err){
             console.log(err);
         }
