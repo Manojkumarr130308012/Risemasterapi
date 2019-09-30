@@ -63,8 +63,8 @@ class academicYearController{
             let response = await academicYearSchema.updateOne({_id: id}, body);
             return { status: "success", result: response, message: "Updated Successfully" };
 
-        } catch (err) {
-            return { status: "error", err: err };
+        } catch (error) {
+            return { status: "error", error: error };
         }
 
     }

@@ -1,16 +1,18 @@
 const mongoose = require('mongoose');
 
-mongoose.set('useCreateIndex', true);
+
 
 const designationSchema = new mongoose.Schema({
-	// designationId: {
-	// 	type: String,		
-	// 	unique: true,
-	// },
+	 designationId: {
+		 type: String,
+		 required: true,
+		 unique: true	
+	 	
+	 },
 	designationName: {
 		type: String,
-		required: true,
-		unique: true			
+		required: true
+					
 	}
 });
 
