@@ -5,6 +5,7 @@ const errorHandler = require('../utils/error.handler');
 class addressDetailsController{
 	async add(newDetails){
 		try{
+			newDetails = {...newDetails, ...{userId: userSession.id}}
 			let response = await addressDetailsSchema.create(newDetails);
 			return {
 				status: "success",

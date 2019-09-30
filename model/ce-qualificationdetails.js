@@ -1,31 +1,31 @@
 const mongoose = require("mongoose");
 
 const sslcDetailsSchema = new mongoose.Schema({
-    sslccourseType: {
-        type: mongoose.Schema.ObjectId,
-        required: true
-    },
-    sslcinstitutionType: {
-        type: mongoose.Schema.ObjectId,
-        required: true
-    },
-    sslcschoolCollege: {
+    courseType: {
         type: String,
         required: true
     },
-    sslcmedium: {
-        type: mongoose.Schema.ObjectId,
-        required: true
-    },
-    sslccity: {
+    institutionType: {
         type: String,
         required: true
     },
-    sslctaluk: {
+    schoolCollege: {
         type: String,
         required: true
     },
-    sslcdistrict: {
+    medium: {
+        type: String,
+        required: true
+    },
+    city: {
+        type: String,
+        required: true
+    },
+    taluk: {
+        type: String,
+        required: true
+    },
+    district: {
         type: String,
         required: true
     },
@@ -33,29 +33,29 @@ const sslcDetailsSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    sslccountry: {
+    country: {
         type: String,
         required: true
     },
-    sslcyearOfPassing: {
+    yearOfPassing: {
         type: String,
         required: true
     },
-    sslcmarkObtained: {
+    markObtained: {
         type: String,
         required: true
     },
-    sslcmaxMark: {
+    maxMark: {
         type: String,
         required: true
     },
-    sslcpercentage: {
+    percentage: {
         type: String,
         required: true
     },
-    sslcorganisationType: {
+    organisationType: {
         type: String,
         required: true
     }
 })
-module.exports = new mongoose.model('ce-qd-sslcDetail', sslcDetailsSchema);
+module.exports = new mongoose.model('ce-QualifictaionDetail', sslcDetailsSchema);

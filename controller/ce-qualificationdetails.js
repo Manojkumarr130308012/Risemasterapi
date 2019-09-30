@@ -1,8 +1,8 @@
-const sslcDetailsSchema = require('../model/ce-qd-sslcdetails');
+const sslcDetailsSchema = require('../model/ce-qualificationdetails');
 const errorHandler = require('../utils/error.handler');
-const courseTypeSchema = require('./../model/courseType');
-const mediumSchema = require('./../model/medium');
-const institutionTypeSchema = require('./../model/institutionType');
+const courseTypeSchema = require('../model/courseType');
+const mediumSchema = require('../model/medium');
+const institutionTypeSchema = require('../model/institutionType');
 class sslcDetailsController{
 	async add(newDetails){
 		try{
