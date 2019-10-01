@@ -159,9 +159,9 @@ const basicDetailsSchema = new mongoose.Schema({
     sPhoto: {
         type: String
     },
-    token: {
-        type: String,
-        required: false,
+    CEId: {
+        type: Number,
+        default:1000
     }
    
 })

@@ -29,7 +29,7 @@ server.use(['/ce-addressdetails'], async (req, res, next) => {
 		})
 	}
 
-	await basicDetailsController.validateToken(res, req.headers.authorization);
+	await basicDetailsController.validateId(res, req.headers.authorization);
 
 	next();
 })

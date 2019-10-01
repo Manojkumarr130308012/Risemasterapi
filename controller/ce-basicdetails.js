@@ -15,21 +15,17 @@ const casteSchema = require('./../model/caste');
 class basicDetailsController{
 	async add(newDetails){
 		try{
-			let user  = await basicDetailsSchema.create(newDetails);
-			if(!user){
-                throw new Error('invalid creds');
-            }
-
-            let token = this.generateToken();
-
-            this.saveToken(user._id, token);
-
-            user.token = token;
-
-            return {
-                status: "success",
-                data: user,
-            };
+			let response  = await basicDetailsSchema.create(newDetails);
+			// console.log(response);
+			let id = response._id;
+			console.log(id);
+			let CEId = await basicDetailsSchema.findOneAndUpdate({'_id':id}, { $inc: { CEId: 1 }});
+			this.saveID(id, CEId);
+			response.CEId = CEId;
+			return {
+				status: "success",
+				response: response
+			};
 
 			
 		} catch(error){
@@ -40,35 +36,29 @@ class basicDetailsController{
 		}
 	}
 	
-	async saveToken(userID, token){
+	async saveID(canId, CEId){
         try{
-            await basicDetailsSchema.update({_id: userID}, {token: token})
+           return  await basicDetailsSchema.update({_id: canId}, {CEId: CEId})
         } catch(err){
             console.log(err);
         }
-    }
-
-    generateToken() {
-        let timeStamp = `${new Date().getTime()}`;
-
-        return require('crypto').createHash('md5').update(timeStamp).digest('hex')
-    }
-
-    async validateToken(res, token, userId){
+	}
+	
+	async validateId(res, CEId, canId){
         try{
-            let user = await basicDetailsSchema.findOne({
-                token: token
+            let response = await basicDetailsSchema.findOne({
+                CEId: CEId
             });
 
-            if(!user){
-                throw new Error('invalid token');
+            if(!response){
+                throw new Error('invalid Id');
             }
 
-            global.userSession = user;
+            global.userSession = response;
         } catch(error){
             res.send({
                 status: 'error',
-                msg: 'Invalid token'
+                msg: 'Invalid ID'
             });
         }
     }
