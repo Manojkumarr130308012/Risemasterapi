@@ -90,6 +90,7 @@ class admissionTypeController{
 					  }
 				 },			 
 				]);
+				
 		} catch (error) {
 			return {
 				status: "error",

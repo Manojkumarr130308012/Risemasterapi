@@ -60,6 +60,11 @@ const stationRouter = require("./router/fillingStations");
 const driverRouter = require("./router/driverMaster");
 const stageDetailsRouter = require("./router/stage-details");
 
+// Staff Management
+const staffProfileRouter = require("./router/staff-profile");
+const staffDetailsRouter = require("./router/staff-details");
+const staffFileUploadRouter = require('./router/staffFileUpload');
+
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 
@@ -119,9 +124,13 @@ server.use("/ce-followups", followupsRouter);
 server.use("/vehicle",vehicleRouter);
 server.use("/vehicle-expenses", expenseRouter);
 server.use("/filling-stations",stationRouter);
-server.use("/driver",driverRouter)
-server.use("/stage-details",stageDetailsRouter)
+server.use("/driver",driverRouter);
+server.use("/stage-details",stageDetailsRouter);
 
+// Staff Management
+server.use("/staff-profile",staffProfileRouter);
+server.use("/staff-details",staffDetailsRouter);
+server.use("/staffFileUpload", staffFileUploadRouter);
 
 // File Upload
 server.use('/uploads', express.static('uploads'));
