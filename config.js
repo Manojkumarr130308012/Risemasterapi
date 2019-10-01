@@ -15,7 +15,7 @@ module.exports = {
         secure: true, // true for 465, false for other ports
         auth: {
             user: 'santhiyaptsm@gmail.com',
-            pass: 'sandyptsm143'
+            pass: ''
         }
     }
 }
