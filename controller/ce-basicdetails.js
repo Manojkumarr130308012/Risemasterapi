@@ -12,23 +12,37 @@ const nationalitySchema = require('./../model/nationality');
 const religionSchema = require('./../model/religion');
 const communitySchema = require('./../model/community');
 const casteSchema = require('./../model/caste');
+
+
 class basicDetailsController{
 	async add(newDetails){
 		try{
-			let response  = await basicDetailsSchema.create(newDetails);
+			let response2  = await basicDetailsSchema.create(newDetails);
 			// console.log(response);
-			let id = response._id;
-			console.log(id);
-			let CEId = await basicDetailsSchema.findOneAndUpdate({'_id':id}, { $inc: { CEId: 1 }});
-			this.saveID(id, CEId);
-			response.CEId = CEId;
-			return {
+			let id = response2._id;
+			console.log('id',id);
+			let CEIdnew = await basicDetailsSchema.findOneAndUpdate(
+				{'_id':id}, { $inc: { CEId: 1 }}, {useFindAndModify: false});
+				console.log('CEIdnew',CEIdnew);
+			}
+		/*	{new: true}, function(err, response){
+				if (err){
+					callback(err);
+				}else{
+					callback(response);
+					console.log (response);
+				}
+			});*/
+			//console.log('CEId',CEId);
+			//this.saveID(id, CEId);
+			//let CEId2 =response.CEId;
+		/*	return {
 				status: "success",
 				response: response
-			};
+			};*/
 
 			
-		} catch(error){
+		 catch(error){
 			return {
 				status: "error",
 				error: errorHandler.parseMongoError(error)
@@ -42,6 +56,18 @@ class basicDetailsController{
         } catch(err){
             console.log(err);
         }
+	}
+
+	async update(id, body) {
+
+        try {
+            let response = await basicDetailsSchema.updateOne({_id: id}, body);
+            return { status: "success", result: response };
+
+        } catch (error) {
+            return { status: "error", error: error };
+        }
+
 	}
 	
 	async validateId(res, CEId, canId){
@@ -103,17 +129,7 @@ class basicDetailsController{
 		}
 	}
 	
-	async update(id, body) {
-
-        try {
-            let response = await basicDetailsSchema.updateOne({_id: id}, body);
-            return { status: "success", result: response };
-
-        } catch (error) {
-            return { status: "error", error: error };
-        }
-
-	}
+	
 	async aggregation() {
 		try {
 			

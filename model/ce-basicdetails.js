@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+mongoose.set('useFindAndModify', false);
 const basicDetailsSchema = new mongoose.Schema({
     firstName: {
         type: String,
@@ -165,6 +166,8 @@ const basicDetailsSchema = new mongoose.Schema({
     }
    
 })
+
+
 module.exports = new mongoose.model('ce_basicdetail', basicDetailsSchema);
 
 
