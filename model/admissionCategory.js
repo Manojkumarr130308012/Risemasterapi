@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const admissionCategorySchema = new mongoose.Schema({
     institution: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     admissionCategory: {

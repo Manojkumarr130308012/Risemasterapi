@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+
 const basicDetailsSchema = new mongoose.Schema({
     firstName: {
         type: String,
@@ -162,7 +164,7 @@ const basicDetailsSchema = new mongoose.Schema({
     },
     CEId: {
         type: Number,
-        default:1000
+        unique: true
     }
    
 })
