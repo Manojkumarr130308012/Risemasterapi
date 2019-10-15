@@ -1,4 +1,7 @@
 const mongoose = require("mongoose");
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+
 const basicDetailsSchema = new mongoose.Schema({
     firstName: {
         type: String,
@@ -159,12 +162,14 @@ const basicDetailsSchema = new mongoose.Schema({
     sPhoto: {
         type: String
     },
-    token: {
-        type: String,
-        required: false,
+    CEId: {
+        type: Number,
+        unique: true
     }
    
 })
+
+
 module.exports = new mongoose.model('ce_basicdetail', basicDetailsSchema);
 
 

@@ -3,10 +3,10 @@ const addressTypeSchema = require('./../model/addressType');
 const errorHandler = require('../utils/error.handler');
 
 class addressDetailsController{
-	async add(newDetails){
-		try{
-			newDetails = {...newDetails, ...{userId: userSession.id}}
-			let response = await addressDetailsSchema.create(newDetails);
+	async add(newDetail){
+		try {
+			newDetail = {...newDetail, ...{canID: userSession.id}}
+			let response = await addressDetailsSchema.create(newDetail);
 			return {
 				status: "success",
 				response: response

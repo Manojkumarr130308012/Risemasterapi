@@ -2,7 +2,7 @@
 const mongoose = require("mongoose");
 
 const addressDetailsSchema = new mongoose.Schema({
-    userId: {
+    canId: {
 		type: String,
 		required: true
 	},
@@ -41,10 +41,6 @@ const addressDetailsSchema = new mongoose.Schema({
     country: {
         type: String,
         required: true
-    },
-    IdValue: {
-        type: String,
-        required: true
-    },
+    }
 })
-module.exports = new mongoose.model('ce-addressdetail', addressDetailsSchema);
+module.exports = new mongoose.model('ce_addressdetail', addressDetailsSchema);

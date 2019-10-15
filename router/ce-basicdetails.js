@@ -1,3 +1,5 @@
+
+
 const router = require('express').Router();
 const basicDetailsController = require('./../controller/ce-basicdetails');
 
@@ -7,12 +9,10 @@ router.post('/add', async (req, res) => {
 })
 
 router.get('/', async (req, res) => {
-	res.setHeader('Access-Control-Allow-Origin', '*');
 	const response = await basicDetailsController.fetch();
 	res.send(response);
 })
 router.get('/fetchdata', async (req, res) => {
-	//res.setHeader('Access-Control-Allow-Origin', '*');
 	const response = await basicDetailsController.fetchdata(req.query.id);
 	res.send(response);
 })
