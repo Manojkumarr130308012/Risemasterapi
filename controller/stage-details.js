@@ -5,7 +5,7 @@ class stageDetailsController{
 	async add(newStageDetails){
 		try{
 			let response = await stageDetailsSchema.create(newStageDetails);
-			return { status: "Success", result: response, message: "Added Successfully" };
+			return { status: "success", result: response, message: "Added Successfully" };
 
 		} catch(error){
 			return {
@@ -45,10 +45,8 @@ class stageDetailsController{
     async fetchbyVehicleId(IdValue){
 		try{
 			let response = await stageDetailsSchema.find({'IdValue':IdValue});
-			console.log('veh',response);
-			return {
-				response: response
-			};
+			
+			return  response;
 			
 		} catch(error){
 			return {
@@ -77,10 +75,10 @@ class stageDetailsController{
 
         try {
             let response = await stageDetailsSchema.updateOne({_id: id}, body);
-            return { status: "Success", result: response, message: "Updated Successfully" };
+            return { status: "success", result: response, message: "Updated Successfully" };
 
-        } catch (err) {
-            return { status: "error", err: err };
+        } catch (error) {
+            return { status: "error", error: error };
         }
 
     }

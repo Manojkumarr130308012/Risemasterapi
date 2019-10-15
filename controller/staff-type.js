@@ -5,7 +5,7 @@ class staffTypeController{
 	async add(newStaffType){
 		try{
 			let response = await staffTypeSchema.create(newStaffType);
-			return { status: "Success", result: response, message: "Added Successfully" };
+			return { status: "success", result: response, message: "Added Successfully" };
 
 		} catch(error){
 			return {
@@ -61,10 +61,10 @@ class staffTypeController{
 
         try {
             let response = await staffTypeSchema.updateOne({_id: id}, body);
-            return { status: "Success", result: response, message: "Updated Successfully" };
+            return { status: "success", result: response, message: "Updated Successfully" };
 
-        } catch (err) {
-            return { status: "error", err: err };
+        } catch (error) {
+            return { status: "error", error: error };
         }
 
     }

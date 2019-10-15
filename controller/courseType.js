@@ -7,7 +7,7 @@ class courseTypeController{
 		try{
 			let response = await courseTypeSchema.create(newAddress);
 			
-			return { status: "Success", result: response, message: "Added Successfully" };
+			return { status: "success", result: response, message: "Added Successfully" };
 			
 		} catch(error){
 			return {
@@ -63,9 +63,9 @@ class courseTypeController{
 
         try {
             let response = await courseTypeSchema.updateOne({_id: id}, body);
-			return { status: "Success", result: response, message: "Updated Successfully" };
-        } catch (err) {
-            return { status: "error", err: err };
+			return { status: "success", result: response, message: "Updated Successfully" };
+        } catch (error) {
+            return { status: "error", error: error };
         }
 
 	}
@@ -96,6 +96,19 @@ class courseTypeController{
 			};
 		}
     }
-
+	// async fetchbyQua(qualificationType){
+	// 	try{
+	// 		let response = await courseTypeSchema.find({'qualificationType':qualificationType});
+	// 		return {
+	// 			response: response
+	// 		};
+			
+	// 	} catch(error){
+	// 		return {
+	// 			status: "error",
+	// 			error: errorHandler.parseMongoError(error)
+	// 		};
+	// 	}
+	// }
 }
 module.exports = new courseTypeController();

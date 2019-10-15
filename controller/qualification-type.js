@@ -6,7 +6,7 @@ class qualificationTypeController{
 		try{
 			let response = await qualificationTypeSchema.create(newAdmissionCategory);
 			
-			return { status: "Success", result: response, message: "Added Successfully" };
+			return { status: "success", result: response, message: "Added Successfully" };
 			
 		} catch(error){
 			return {
@@ -62,9 +62,9 @@ class qualificationTypeController{
 
         try {
             let response = await qualificationTypeSchema.updateOne({_id: id}, body);
-			return { status: "Success", result: response, message: "Updated Successfully" };
-        } catch (err) {
-            return { status: "error", err: err };
+			return { status: "success", result: response, message: "Updated Successfully" };
+        } catch (error) {
+            return { status: "error", error: error };
         }
 
 	}

@@ -5,7 +5,7 @@ class modeOfEnquiryController{
 	async add(newModeOfEnquiry){
 		try{
 			let response = await modeOfEnquirySchema.create(newModeOfEnquiry);
-			return { status: "Success", result: response, message: "Added Successfully" };
+			return { status: "success", result: response, message: "Added Successfully" };
 
 		} catch(error){
 			return {
@@ -61,10 +61,10 @@ class modeOfEnquiryController{
 
         try {
             let response = await modeOfEnquirySchema.updateOne({_id: id}, body);
-            return { status: "Success", result: response, message: "Updated Successfully" };
+            return { status: "success", result: response, message: "Updated Successfully" };
 
-        } catch (err) {
-            return { status: "error", err: err };
+        } catch (error) {
+            return { status: "error", error: error };
         }
 
     }

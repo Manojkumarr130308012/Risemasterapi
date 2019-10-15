@@ -7,7 +7,7 @@ class admissionCategoryController{
 		try{
 			let response = await admissionCategorySchema.create(newAdmissionCategory);
 			
-			return { status: "Success", result: response, message: "Added Successfully" };
+			return { status: "success", result: response, message: "Added Successfully" };
 			
 		} catch(error){
 			return {
@@ -63,9 +63,9 @@ class admissionCategoryController{
 
         try {
             let response = await admissionCategorySchema.updateOne({_id: id}, body);
-			return { status: "Success", result: response, message: "Updated Successfully" };
-        } catch (err) {
-            return { status: "error", err: err };
+			return { status: "success", result: response, message: "Updated Successfully" };
+        } catch (error) {
+            return { status: "error", error: error };
         }
 
 	}

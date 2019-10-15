@@ -1,12 +1,12 @@
-
-const bankSchema = require('./../model/bank');
+const addCECPSchema = require('./../model/addCEcourseProgram');
 const errorHandler = require('./../utils/error.handler');
-const institutionSchema = require('./../model/institution');
-class bankController{
-	async add(newBank){
+const courseProgramSchema = require('./../model/course-program');
+
+class academicYearController{
+	async add(newYear){
 		try{
-			let response = await bankSchema.create(newBank);
-		
+			let response = await addCECPSchema.create(newYear);
+
 			return { status: "success", result: response, message: "Added Successfully" };
 			
 		} catch(error){
@@ -16,11 +16,22 @@ class bankController{
 			};
 		}
 	}
-
 	
+	async fetchdata(id){
+		try{
+			let response = await addCECPSchema.find({'_id':id});
+			return response;
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
 	async fetch(){
 		try{
-			let response = await bankSchema.find({});
+			let response = await addCECPSchema.find({});
 			return {
 				response: response
 			};
@@ -32,22 +43,9 @@ class bankController{
 		}
 	}
 
-	async fetchdata(id){
-		try{
-			let response = await bankSchema.find({'_id':id});
-			return response;
-			
-		} catch(error){
-			return {
-				status: "error",
-				error: errorHandler.parseMongoError(error)
-			};
-		}
-	}
-
 	async delete(id){
 		try{
-			let response = await bankSchema.deleteOne({_id: id});
+			let response = await addCECPSchema.deleteOne({_id: id});
 			return {
 				status: "success",
 				response: response
@@ -59,38 +57,36 @@ class bankController{
 			};
 		}
 	}
-
+	
 	async update(id, body) {
 
         try {
-            let response = await bankSchema.updateOne({_id: id}, body);
+            let response = await addCECPSchema.updateOne({_id: id}, body);
             return { status: "success", result: response, message: "Updated Successfully" };
 
-        } catch (error) {
-            return { status: "error", error: error };
+        } catch (err) {
+            return { status: "error", err: err };
         }
 
-	}
-	async aggregation() {
+    }
+    async aggregation() {
 		try {
-			
-            let result =  await institutionSchema.aggregate([
+         let result =  await courseProgramSchema.aggregate([
 				{$project: {
 					_id:0
 					
 		 }}
 		]);
-		return  await bankSchema.aggregate([
+		return  await addCECPSchema.aggregate([
 				{$lookup:
 					  {
-						from: "institutions",
-						localField: "institution",
+						from: "course-programs",
+						localField: "courseProgram",
 						foreignField: "_id",
-						as: "InstitutionDetails"
+						as: "courseProgramDetails"
 					  }
-				 },				 
+				 },			 
 				]);
-				
 		} catch (error) {
 			return {
 				status: "error",
@@ -99,5 +95,6 @@ class bankController{
 		}
     }
 
+
 }
-module.exports = new bankController();
+module.exports = new academicYearController();

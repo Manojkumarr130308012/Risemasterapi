@@ -6,7 +6,7 @@ class scholarshipCategoryController{
 		try{
 			let response = await scholarshipCategorySchema.create(newAddress);
             
-            return { status: "Success", result: response, message: "Added Successfully" };
+            return { status: "success", result: response, message: "Added Successfully" };
             
 		} catch(error){
 			return {
@@ -62,11 +62,11 @@ class scholarshipCategoryController{
 
         try {
             let response = await scholarshipCategorySchema.updateOne({_id: id}, body);
-			return { status: "Success", result: response, message: "Updated Successfully" };
-        } catch (err) {
+			return { status: "success", result: response, message: "Updated Successfully" };
+        } catch (error) {
             return {
                  status: "error",
-                  err: err 
+                  error: error 
                 };
         }
 

@@ -6,8 +6,7 @@ router.post('/add', async (req, res) => {
 	res.send(response);
 })
 
-router.get('/', async (req, res) => {
-	res.setHeader('Access-Control-Allow-Origin', '*');
+router.get('/', async (req, res) => {	
 	const response = await institutionController.fetch();
 	res.send(response);
 })

@@ -6,7 +6,7 @@ class academicYearController{
 		try{
 			let response = await academicYearSchema.create(newYear);
 
-			return { status: "Success", result: response, message: "Added Successfully" };
+			return { status: "success", result: response, message: "Added Successfully" };
 			
 		} catch(error){
 			return {
@@ -61,10 +61,10 @@ class academicYearController{
 
         try {
             let response = await academicYearSchema.updateOne({_id: id}, body);
-            return { status: "Success", result: response, message: "Updated Successfully" };
+            return { status: "success", result: response, message: "Updated Successfully" };
 
-        } catch (err) {
-            return { status: "error", err: err };
+        } catch (error) {
+            return { status: "error", error: error };
         }
 
     }

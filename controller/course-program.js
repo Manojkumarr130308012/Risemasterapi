@@ -1,13 +1,13 @@
 const courseProgramSchema = require('./../model/course-program');
 const errorHandler = require('../utils/error.handler');
 const institutionSchema = require('./../model/institution');
-const courseCategorySchema = require('./../model/course-category');
+// const courseCategorySchema = require('./../model/course-category');
 
 class courseProgramController {
 	async add(newCourseProgram) {
 		try {
 			let response = await courseProgramSchema.create(newCourseProgram);
-			return { status: "Success", result: response, message: "Added Successfully" };
+			return { status: "success", result: response, message: "Added Successfully" };
 
 		} catch (error) {
 			return {
@@ -63,10 +63,10 @@ class courseProgramController {
 
 		try {
 			let response = await courseProgramSchema.updateOne({ _id: id }, body);
-			return { status: "Success", result: response, message: "Updated Successfully" };
+			return { status: "success", result: response, message: "Updated Successfully" };
 
-		} catch (err) {
-			return { status: "error", err: err };
+		} catch (error) {
+			return { status: "error", error: error };
 		}
 
 	}
@@ -100,6 +100,21 @@ class courseProgramController {
 			};
 		}
 	}
+	async fetchByCouCate(coursecategory){
+		try{
+			let response = await courseProgramSchema.find({'coursecategory':coursecategory});
+			return {
+				response: response
+			};
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
+
 
 }
 module.exports = new courseProgramController();

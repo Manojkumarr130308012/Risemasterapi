@@ -5,7 +5,7 @@ class feeTypeController{
 	async add(newFeeType){
 		try{
 			let response = await feeTypeSchema.create(newFeeType);
-			return { status: "Success", result: response, message: "Added Successfully" };
+			return { status: "success", result: response, message: "Added Successfully" };
 
 		} catch(error){
 			return {
@@ -61,10 +61,10 @@ class feeTypeController{
 
         try {
             let response = await feeTypeSchema.updateOne({_id: id}, body);
-            return { status: "Success", result: response, message: "Updated Successfully" };
+            return { status: "success", result: response, message: "Updated Successfully" };
 
-        } catch (err) {
-            return { status: "error", err: err };
+        } catch (error) {
+            return { status: "error", error: error };
         }
 
     }

@@ -5,7 +5,7 @@ class salutationController{
 	async add(newSalutation){
 		try{
 			let response = await salutationSchema.create(newSalutation);
-			return { status: "Success", result: response, message: "Added Successfully" };
+			return { status: "success", result: response, message: "Added Successfully" };
 
 		} catch(error){
 			return {
@@ -61,10 +61,10 @@ class salutationController{
 
         try {
             let response = await salutationSchema.updateOne({_id: id}, body);
-            return { status: "Success", result: response, message: "Updated Successfully" };
+            return { status: "success", result: response, message: "Updated Successfully" };
 
-        } catch (err) {
-            return { status: "error", err: err };
+        } catch (error) {
+            return { status: "error", error: error };
         }
 
     }

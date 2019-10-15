@@ -5,7 +5,7 @@ class payTypeController{
 	async add(newPayType){
 		try{
 			let response = await payTypeSchema.create(newPayType);
-			return { status: "Success", result: response, message: "Added Successfully" };
+			return { status: "success", result: response, message: "Added Successfully" };
 
 		} catch(error){
 			return {
@@ -61,10 +61,10 @@ class payTypeController{
 
         try {
             let response = await payTypeSchema.updateOne({_id: id}, body);
-            return { status: "Success", result: response, message: "Updated Successfully" };
+            return { status: "success", result: response, message: "Updated Successfully" };
 
-        } catch (err) {
-            return { status: "error", err: err };
+        } catch (error) {
+            return { status: "error", error: error };
         }
 
     }

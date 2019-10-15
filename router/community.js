@@ -6,12 +6,12 @@ router.post('/add', async (req, res) => {
 	res.send(response);
 })
 router.get('/', async (req, res) => {
-	res.setHeader('Access-Control-Allow-Origin', '*');
+	
 	const response = await communityController.fetch();
 	res.send(response);
 })
 router.get('/fetchdata', async (req, res) => {
-	//res.setHeader('Access-Control-Allow-Origin', '*');
+	
 	const response = await communityController.fetchdata(req.query.id);
 	res.send(response);
 })

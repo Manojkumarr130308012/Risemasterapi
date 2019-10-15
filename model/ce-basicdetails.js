@@ -13,7 +13,7 @@ const basicDetailsSchema = new mongoose.Schema({
         required: true
     },
     gender: {
-        type: mongoose.Schema.ObjectId,
+        type:String,
         required: true
     },
     aadharNo: {
@@ -49,15 +49,15 @@ const basicDetailsSchema = new mongoose.Schema({
         required: true
     },
     institution: {
-        type: mongoose.Schema.ObjectId,
+        type: String,
         required: true
     },
     board: {
-        type: mongoose.Schema.ObjectId,
+        type: String,
         required: true
     },
     referenceType: {
-        type: mongoose.Schema.ObjectId,
+        type: String,
         required: true
     },
     referenceBy: {
@@ -69,23 +69,23 @@ const basicDetailsSchema = new mongoose.Schema({
         required: true
     },
     admissionType: {
-        type: mongoose.Schema.ObjectId,
+        type: String,
         required: true
     },
     admissionCategory: {
         type: String,
         required: true
     },
-    courseCategory: {
-        type: mongoose.Schema.ObjectId,
+    coursecategory: {
+        type: String,
         required: true
     },
     courseProgram: {
-        type: mongoose.Schema.ObjectId,
+        type: String,
         required: true
     },
     scholarshipCategory: {
-        type: mongoose.Schema.ObjectId,
+        type: String,
         required: true
     },
     remark: {
@@ -93,19 +93,19 @@ const basicDetailsSchema = new mongoose.Schema({
         required: true
     },
     nationality: {
-        type: mongoose.Schema.ObjectId,
+        type: String,
         required: true
     },
     religion: {
-        type: mongoose.Schema.ObjectId,
+        type: String,
         required: true
     },
     community: {
-        type: mongoose.Schema.ObjectId,
+        type: String,
         required: true
     },
     caste: {
-        type: mongoose.Schema.ObjectId,
+        type: String,
         required: true
     },
     motherTongue: {
@@ -155,13 +155,17 @@ const basicDetailsSchema = new mongoose.Schema({
     relativeName: {
         type: String,
         required: true
+    },
+    sPhoto: {
+        type: String
+    },
+    token: {
+        type: String,
+        required: false,
     }
-    // sPhoto: {
-    //     type: String
-    // }
    
 })
-module.exports = new mongoose.model('ce-basicdetail', basicDetailsSchema);
+module.exports = new mongoose.model('ce_basicdetail', basicDetailsSchema);
 
 
 // s-> student ; f-> father ; m-> mother; p-> parent

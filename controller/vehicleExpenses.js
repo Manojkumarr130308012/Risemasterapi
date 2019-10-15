@@ -5,7 +5,7 @@ class expenseController{
 	async add(newExpense){
 		try{
 			let response = await expenseSchema.create(newExpense);
-			return { status: "Success", result: response, message: "Added Successfully" };
+			return { status: "success", result: response, message: "Added Successfully" };
 		} catch(error){
 			return {
 				status: "error",
@@ -60,10 +60,10 @@ class expenseController{
 
         try {
             let response = await expenseSchema.updateOne({_id: id}, body);
-            return { status: "Success", result: response, message: "Updated Successfully" };
+            return { status: "success", result: response, message: "Updated Successfully" };
 
-        } catch (err) {
-            return { status: "error", err: err };
+        } catch (error) {
+            return { status: "error", error: error };
         }
 
     }

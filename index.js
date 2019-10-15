@@ -52,6 +52,9 @@ const basicDetailsRouter = require("./router/ce-basicdetails");
 const addressDetailsRouter = require("./router/ce-addressdetails");
 const paymentDetailsRouter = require("./router/ce-paymentdetails");
 const followupsRouter = require("./router/ce-followups");
+const qualificationDetailsRouter = require("./router/ce-qualificationdetails");
+const studentPhotoRouter = require("./router/uploadStudentPhoto");
+
 
 // Vehicle Management 
 const vehicleRouter = require("./router/vehicleMaster");
@@ -117,6 +120,8 @@ server.use("/ce-basicdetails", basicDetailsRouter);
 server.use("/ce-addressdetails", addressDetailsRouter);
 server.use("/ce-paymentdetails", paymentDetailsRouter);
 server.use("/ce-followups", followupsRouter);
+server.use("/ce-qualificationdetails", qualificationDetailsRouter);
+server.use("/uploadStudentPhoto", studentPhotoRouter);
 
 //server.use(cors({origin: 'http://localhost:4200'}));
 
@@ -135,8 +140,9 @@ server.use("/staffFileUpload", staffFileUploadRouter);
 // File Upload
 server.use('/uploads', express.static('uploads'));
 server.use('/driverFiles', express.static('driverFiles'));
-
+server.use('/studentPhoto', express.static('studentPhoto'));
 server.set('view engine', 'pug')
+
 
 server.listen(config.app.port, () => {
 	console.log(`Listening on`, config.app.port);

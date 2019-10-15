@@ -5,6 +5,7 @@ const errorHandler = require('../utils/error.handler');
 class addressDetailsController{
 	async add(newDetails){
 		try{
+			newDetails = {...newDetails, ...{userId: userSession.id}}
 			let response = await addressDetailsSchema.create(newDetails);
 			return {
 				status: "success",
@@ -66,8 +67,8 @@ class addressDetailsController{
             let response = await addressDetailsSchema.updateOne({_id: id}, body);
             return { status: "success", result: response };
 
-        } catch (err) {
-            return { status: "error", err: err };
+        } catch (error) {
+            return { status: "error", error: error };
         }
 
     }
