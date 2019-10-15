@@ -6,13 +6,15 @@ router.post('/add', async (req, res) => {
 	res.send(response);
 })
 router.get('/', async (req, res) => {
-	
 	const response = await departmentController.fetch();
 	res.send(response);
 })
 router.get('/fetchdata', async (req, res) => {
-	
 	const response = await departmentController.fetchdata(req.query.id);
+	res.send(response);
+})
+router.get('/fetchbyIns', async (req, res) => {
+	const response = await departmentController.fetchbyIns(req.query.institution);
 	res.send(response);
 })
 router.delete('/delete', async (req, res) => {
@@ -26,7 +28,6 @@ router.put('/update', async (req, res) => {
 router.get('/aggregation', async function  (req, res) {
 	let response = await departmentController.aggregation();
 	res.send(response);
-	//console.log(response);
 })
 
 module.exports = router;

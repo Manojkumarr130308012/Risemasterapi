@@ -65,8 +65,12 @@ const stageDetailsRouter = require("./router/stage-details");
 
 // Staff Management
 const staffProfileRouter = require("./router/staff-profile");
-const staffDetailsRouter = require("./router/staff-details");
 const staffFileUploadRouter = require('./router/staffFileUpload');
+const staffContactRouter = require('./router/staffContact');
+const staffIdentityRouter = require('./router/staffIdentity');
+const staffExperienceRouter = require('./router/staffExperience');
+const staffEducationRouter = require('./router/staffEducation');
+const staffCourseRouter = require('./router/staffCourse');
 
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
@@ -134,8 +138,12 @@ server.use("/stage-details",stageDetailsRouter);
 
 // Staff Management
 server.use("/staff-profile",staffProfileRouter);
-server.use("/staff-details",staffDetailsRouter);
 server.use("/staffFileUpload", staffFileUploadRouter);
+server.use("/staffContact", staffContactRouter);
+server.use("/staffIdentity", staffIdentityRouter);
+server.use("/staffExperience", staffExperienceRouter);
+server.use("/staffEducation", staffEducationRouter);
+server.use("/staffCourse", staffCourseRouter);
 
 // File Upload
 server.use('/uploads', express.static('uploads'));

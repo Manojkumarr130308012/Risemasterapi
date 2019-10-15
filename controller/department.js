@@ -69,6 +69,21 @@ class departmentController{
         }
 
 	}
+
+	async fetchbyIns(institution){
+		try{
+			let response = await departmentSchema.find({'institution':institution});
+			return {
+				response: response
+			};
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
 	
 	async aggregation() {
         try {

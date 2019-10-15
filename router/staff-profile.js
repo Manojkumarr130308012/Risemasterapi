@@ -17,6 +17,10 @@ router.get('/fetchbyStaffProfileId', async (req, res) => {
 	const response = await staffProfileController.fetchbyStaffProfileId(req.query.id);
 	res.send(response);
 })
+router.get('/fetchbyDepartment', async (req, res) => {
+	const response = await staffProfileController.fetchbyDepartment(req.query.department);
+	res.send(response);
+})
 router.delete('/delete', async (req, res) => {
 	const response = await staffProfileController.delete(req.query.id);
 	res.send(response);

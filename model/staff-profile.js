@@ -8,7 +8,7 @@ const staffProfileSchema = new mongoose.Schema({
     },
     department: {
         type: mongoose.Schema.ObjectId,
-        // required: true
+        required: true
     },
     
     staffCode: {
@@ -26,7 +26,7 @@ const staffProfileSchema = new mongoose.Schema({
     salutation: {
         type: mongoose.Schema.ObjectId,
         required: true
-    },
+     },
     firstName: {
         type: String,
         required: true
@@ -80,7 +80,16 @@ const staffProfileSchema = new mongoose.Schema({
         required: true
     },
     photoLocation : {
-		type: String,
+		type: String
+    },
+    abbrevation: {
+        type: String
+    },
+    dor: {
+        type: String
+    },
+    reason: {
+        type: String
     }
 })
 module.exports = new mongoose.model('staff-profile', staffProfileSchema);
