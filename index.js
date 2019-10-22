@@ -62,6 +62,8 @@ const expenseRouter = require("./router/vehicleExpenses");
 const stationRouter = require("./router/fillingStations");
 const driverRouter = require("./router/driverMaster");
 const stageDetailsRouter = require("./router/stage-details");
+const expensesEntryRouter = require("./router/expenses-entry");
+const fuelEntryRouter = require("./router/fuel-entry");
 
 // Staff Management
 const staffProfileRouter = require("./router/staff-profile");
@@ -135,6 +137,8 @@ server.use("/vehicle-expenses", expenseRouter);
 server.use("/filling-stations",stationRouter);
 server.use("/driver",driverRouter);
 server.use("/stage-details",stageDetailsRouter);
+server.use("/expenses-entry",expensesEntryRouter);
+server.use("/fuel-entry",fuelEntryRouter);
 
 // Staff Management
 server.use("/staff-profile",staffProfileRouter);
