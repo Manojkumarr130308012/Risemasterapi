@@ -13,6 +13,12 @@ router.get('/fetchdata', async (req, res) => {
 	const response = await fuelEntryController.fetchdata(req.query.id);
 	res.send(response);
 })
+
+router.get('/fetchbyVehicle', async (req, res) => {
+	//res.setHeader('Access-Control-Allow-Origin', '*');
+	const response = await fuelEntryController.fetchbyVehicle(req.query.vehicleno);
+	res.send(response);
+})
 router.delete('/delete', async (req, res) => {
 	const response = await fuelEntryController.delete(req.query.id);
 	res.send(response);

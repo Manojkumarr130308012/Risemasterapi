@@ -42,6 +42,21 @@ class fuelEntryController{
 		}
 	}
 
+	async fetchbyVehicle(vehicleno){
+		try{
+			let response = await fuelEntrySchema.find({'fuelVehicleNo':vehicleno}).sort({"fuelDate":-1}).limit(1);						
+			return response;			
+			console.log(response);
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
+
+
 	async delete(id){
 		try{
 			let response = await fuelEntrySchema.deleteOne({_id: id});
