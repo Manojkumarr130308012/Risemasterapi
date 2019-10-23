@@ -82,7 +82,7 @@ class basicDetailsController {
 						from: "institutions",
 						localField: "institution",
 						foreignField: "_id",
-						as: "InstitutionDetails"
+						as: "institution"
 					}
 				},
 				{
@@ -91,7 +91,7 @@ class basicDetailsController {
 						from: "genders",
 						localField: "gender",
 						foreignField: "_id",
-						as: "GenderDetails"
+						as: "gender"
 					}
 				},
 				{
@@ -100,7 +100,7 @@ class basicDetailsController {
 						from: "admission-types",
 						localField: "admissionType",
 						foreignField: "_id",
-						as: "AdmissionTypeDetails"
+						as: "admissionType"
 					}
 				},
 				{
@@ -109,7 +109,7 @@ class basicDetailsController {
 						from: "boards",
 						localField: "board",
 						foreignField: "_id",
-						as: "BoardDetails"
+						as: "board"
 					}
 				},
 				{
@@ -118,7 +118,7 @@ class basicDetailsController {
 						from: "referraltypes",
 						localField: "referenceType",
 						foreignField: "_id",
-						as: "ReferenceTypeDetails"
+						as: "referenceType"
 					}
 				},
 				{
@@ -127,7 +127,7 @@ class basicDetailsController {
 						from: "scholarshipcategories",
 						localField: "scholarshipCategory",
 						foreignField: "_id",
-						as: "scholarshipCategoryDetails"
+						as: "scholarshipCategory"
 					}
 				},
 				{
@@ -136,7 +136,7 @@ class basicDetailsController {
 						from: "course-categories",
 						localField: "coursecategory",
 						foreignField: "_id",
-						as: "courseCategoryDetails"
+						as: "coursecategory"
 					}
 				},
 				{
@@ -154,7 +154,7 @@ class basicDetailsController {
 						from: "nationalities",
 						localField: "nationality",
 						foreignField: "_id",
-						as: "nationalityDetails"
+						as: "nationality"
 					}
 				},
 				{
@@ -163,7 +163,7 @@ class basicDetailsController {
 						from: "religions",
 						localField: "religion",
 						foreignField: "_id",
-						as: "ReligionDetails"
+						as: "religion"
 					}
 				},
 				{
@@ -172,7 +172,7 @@ class basicDetailsController {
 						from: "communities",
 						localField: "community",
 						foreignField: "_id",
-						as: "communityDetails"
+						as: "community"
 					}
 				},
 				{
@@ -181,7 +181,7 @@ class basicDetailsController {
 						from: "castes",
 						localField: "caste",
 						foreignField: "_id",
-						as: "casteDetails"
+						as: "caste"
 					}
 				},
 				{

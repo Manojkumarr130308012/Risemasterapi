@@ -75,28 +75,37 @@ class qualificationDetailsController{
 				{$lookup:
 					  {
 						from: "media",
-						localField: "sslcmedium",
+						localField: "medium",
 						foreignField: "_id",
-						as: "MediumDetails"
+						as: "medium"
 					  }
 				 },
 					{$lookup:
 						  {
 							from: "coursetypes",
-							localField: "sslccourseType",
+							localField: "courseType",
 							foreignField: "_id",
-							as: "CourseTypeDetails"
+							as: "courseType"
 						  }
 					 },			 
 					
 						{$lookup:
 							  {
 								from: "institutiontypes",
-								localField: "sslcinstitutionType",
+								localField: "institutionType",
 								foreignField: "_id",
-								as: "InstitutionDetails"
+								as: "institutionType"
 							  }
-						 },			 
+						 },	
+						 
+						{$lookup:
+							{
+							  from: "qualificationtypes",
+							  localField: "qualificationType",
+							  foreignField: "_id",
+							  as: "qualificationType"
+							}
+					   },			 
 						]);
 				
 		} catch (error) {

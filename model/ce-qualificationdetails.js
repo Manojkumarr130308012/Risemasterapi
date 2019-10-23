@@ -1,12 +1,16 @@
 const mongoose = require("mongoose");
 
 const qualificationDetailsSchema = new mongoose.Schema({
+    qualificationType: {
+        type: mongoose.Schema.ObjectId,
+        required: true
+    },
     courseType: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     institutionType: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     schoolCollege: {
@@ -14,7 +18,7 @@ const qualificationDetailsSchema = new mongoose.Schema({
         required: true
     },
     medium: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     city: {
@@ -29,7 +33,7 @@ const qualificationDetailsSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    sslcstate: {
+   state: {
         type: String,
         required: true
     },
