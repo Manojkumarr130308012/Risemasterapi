@@ -6,7 +6,7 @@ const courseProgramSchema = new mongoose.Schema({
         required: true
     },
     coursecategory: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     courseprogram: {

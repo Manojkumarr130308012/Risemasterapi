@@ -41,6 +41,10 @@ const addressDetailsSchema = new mongoose.Schema({
     country: {
         type: String,
         required: true
+    },
+    canId: {
+        type: mongoose.Schema.ObjectId,
+        required: true
     }
 })
 module.exports = new mongoose.model('ce_addressdetail', addressDetailsSchema);

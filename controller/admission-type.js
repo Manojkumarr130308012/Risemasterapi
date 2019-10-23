@@ -70,16 +70,22 @@ class admissionTypeController{
         }
 
 	}
-	
-	async aggregation() {
-		try {
+	async fetchbyIns(institution){
+		try{
+			let response = await admissionTypeSchema.find({'institution':institution});
+			return {
+				response: response
+			};
 			
-            let result =  await institutionSchema.aggregate([
-				{$project: {
-					_id:0
-					
-		 }}
-		]);
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
+	async aggregation() {
+		try {          
 		return  await admissionTypeSchema.aggregate([
 				{$lookup:
 					  {

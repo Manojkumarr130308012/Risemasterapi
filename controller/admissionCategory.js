@@ -1,5 +1,4 @@
 const admissionCategorySchema = require('./../model/admissionCategory');
-const institutionSchema = require('./../model/institution');
 const errorHandler = require('./../utils/error.handler');
 
 class admissionCategoryController{
@@ -69,16 +68,22 @@ class admissionCategoryController{
         }
 
 	}
-	
+	async fetchbyIns(institution){
+		try{
+			let response = await admissionCategorySchema.find({'institution':institution});
+			return {
+				response: response
+			};
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
 	async aggregation() {
 		try {
-			
-            let result =  await institutionSchema.aggregate([
-				{$project: {
-					_id:0
-					
-		 }}
-		]);
 		return  await admissionCategorySchema.aggregate([
 				{$lookup:
 					  {
@@ -89,12 +94,6 @@ class admissionCategoryController{
 					  }
 				 },			 
 				]);
-				//  {
-				// 	$addFields: {
-				// 		InstitutionDetails: "$InstitutionDetails.institution_name"
-				// 	},
-				// },	
-				
 		} catch (error) {
 			return {
 				status: "error",
@@ -102,12 +101,6 @@ class admissionCategoryController{
 			};
 		}
     }
-
-	/*{
-		$addFields: {
-			InstitutionDetails: "$InstitutionDetails.institution_name"
-		},
-	},*/
 
 }
 module.exports = new admissionCategoryController();

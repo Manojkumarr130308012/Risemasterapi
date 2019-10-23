@@ -85,13 +85,6 @@ class courseCategoryController{
 	}
 	async aggregation() {
         try {
-			let result1 =  await institutionSchema.aggregate([
-				{$project: {
-						_id:0
-	
-					   }}
-					
-				]);
            return  await courseCategorySchema.aggregate([
 			{$lookup:
 				{

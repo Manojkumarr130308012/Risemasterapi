@@ -15,6 +15,11 @@ router.get('/fetchdata', async (req, res) => {
 	const response = await admissionCategoryController.fetchdata(req.query.id);
 	res.send(response);
 })
+router.get('/fetchbyIns', async (req, res) => {
+	//res.setHeader('Access-Control-Allow-Origin', '*');
+	const response = await admissionCategoryController.fetchbyIns(req.query.institution);
+	res.send(response);
+})
 router.delete('/delete', async (req, res) => {
 	const response = await admissionCategoryController.delete(req.query.id);
 	res.send(response);

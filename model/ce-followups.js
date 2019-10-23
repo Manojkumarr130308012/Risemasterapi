@@ -20,6 +20,10 @@ const followupsSchema = new mongoose.Schema({
     nextEnquiryTime: {
         type: String,
         required: true
+    },
+    canId: {
+        type: mongoose.Schema.ObjectId,
+        required: true
     }
 })
 module.exports = new mongoose.model('followup', followupsSchema);
