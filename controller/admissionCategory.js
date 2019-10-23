@@ -1,5 +1,4 @@
 const admissionCategorySchema = require('./../model/admissionCategory');
-const institutionSchema = require('./../model/institution');
 const errorHandler = require('./../utils/error.handler');
 
 class admissionCategoryController{
@@ -69,7 +68,20 @@ class admissionCategoryController{
         }
 
 	}
-	
+	async fetchbyIns(institution){
+		try{
+			let response = await admissionCategorySchema.find({'institution':institution});
+			return {
+				response: response
+			};
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
 	async aggregation() {
 		try {
 		return  await admissionCategorySchema.aggregate([

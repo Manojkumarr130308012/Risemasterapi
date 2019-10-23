@@ -70,7 +70,20 @@ class admissionTypeController{
         }
 
 	}
-	
+	async fetchbyIns(institution){
+		try{
+			let response = await admissionTypeSchema.find({'institution':institution});
+			return {
+				response: response
+			};
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
 	async aggregation() {
 		try {          
 		return  await admissionTypeSchema.aggregate([
