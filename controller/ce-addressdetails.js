@@ -5,7 +5,6 @@ const errorHandler = require('../utils/error.handler');
 class addressDetailsController{
 	async add(newDetail){
 		try {
-			newDetail = {...newDetail, ...{canID: userSession.id}}
 			let response = await addressDetailsSchema.create(newDetail);
 			return {
 				status: "success",
@@ -75,14 +74,6 @@ class addressDetailsController{
 
 	async aggregation() {
 		try {
-			
-            let result =  await addressTypeSchema.aggregate([
-				{$project: {
-					_id:0
-					
-		 }}
-		]);
-		// return result;
 		return  await addressDetailsSchema.aggregate([
 				{$lookup:
 					  {

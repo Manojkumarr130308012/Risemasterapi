@@ -29,6 +29,10 @@ const paymentDetailsSchema = new mongoose.Schema({
     amount: {
         type: String,
         required: true
+    },
+    canId: {
+        type: mongoose.Schema.ObjectId,
+        required: true
     }
     
 })

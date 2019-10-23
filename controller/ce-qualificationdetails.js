@@ -1,12 +1,9 @@
-const sslcDetailsSchema = require('../model/ce-qualificationdetails');
+const qualificationDetailsSchema = require('../model/ce-qualificationdetails');
 const errorHandler = require('../utils/error.handler');
-const courseTypeSchema = require('../model/courseType');
-const mediumSchema = require('../model/medium');
-const institutionTypeSchema = require('../model/institutionType');
-class sslcDetailsController{
+class qualificationDetailsController{
 	async add(newDetails){
 		try{
-			let response = await sslcDetailsSchema.create(newDetails);
+			let response = await qualificationDetailsSchema.create(newDetails);
 			return {
 				status: "success",
 				response: response
@@ -22,7 +19,7 @@ class sslcDetailsController{
 
 	async fetchdata(id){
 		try{
-			let response = await sslcDetailsSchema.find({'_id':id});
+			let response = await qualificationDetailsSchema.find({'_id':id});
 			return response;
 			
 		} catch(error){
@@ -34,7 +31,7 @@ class sslcDetailsController{
 	}
 	async fetch(){
 		try{
-			let response = await sslcDetailsSchema.find({});
+			let response = await qualificationDetailsSchema.find({});
 			return {
 				response: response
 			};
@@ -48,7 +45,7 @@ class sslcDetailsController{
 
 	async delete(id){
 		try{
-			let response = await sslcDetailsSchema.deleteOne({_id: id});
+			let response = await qualificationDetailsSchema.deleteOne({_id: id});
 			return {
 				status: "success",
 				response: response
@@ -64,7 +61,7 @@ class sslcDetailsController{
 	async update(id, body) {
 
         try {
-            let response = await sslcDetailsSchema.updateOne({_id: id}, body);
+            let response = await qualificationDetailsSchema.updateOne({_id: id}, body);
             return { status: "success", result: response };
 
         } catch (error) {
@@ -74,15 +71,7 @@ class sslcDetailsController{
 	}
 	async aggregation() {
 		try {
-			
-            let result1 =  await mediumSchema.aggregate([
-				{$project: {
-					_id:0
-					
-		 }}
-		]);
-	
-		let Medium =  await sslcDetailsSchema.aggregate([
+			return await qualificationDetailsSchema.aggregate([
 				{$lookup:
 					  {
 						from: "media",
@@ -90,16 +79,7 @@ class sslcDetailsController{
 						foreignField: "_id",
 						as: "MediumDetails"
 					  }
-				 },			 
-				]);
-				let result2 =  await courseTypeSchema.aggregate([
-					{$project: {
-						_id:0
-						
-			 }}
-			]);
-			// return result;
-			let CourseType =  await sslcDetailsSchema.aggregate([
+				 },
 					{$lookup:
 						  {
 							from: "coursetypes",
@@ -108,15 +88,7 @@ class sslcDetailsController{
 							as: "CourseTypeDetails"
 						  }
 					 },			 
-					]);
-					let result3 =  await institutionTypeSchema.aggregate([
-						{$project: {
-							_id:0
-							
-				 }}
-				]);
-				// return result;
-				let InstitutionType =  await sslcDetailsSchema.aggregate([
+					
 						{$lookup:
 							  {
 								from: "institutiontypes",
@@ -126,11 +98,7 @@ class sslcDetailsController{
 							  }
 						 },			 
 						]);
-				return {
-					CourseType,
-					Medium,
-					InstitutionType
-				}
+				
 		} catch (error) {
 			return {
 				status: "error",
@@ -141,4 +109,4 @@ class sslcDetailsController{
 	
 
 }
-module.exports = new sslcDetailsController();
+module.exports = new qualificationDetailsController();

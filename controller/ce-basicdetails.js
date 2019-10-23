@@ -5,31 +5,10 @@ class basicDetailsController {
 
 	async add(newDetails) {
 		try {
-			
-			let countCEId = await basicDetailsSchema.aggregate([
-				{ $count: "CEId" }
-			]);
-
-		//	console.log(countCEId);
-
-			if(countCEId=="" || countCEId==null)
-			{
-				let SetCEId=1000;
-				newDetails = { ...newDetails, ...{ CEId: SetCEId } }
-			}
-			else{
-			let SetCEId = countCEId[0].CEId - 1;
-			newDetails = { ...newDetails, ...{ CEId: SetCEId } }
-			}
-
 			let response = await basicDetailsSchema.create(newDetails);
 
-			//	let userDetails = await user.save();
-
-
-			return {
-				status: "success",
-				response: response
+			return {	
+				 response
 			};
 
 

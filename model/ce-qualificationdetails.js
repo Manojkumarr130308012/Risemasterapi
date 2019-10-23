@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const sslcDetailsSchema = new mongoose.Schema({
+const qualificationDetailsSchema = new mongoose.Schema({
     courseType: {
         type: String,
         required: true
@@ -56,6 +56,10 @@ const sslcDetailsSchema = new mongoose.Schema({
     organisationType: {
         type: String,
         required: true
+    },
+    canId: {
+        type: mongoose.Schema.ObjectId,
+        required: true
     }
 })
-module.exports = new mongoose.model('ce-QualifictaionDetail', sslcDetailsSchema);
+module.exports = new mongoose.model('ce_QualifictaionDetail', qualificationDetailsSchema);

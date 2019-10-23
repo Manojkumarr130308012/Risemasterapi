@@ -3,9 +3,9 @@ const errorHandler = require('./../utils/error.handler');
 const courseProgramSchema = require('./../model/course-program');
 
 class academicYearController{
-	async add(newYear){
+	async add(newcourseprogram){
 		try{
-			let response = await addCECPSchema.create(newYear);
+			let response = await addCECPSchema.create(newcourseprogram);
 
 			return { status: "success", result: response, message: "Added Successfully" };
 			

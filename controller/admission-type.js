@@ -72,14 +72,7 @@ class admissionTypeController{
 	}
 	
 	async aggregation() {
-		try {
-			
-            let result =  await institutionSchema.aggregate([
-				{$project: {
-					_id:0
-					
-		 }}
-		]);
+		try {          
 		return  await admissionTypeSchema.aggregate([
 				{$lookup:
 					  {

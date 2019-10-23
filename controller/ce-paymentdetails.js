@@ -74,14 +74,7 @@ class paymentDetailsController{
 
 	async aggregation() {
 		try {
-			
-            let result =  await paymentMethodSchema.aggregate([
-				{$project: {
-					_id:0
-					
-		 }}
-		]);
-		// return result;
+		
 		return  await paymentDetailsSchema.aggregate([
 				{$lookup:
 					  {
