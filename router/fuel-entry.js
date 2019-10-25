@@ -14,11 +14,25 @@ router.get('/fetchdata', async (req, res) => {
 	res.send(response);
 })
 
-router.get('/fetchbyVehicle', async (req, res) => {
-	//res.setHeader('Access-Control-Allow-Origin', '*');
-	const response = await fuelEntryController.fetchbyVehicle(req.query.vehicleno);
+router.get('/fetchOpenKMSbyVehicle', async (req, res) => {
+
+	const response = await fuelEntryController.fetchKMSbyVehicle(req.query.vehicleno);
 	res.send(response);
 })
+
+router.get('/fetchFuelReportbyVehicle', async (req, res) => {
+
+	const response = await fuelEntryController.fetchFuelReportbyVehicle(req.query.fuelVehicleNo);	
+	res.send(response);
+})
+
+router.post('/fetchFuelReportbyDate', async (req, res) => {
+
+	const response = await fuelEntryController.fetchFuelReportbyDate(req.body);	
+	//console.log('fetchFuelReportbyDate',response);
+	res.send(response);
+})
+
 router.delete('/delete', async (req, res) => {
 	const response = await fuelEntryController.delete(req.query.id);
 	res.send(response);
