@@ -46,7 +46,7 @@ class admissionTypeController{
 
 	async delete(id){
 		try{
-			let response = await admissionTypeSchema.deleteOne({_id: id});
+			let response = await admissionTypeSchema.deleteOne({admissiontype: id});
 			return {
 				status: "success",
 				response: response

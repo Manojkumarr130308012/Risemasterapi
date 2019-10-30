@@ -47,9 +47,18 @@ class fuelEntryController{
 
 	async fetchKMSbyVehicle(vehicleno){
 		try{
-			let response = await fuelEntrySchema.find({'fuelVehicleNo':vehicleno}).sort({"fuelDate":-1}).limit(1);						
-			return response;			
-			console.log(response);
+			let response = await fuelEntrySchema.find({'fuelVehicleNo':vehicleno}).sort({"fuelDate":-1}).limit(1);	
+			let count=Object.keys(response).length;
+			if(count != "0")	{	
+							
+				return response;
+			
+			}		
+			else{
+				let response='[{"closeKM":"0"}]';
+				return response;
+			}
+			
 			
 		} catch(error){
 			return {
