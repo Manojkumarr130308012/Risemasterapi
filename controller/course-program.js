@@ -79,7 +79,16 @@ class courseProgramController {
 						from: "institutions",
 						localField: "institution",
 						foreignField: "_id",
-						as: "InstitutionDetails"
+						as: "institution"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "course-categories",
+						localField: "coursecategory",
+						foreignField: "_id",
+						as: "coursecategory"
 					}
 				},
 			]);

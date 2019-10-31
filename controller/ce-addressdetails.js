@@ -1,7 +1,8 @@
 const addressDetailsSchema = require('../model/ce-addressdetails');
-const addressTypeSchema = require('./../model/addressType');
 const errorHandler = require('../utils/error.handler');
 
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 class addressDetailsController{
 	async add(newDetail){
 		try {
@@ -41,6 +42,33 @@ class addressDetailsController{
 			return {
 				status: "error",
 				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
+	async fetchaddress(canId){	
+		try{
+			return await addressDetailsSchema.aggregate([
+
+				{
+					$match: {
+						canId: ObjectId(canId)
+					}
+				},
+				{
+					$lookup:
+					{
+					  from: "addresstypes",
+					  localField: "addresstype",
+					  foreignField: "_id",
+					  as: "AddressTypeDetails"
+					}
+			   },		
+			]);
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: error
 			};
 		}
 	}

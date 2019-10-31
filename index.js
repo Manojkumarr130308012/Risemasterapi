@@ -3,7 +3,6 @@ const express = require("express");
 const server = express();
 const config = require('./config/config');
 // File Upload
-const multer = require('multer');
 
 const userDesignationRouter = require('./router/userDesignation');
 const academicYearRouter = require('./router/academicYear');
@@ -54,7 +53,8 @@ const paymentDetailsRouter = require("./router/ce-paymentdetails");
 const followupsRouter = require("./router/ce-followups");
 const qualificationDetailsRouter = require("./router/ce-qualificationdetails");
 const studentPhotoRouter = require("./router/uploadStudentPhoto");
-
+const ceCourseProgramRouter = require("./router/addCEcourseProgram");
+const qdFileUpload = require('./router/ce-qd-fileupload');
 
 // Vehicle Management 
 const vehicleRouter = require("./router/vehicleMaster");
@@ -128,7 +128,8 @@ server.use("/ce-paymentdetails", paymentDetailsRouter);
 server.use("/ce-followups", followupsRouter);
 server.use("/ce-qualificationdetails", qualificationDetailsRouter);
 server.use("/uploadStudentPhoto", studentPhotoRouter);
-
+server.use("/addCEcourseProgram", ceCourseProgramRouter);
+server.use("/ce-qd-fileupload",qdFileUpload );
 //server.use(cors({origin: 'http://localhost:4200'}));
 
 // Vehicle Management
@@ -153,6 +154,7 @@ server.use("/staffCourse", staffCourseRouter);
 server.use('/uploads', express.static('uploads'));
 server.use('/driverFiles', express.static('driverFiles'));
 server.use('/studentPhoto', express.static('studentPhoto'));
+server.use('/qdFile', express.static('qdFile'));
 server.set('view engine', 'pug')
 
 

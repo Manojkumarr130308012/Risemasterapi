@@ -27,7 +27,7 @@ const qualificationDetailsSchema = new mongoose.Schema({
     },
     taluk: {
         type: String,
-        required: true
+        required: false
     },
     district: {
         type: String,
@@ -35,11 +35,11 @@ const qualificationDetailsSchema = new mongoose.Schema({
     },
    state: {
         type: String,
-        required: true
+        required: false
     },
     country: {
         type: String,
-        required: true
+        required: false
     },
     yearOfPassing: {
         type: String,
@@ -47,19 +47,22 @@ const qualificationDetailsSchema = new mongoose.Schema({
     },
     markObtained: {
         type: String,
-        required: true
+        required: false
     },
     maxMark: {
         type: String,
-        required: true
+        required: false
     },
     percentage: {
         type: String,
-        required: true
+        required: false
     },
     organisationType: {
         type: String,
-        required: true
+        required: false
+    },
+    fileLocation : {
+		type: String
     },
     canId: {
         type: mongoose.Schema.ObjectId,

@@ -12,7 +12,7 @@ const paymentDetailsSchema = new mongoose.Schema({
     },
     bank: {
         type: String,
-        required: true
+        required: false
     },
     chequeDDDate: {
         type: String,
@@ -36,4 +36,4 @@ const paymentDetailsSchema = new mongoose.Schema({
     }
     
 })
-module.exports = new mongoose.model('ce-paymentdetail', paymentDetailsSchema);
+module.exports = new mongoose.model('ce_paymentdetail', paymentDetailsSchema);

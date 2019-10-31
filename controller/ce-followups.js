@@ -2,9 +2,9 @@ const followupsSchema = require('../model/ce-followups');
 const errorHandler = require('../utils/error.handler');
 
 class followupsController{
-	async add(newDetails){
-		try{
-			let response = await followupsSchema.create(newDetails);
+	async add(newDetail){
+		try {
+			let response = await followupsSchema.create(newDetail);
 			return {
 				status: "success",
 				response: response
@@ -17,11 +17,21 @@ class followupsController{
 		}
 	}
 	
-
 	async fetchdata(id){
 		try{
-			let response = await followupsSchema.find({'_id':id});
+			let response = await followupsSchema.find({ _id :id});
 			return response;
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
+	async fetchfollowups(canId){
+		try{
+			return await followupsSchema.find({canId :canId});
 			
 		} catch(error){
 			return {
@@ -32,10 +42,8 @@ class followupsController{
 	}
 	async fetch(){
 		try{
-			let response = await followupsSchema.find({});
-			return {
-				response: response
-			};
+			return await followupsSchema.find({});
+			
 		} catch(error){
 			return {
 				status: "error",

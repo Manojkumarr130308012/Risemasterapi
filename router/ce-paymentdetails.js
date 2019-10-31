@@ -15,6 +15,11 @@ router.get('/fetchdata', async (req, res) => {
 	const response = await paymentDetailsController.fetchdata(req.query.id);
 	res.send(response);
 })
+router.get('/fetchpayment', async (req, res) => {
+	//res.setHeader('Access-Control-Allow-Origin', '*');
+	const response = await paymentDetailsController.fetchpayment(req.query.canId);
+	res.send(response);
+})
 router.delete('/delete', async (req, res) => {
 	const response = await paymentDetailsController.delete(req.query.id);
 	res.send(response);

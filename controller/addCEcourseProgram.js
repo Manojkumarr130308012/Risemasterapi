@@ -1,6 +1,8 @@
 const addCECPSchema = require('./../model/addCEcourseProgram');
 const errorHandler = require('./../utils/error.handler');
-const courseProgramSchema = require('./../model/course-program');
+
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 
 class academicYearController{
 	async add(newcourseprogram){
@@ -42,7 +44,32 @@ class academicYearController{
 			};
 		}
 	}
+	async fetchCECouPro(canId){	
+		try{
+			return await addCECPSchema.aggregate([
 
+				{
+					$match: {
+						canId: ObjectId(canId)
+					}
+				},
+				{$lookup:
+					{
+					  from: "course-programs",
+					  localField: "courseprogram",
+					  foreignField: "_id",
+					  as: "courseprogram"
+					}
+			   },	
+			]);
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: error
+			};
+		}
+	}
 	async delete(id){
 		try{
 			let response = await addCECPSchema.deleteOne({_id: id});
@@ -71,19 +98,13 @@ class academicYearController{
     }
     async aggregation() {
 		try {
-         let result =  await courseProgramSchema.aggregate([
-				{$project: {
-					_id:0
-					
-		 }}
-		]);
 		return  await addCECPSchema.aggregate([
 				{$lookup:
 					  {
 						from: "course-programs",
-						localField: "courseProgram",
+						localField: "courseprogram",
 						foreignField: "_id",
-						as: "courseProgramDetails"
+						as: "courseprogram"
 					  }
 				 },			 
 				]);

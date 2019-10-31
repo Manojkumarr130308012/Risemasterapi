@@ -1,6 +1,4 @@
 const mongoose = require("mongoose");
-mongoose.set('useFindAndModify', false);
-mongoose.set('useCreateIndex', true);
 
 const basicDetailsSchema = new mongoose.Schema({
     firstName: {
@@ -21,31 +19,31 @@ const basicDetailsSchema = new mongoose.Schema({
     },
     aadharNo: {
         type: String,
-        required: true
+        required: false
     },
     regNo12th: {
         type: String,
-        required: true
+        required: false
     },
     mark12th: {
         type: String,
-        required: true
+        required: false
     },
     email: {
         type: String,
-        required: true
+        required: false
     },
     sMobileNumber: {
         type: String,
-        required: true
+        required: false
     },
     fFirstName: {
         type: String,
-        required: true
+        required: false
     },
     fLastName: {
         type: String,
-        required: true
+        required: false
     },
     fMobileNumber: {
         type: String,
@@ -57,27 +55,27 @@ const basicDetailsSchema = new mongoose.Schema({
     },
     board: {
         type: mongoose.Schema.ObjectId,
-        required: true
+        // required: false
     },
     referenceType: {
         type: mongoose.Schema.ObjectId,
-        required: true
+        // required: false
     },
     referenceBy: {
         type: String,
-        required: true
+        required: false
     },
     applicatonNo: {
         type: String,
         required: true
     },
-    admissionType: {
+    admissiontype: {
         type: mongoose.Schema.ObjectId,
         required: true
     },
     admissionCategory: {
         type: mongoose.Schema.ObjectId,
-        required: true
+        // required: false
     },
     coursecategory: {
         type: mongoose.Schema.ObjectId,
@@ -85,75 +83,75 @@ const basicDetailsSchema = new mongoose.Schema({
     },
     scholarshipCategory: {
         type: mongoose.Schema.ObjectId,
-        required: true
+        // required: false
     },
     remark: {
         type: String,
-        required: true
+        required: false
     },
     nationality: {
         type: mongoose.Schema.ObjectId,
-        required: true
+        // required: false
     },
     religion: {
         type: mongoose.Schema.ObjectId,
-        required: true
+        // required: false
     },
     community: {
         type: mongoose.Schema.ObjectId,
-        required: true
+        // required: false
     },
     caste: {
         type: mongoose.Schema.ObjectId,
-        required: true
+        // required: false
     },
     motherTongue: {
         type: mongoose.Schema.ObjectId,
-        required: true
+        // required: false
     },
     fEmail: {
         type: String,
-        required: true
+        required: false
     },
     fOccupation: {
         type: String,
-        required: true
+        required: false
     },
     fAnnualIncome: {
         type: String,
-        required: true
+        required: false
     },
     mName: {
         type: String,
-        required: true
+        required: false
     },
     mEmail: {
         type: String,
-        required: true
+        required: false
     },
     mMobileNo: {
         type: String,
-        required: true
+        required: false
     },
     mOccupation: {
         type: String,
-        required: true
+        required: false
     },
     mAnnualIncome: {
         type: String,
-        required: true
+        required: false
     },
     pPanNumber: {
         type: String,
-        required: true
+        required: false
     },
     pAadharNumber: {
         type: String,
-        required: true
+        required: false
     },
     relativeName: {
         type: String,
-        required: true
+        required: false
     },
     sPhoto: {
         type: String
@@ -163,6 +161,3 @@ const basicDetailsSchema = new mongoose.Schema({
 
 module.exports = new mongoose.model('ce_basicdetail', basicDetailsSchema);
 
-
-// s-> student ; f-> father ; m-> mother; p-> parent
-    //ce/CE -> CandidateEnquiry

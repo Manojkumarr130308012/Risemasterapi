@@ -1,5 +1,8 @@
 const qualificationDetailsSchema = require('../model/ce-qualificationdetails');
 const errorHandler = require('../utils/error.handler');
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
+
 class qualificationDetailsController{
 	async add(newDetails){
 		try{
@@ -68,6 +71,57 @@ class qualificationDetailsController{
             return { status: "error", error: error };
         }
 
+	}
+	async fetchqualification(canId) {
+		try {
+			return await qualificationDetailsSchema.aggregate([
+				{
+					$match: {
+						canId: ObjectId(canId)
+					}
+				},
+				{$lookup:
+					  {
+						from: "media",
+						localField: "medium",
+						foreignField: "_id",
+						as: "medium"
+					  }
+				 },
+					{$lookup:
+						  {
+							from: "coursetypes",
+							localField: "courseType",
+							foreignField: "_id",
+							as: "courseType"
+						  }
+					 },			 
+					
+						{$lookup:
+							  {
+								from: "institutiontypes",
+								localField: "institutionType",
+								foreignField: "_id",
+								as: "institutionType"
+							  }
+						 },	
+						 
+						{$lookup:
+							{
+							  from: "qualificationtypes",
+							  localField: "qualificationType",
+							  foreignField: "_id",
+							  as: "qualificationType"
+							}
+					   },			 
+						]);
+				
+		} catch (error) {
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
 	}
 	async aggregation() {
 		try {

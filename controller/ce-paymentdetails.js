@@ -1,7 +1,7 @@
 const paymentDetailsSchema = require('../model/ce-paymentdetails');
-const paymentMethodSchema = require('./../model/paymentMethod');
 const errorHandler = require('../utils/error.handler');
-
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 class paymentDetailsController{
 	async add(newDetails){
 		try{
@@ -71,6 +71,32 @@ class paymentDetailsController{
         }
 
 	}
+	async fetchpayment(canId){
+		try{
+			return await paymentDetailsSchema.aggregate([
+
+				{
+					$match: {
+						canId: ObjectId(canId)
+					}
+				},
+				{$lookup:
+					{
+					  from: "paymentmethods",
+					  localField: "paymentmethod",
+					  foreignField: "_id",
+					  as: "paymentmethod"
+					}
+			   },			
+			]);
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
 
 	async aggregation() {
 		try {
@@ -81,7 +107,7 @@ class paymentDetailsController{
 						from: "paymentmethods",
 						localField: "paymentmethod",
 						foreignField: "_id",
-						as: "paymentMethodDetails"
+						as: "paymentmethod"
 					  }
 				 },			 
 				]);

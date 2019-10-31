@@ -6,13 +6,18 @@ router.post('/add', async (req, res) => {
 	res.send(response);
 })
 router.get('/', async (req, res) => {
-	res.setHeader('Access-Control-Allow-Origin', '*');
+	// res.setHeader('Access-Control-Allow-Origin', '*');
 	const response = await addressDetailsController.fetch();
 	res.send(response);
 })
 router.get('/fetchdata', async (req, res) => {
 	//res.setHeader('Access-Control-Allow-Origin', '*');
 	const response = await addressDetailsController.fetchdata(req.query.id);
+	res.send(response);
+})
+router.get('/fetchaddress', async (req, res) => {
+	//res.setHeader('Access-Control-Allow-Origin', '*');
+	const response = await addressDetailsController.fetchaddress(req.query.canId);
 	res.send(response);
 })
 router.delete('/delete', async (req, res) => {

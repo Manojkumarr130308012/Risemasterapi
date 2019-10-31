@@ -11,19 +11,19 @@ const followupsSchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        required: true
+        required: false
     },
     nextEnquiryDate: {
         type: String,
-        required: true
+        required: false
     },
     nextEnquiryTime: {
         type: String,
-        required: true
+        required: false
     },
     canId: {
         type: mongoose.Schema.ObjectId,
         required: true
     }
 })
-module.exports = new mongoose.model('followup', followupsSchema);
+module.exports = new mongoose.model('ce_followup', followupsSchema);

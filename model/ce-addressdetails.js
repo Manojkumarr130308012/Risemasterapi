@@ -2,25 +2,21 @@
 const mongoose = require("mongoose");
 
 const addressDetailsSchema = new mongoose.Schema({
-    canId: {
-		type: String,
-		required: true
-	},
     addresstype: {
         type: mongoose.Schema.ObjectId,
         required: true
     },
     flatNo: {
         type: String,
-        required: true
+        required: false
     },
     streetLane: {
         type: String,
-        required: true
+        required: false
     },
     area: {
         type: String,
-        required: true
+        required: false
     },
     city: {
         type: String,
@@ -28,7 +24,7 @@ const addressDetailsSchema = new mongoose.Schema({
     },
     district: {
         type: String,
-        required: true
+        required: false
     },
     pincode: {
         type: String,
@@ -36,15 +32,16 @@ const addressDetailsSchema = new mongoose.Schema({
     },
     state: {
         type: String,
-        required: true
+        required: false
     },
     country: {
         type: String,
-        required: true
+        required: false
     },
     canId: {
         type: mongoose.Schema.ObjectId,
         required: true
     }
 })
+
 module.exports = new mongoose.model('ce_addressdetail', addressDetailsSchema);
