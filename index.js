@@ -75,6 +75,10 @@ const staffExperienceRouter = require('./router/staffExperience');
 const staffEducationRouter = require('./router/staffEducation');
 const staffCourseRouter = require('./router/staffCourse');
 
+//StudentManagement
+const studentDetailsRouter = require('./router/student-details');
+
+
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 
@@ -150,6 +154,9 @@ server.use("/staffIdentity", staffIdentityRouter);
 server.use("/staffExperience", staffExperienceRouter);
 server.use("/staffEducation", staffEducationRouter);
 server.use("/staffCourse", staffCourseRouter);
+
+//Student Management
+server.use("/student-details", studentDetailsRouter);
 
 // File Upload
 server.use('/uploads', express.static('uploads'));
