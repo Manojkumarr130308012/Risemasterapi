@@ -5,19 +5,19 @@ router.post('/add', async (req, res) => {
 	const response = await addCECPController.add(req.body);
 	res.send(response);
 })
-
 router.get('/', async (req, res) => {
-	//res.setHeader('Access-Control-Allow-Origin', '*');
-	const response = await addCECPController.fetch();
+	const response = await addCECPController.fetch(); 
 	res.send(response);
 })
-
+router.get('/fetchdata1', async (req, res) => {	
+	const response = await addCECPController.fetchdata1(req.query.id);
+	res.send(response);
+})
 router.get('/fetchdata', async (req, res) => {	
-	const response = await addCECPController.fetchdata(req.query.id);
+	const response = await addCECPController.fetchdata(req.query.canId);
 	res.send(response);
 })
 router.get('/fetchCECouPro', async (req, res) => {
-	//res.setHeader('Access-Control-Allow-Origin', '*');
 	const response = await addCECPController.fetchCECouPro(req.query.canId);
 	res.send(response);
 })

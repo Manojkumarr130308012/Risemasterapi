@@ -55,11 +55,11 @@ const basicDetailsSchema = new mongoose.Schema({
     },
     board: {
         type: mongoose.Schema.ObjectId,
-        // required: false
+        required: false
     },
     referenceType: {
         type: mongoose.Schema.ObjectId,
-        // required: false
+        required: false
     },
     referenceBy: {
         type: String,
@@ -75,11 +75,7 @@ const basicDetailsSchema = new mongoose.Schema({
     },
     admissionCategory: {
         type: mongoose.Schema.ObjectId,
-        // required: false
-    },
-    coursecategory: {
-        type: mongoose.Schema.ObjectId,
-        required: true
+        required: false
     },
     scholarshipCategory: {
         type: mongoose.Schema.ObjectId,
@@ -154,6 +150,9 @@ const basicDetailsSchema = new mongoose.Schema({
         required: false
     },
     sPhoto: {
+        type: String
+    },
+    enquiryDate: {
         type: String
     }
 })

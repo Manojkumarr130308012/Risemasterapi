@@ -1,6 +1,5 @@
 const admissionTypeSchema = require('./../model/admission-type');
 const errorHandler = require('./../utils/error.handler');
-const institutionSchema = require('./../model/institution');
 
 class admissionTypeController{
 	async add(newAdmissionType){

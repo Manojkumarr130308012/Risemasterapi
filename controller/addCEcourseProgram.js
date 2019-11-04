@@ -4,7 +4,7 @@ const errorHandler = require('./../utils/error.handler');
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 
-class academicYearController{
+class addCECPController{
 	async add(newcourseprogram){
 		try{
 			let response = await addCECPSchema.create(newcourseprogram);
@@ -19,7 +19,7 @@ class academicYearController{
 		}
 	}
 	
-	async fetchdata(id){
+	async fetchdata1(id){
 		try{
 			let response = await addCECPSchema.find({'_id':id});
 			return response;
@@ -28,6 +28,40 @@ class academicYearController{
 			return {
 				status: "error",
 				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
+	async fetchdata(canId){	
+		try{
+			return await addCECPSchema.aggregate([
+
+				{
+					$match: {
+						canId: ObjectId(canId)
+					}
+				},
+				{$lookup:
+					{
+					  from: "course-categories",
+					  localField: "coursecategory",
+					  foreignField: "_id",
+					  as: "coursecategory"
+					}
+			   },	
+				{$lookup:
+					{
+					  from: "course-programs",
+					  localField: "courseprogram",
+					  foreignField: "_id",
+					  as: "courseprogram"
+					}
+			   },	
+			]);
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: error
 			};
 		}
 	}
@@ -53,6 +87,14 @@ class academicYearController{
 						canId: ObjectId(canId)
 					}
 				},
+				{$lookup:
+					{
+					  from: "course-categories",
+					  localField: "coursecategory",
+					  foreignField: "_id",
+					  as: "coursecategory"
+					}
+			   },	
 				{$lookup:
 					{
 					  from: "course-programs",
@@ -99,6 +141,14 @@ class academicYearController{
     async aggregation() {
 		try {
 		return  await addCECPSchema.aggregate([
+			{$lookup:
+				{
+				  from: "course-categories",
+				  localField: "coursecategory",
+				  foreignField: "_id",
+				  as: "coursecategory"
+				}
+		   },	
 				{$lookup:
 					  {
 						from: "course-programs",
@@ -118,4 +168,4 @@ class academicYearController{
 
 
 }
-module.exports = new academicYearController();
+module.exports = new addCECPController();

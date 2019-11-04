@@ -1,6 +1,9 @@
 const basicDetailsSchema = require('../model/ce-basicdetails');
 const errorHandler = require('../utils/error.handler');
 
+
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 class basicDetailsController{
 	async add(newDetail){
 		try {
@@ -18,62 +21,10 @@ class basicDetailsController{
 
 	async fetchdata(id){
 		try{
-			let response = await basicDetailsSchema.find({'_id':id});
-			return response;
-			
-		} catch(error){
-			return {
-				status: "error",
-				error: errorHandler.parseMongoError(error)
-			};
-		}
-	}
-	async fetch(){
-		try{
-			let response = await basicDetailsSchema.find({});
-			return {
-				response: response
-			};
-		} catch(error){
-			return {
-				status: "error",
-				error: errorHandler.parseMongoError(error)
-			};
-		}
-	}
-
-	async delete(id){
-		try{
-			let response = await basicDetailsSchema.deleteOne({_id: id});
-			return {
-				status: "success",
-				response: response
-			};
-		} catch(error){
-			return {
-				status: "error",
-				error: errorHandler.parseMongoError(error)
-			};
-		}
-	}
-	
-	async update(id, body) {
-
-        try {
-            let response = await basicDetailsSchema.updateOne({_id: id}, body);
-            return { status: "success", result: response };
-
-        } catch (error) {
-            return { status: "error", error: error };
-        }
-
-	}
-	async fetchbasic(id) {
-		try {
 			return await basicDetailsSchema.aggregate([
 				{
 					$match: {
-						_id: id
+						_id: ObjectId(id)
 					}
 				},
 				{
@@ -132,26 +83,6 @@ class basicDetailsController{
 				},
 				{
 					$lookup:
-					{
-						from: "course-categories",
-						localField: "coursecategory",
-						foreignField: "_id",
-						as: "coursecategory"
-					}
-				},
-				{
-					///////////////////////////////
-					$lookup:
-					{
-						from: "course-programs",
-						localField: "courseprogram",
-						foreignField: "_id",
-						as: "courseprogram"
-					}
-				},
-				//////////////////////////////////
-				{
-					$lookup:
 					{ 
 						from: "nationalities",
 						localField: "nationality",
@@ -204,9 +135,58 @@ class basicDetailsController{
 						as: "motherTongue"
 					}
 				},
+				{
+					$lookup:
+					{
+						from: "ce_paymentdetails",
+						localField: "_id",
+						foreignField: "canId",
+						as: "PaymentDetails"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "ce_addressdetails",
+						localField: "_id",
+						foreignField: "canId",
+						as: "AddressDetails"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "ce_qualifictaiondetails",
+						localField: "_id",
+						foreignField: "canId",
+						as: "QualificationDetails"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "ce_followups",
+						localField: "_id",
+						foreignField: "canId",
+						as: "FollowupsDetails"
+					}
+				},
 			]);
-
-		} catch (error) {
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
+	async fetch(){
+		try{
+			let response = await basicDetailsSchema.find({});
+			return {
+				response: response
+			};
+		} catch(error){
 			return {
 				status: "error",
 				error: errorHandler.parseMongoError(error)
@@ -214,6 +194,33 @@ class basicDetailsController{
 		}
 	}
 
+	async delete(id){
+		try{
+			let response = await basicDetailsSchema.deleteOne({_id: id});
+			return {
+				status: "success",
+				response: response
+			};
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
+	
+	async update(id, body) {
+
+        try {
+            let response = await basicDetailsSchema.updateOne({_id: id}, body);
+            return { status: "success", result: response };
+
+        } catch (error) {
+            return { status: "error", error: error };
+        }
+
+	}
+	
 	async aggregation() {
 		try {
 			return await basicDetailsSchema.aggregate([
@@ -273,26 +280,6 @@ class basicDetailsController{
 				},
 				{
 					$lookup:
-					{
-						from: "course-categories",
-						localField: "coursecategory",
-						foreignField: "_id",
-						as: "coursecategory"
-					}
-				},
-				{
-					///////////////////////////////
-					$lookup:
-					{
-						from: "course-programs",
-						localField: "courseprogram",
-						foreignField: "_id",
-						as: "courseprogram"
-					}
-				},
-				//////////////////////////////////
-				{
-					$lookup:
 					{ 
 						from: "nationalities",
 						localField: "nationality",
@@ -343,6 +330,42 @@ class basicDetailsController{
 						localField: "motherTongue",
 						foreignField: "_id",
 						as: "motherTongue"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "ce_paymentdetails",
+						localField: "_id",
+						foreignField: "canId",
+						as: "PaymentDetails"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "ce_addressdetails",
+						localField: "_id",
+						foreignField: "canId",
+						as: "AddressDetails"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "ce_qualifictaiondetails",
+						localField: "_id",
+						foreignField: "canId",
+						as: "QualificationDetails"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "ce_followups",
+						localField: "_id",
+						foreignField: "canId",
+						as: "FollowupsDetails"
 					}
 				},
 			]);

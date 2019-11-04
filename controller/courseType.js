@@ -1,6 +1,5 @@
 const courseTypeSchema = require('./../model/courseType');
 const errorHandler = require('./../utils/error.handler');
-const qualificationTypeSchema = require('./../model/qualification-type');
 
 class courseTypeController{
 	async add(newAddress){
@@ -71,13 +70,6 @@ class courseTypeController{
 	}
 	async aggregation() {
 		try {
-			
-            let result =  await qualificationTypeSchema.aggregate([
-				{$project: {
-					_id:0
-					
-		 }}
-		]);
 		return  await courseTypeSchema.aggregate([
 				{$lookup:
 					  {

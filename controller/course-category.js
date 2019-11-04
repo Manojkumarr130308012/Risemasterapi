@@ -1,6 +1,5 @@
 const courseCategorySchema = require('./../model/course-category');
 const errorHandler = require('./../utils/error.handler');
-const institutionSchema = require('./../model/institution');
 
 class courseCategoryController{
 	async add(newCourseCategory){

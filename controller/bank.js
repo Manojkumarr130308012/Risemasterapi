@@ -1,7 +1,6 @@
 
 const bankSchema = require('./../model/bank');
 const errorHandler = require('./../utils/error.handler');
-const institutionSchema = require('./../model/institution');
 class bankController{
 	async add(newBank){
 		try{
@@ -73,13 +72,6 @@ class bankController{
 	}
 	async aggregation() {
 		try {
-			
-            let result =  await institutionSchema.aggregate([
-				{$project: {
-					_id:0
-					
-		 }}
-		]);
 		return  await bankSchema.aggregate([
 				{$lookup:
 					  {

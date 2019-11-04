@@ -13,10 +13,6 @@ router.get('/fetchdata', async (req, res) => {
 	const response = await basicDetailsController.fetchdata(req.query.id);
 	res.send(response);
 })
-router.get('/fetchbasic', async (req, res) => {
-	const response = await basicDetailsController.fetchbasic(req.query.id);
-	res.send(response);
-})
 router.delete('/delete', async (req, res) => {
 	const response = await basicDetailsController.delete(req.query.id);
 	res.send(response);

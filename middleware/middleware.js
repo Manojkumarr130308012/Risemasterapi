@@ -21,18 +21,6 @@ server.use(cors({
 }));
 
 
-server.use(['/ce-addressdetails'], async (req, res, next) => {
-	if(!req.headers.authorization){
-		return res.send({
-			status: 'error',
-			msg: 'Invalid Token'
-		})
-	}
-
-	await basicDetailsController.validateId(res, req.headers.authorization);
-
-	next();
-})
 
 server.use(bodyParser.json());
 
