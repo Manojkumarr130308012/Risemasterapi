@@ -1,7 +1,5 @@
 const courseProgramSchema = require('./../model/course-program');
 const errorHandler = require('../utils/error.handler');
-const institutionSchema = require('./../model/institution');
-// const courseCategorySchema = require('./../model/course-category');
 
 class courseProgramController {
 	async add(newCourseProgram) {

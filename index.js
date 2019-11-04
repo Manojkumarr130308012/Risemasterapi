@@ -21,6 +21,7 @@ const bloodgroupRouter = require("./router/bloodgroup");
 const courseCategoryRouter = require("./router/course-category");
 const courseProgramRouter = require("./router/course-program");
 const admissionTypeRouter = require("./router/admission-type");
+const batchRouter = require("./router/batch");
 
 //Student Master
 const addressTypeRouter = require('./router/addressType');
@@ -95,7 +96,7 @@ server.use("/driverFileUpload", driverFileUploadRouter);
 
 server.use("/course-category", courseCategoryRouter);
 server.use("/course-program", courseProgramRouter);
-
+server.use("/batch", batchRouter);
 //Student Master
 server.use("/addressType", addressTypeRouter);
 server.use("/courseType", courseTypeRouter);
