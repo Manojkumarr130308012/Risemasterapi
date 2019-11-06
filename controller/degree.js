@@ -42,7 +42,7 @@ class degreeController{
 			};
 		}
 	}
-
+	
 	async delete(id){
 		try{
 			let response = await degreeSchema.deleteOne({_id: id});

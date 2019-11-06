@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const batchSchema = new mongoose.Schema({
-    courseprogram: {
+    degree: {
         type: mongoose.Schema.ObjectId,
         required: true
     },

@@ -47,7 +47,7 @@ const basicDetailsSchema = new mongoose.Schema({
     },
     fMobileNumber: {
         type: String,
-        required: true
+        required: false
     },
     institution: {
         type: mongoose.Schema.ObjectId,
@@ -71,7 +71,7 @@ const basicDetailsSchema = new mongoose.Schema({
     },
     admissiontype: {
         type: mongoose.Schema.ObjectId,
-        required: true
+        required: false
     },
     admissionCategory: {
         type: mongoose.Schema.ObjectId,

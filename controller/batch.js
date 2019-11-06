@@ -44,7 +44,20 @@ class batchController{
 			};
 		}
 	}
-
+	async fetchByDeg(degree){
+		try{
+			let response = await batchSchema.find({'degree':degree});
+			return {
+				response: response
+			};
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
 	async delete(id){
 		try{
 			let response = await batchSchema.deleteOne({_id: id});
@@ -77,10 +90,10 @@ class batchController{
 			{
                 $lookup:
                 {
-                    from: "course-programs",
-                    localField: "courseprogram",
+                    from: "degrees",
+                    localField: "degree",
                     foreignField: "_id",
-                    as: "courseprogram"
+                    as: "degree"
                 }
             },			 
 		  ]);

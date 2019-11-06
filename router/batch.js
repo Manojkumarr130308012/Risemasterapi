@@ -15,6 +15,10 @@ router.get('/fetchdata', async (req, res) => {
 	const response = await batchController.fetchdata(req.query.id);
 	res.send(response);
 })
+router.get('/fetchByDeg', async (req, res) => {
+	const response = await batchController.fetchByDeg(req.query.degree);
+	res.send(response);
+})
 router.delete('/delete', async (req, res) => {
 	const response = await batchController.delete(req.query.id);
 	res.send(response);
