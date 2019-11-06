@@ -6,7 +6,7 @@ const followupsSchema = new mongoose.Schema({
         required: true
     },
     modeOfEnquiry: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     description: {

@@ -1,6 +1,7 @@
 const followupsSchema = require('../model/ce-followups');
 const errorHandler = require('../utils/error.handler');
-
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 class followupsController{
 	async add(newDetail){
 		try {
@@ -29,11 +30,24 @@ class followupsController{
 			};
 		}
 	}
-	async fetchfollowups(canId){
-		try{
-			return await followupsSchema.find({canId :canId});
-			
-		} catch(error){
+	async fetchfollowups(canId) {
+		try {
+			return  await followupsSchema.aggregate([
+				{
+					$match: {
+						canId: ObjectId(canId)
+					}
+				},
+				{$lookup:
+					{
+					  from: "modeof-enquiries",
+					  localField: "modeOfEnquiry",
+					  foreignField: "_id",
+					  as: "modeOfEnquiry"
+					}
+			   },		
+			]);
+		} catch (error) {
 			return {
 				status: "error",
 				error: errorHandler.parseMongoError(error)
@@ -77,6 +91,27 @@ class followupsController{
             return { status: "error", error: error };
         }
 
+	}
+	
+	async aggregation() {
+		try {
+		
+		return  await followupsSchema.aggregate([
+				{$lookup:
+					  {
+						from: "modeof-enquiries",
+						localField: "modeOfEnquiry",
+						foreignField: "_id",
+						as: "modeOfEnquiry"
+					  }
+				 },			 
+				]);
+		} catch (error) {
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
     }
 
 }

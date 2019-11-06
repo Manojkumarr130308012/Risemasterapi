@@ -33,6 +33,9 @@ router.get('/aggregation', async (req, res) =>{
 	res.send(response);
 	
 })
-
+// router.get('/fetchFollowup', async (req, res) => {
+// 	const response = await followupsController.fetchFollowup(req.query.canId);
+// 	res.send(response);
+// })
 
 module.exports = router;
