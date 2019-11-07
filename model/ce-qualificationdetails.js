@@ -61,7 +61,7 @@ const qualificationDetailsSchema = new mongoose.Schema({
         type: String,
         required: false
     },
-    fileLocation : {
+    photoLocation : {
 		type: String
     },
     canId: {
