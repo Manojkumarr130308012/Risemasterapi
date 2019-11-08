@@ -36,7 +36,7 @@ class basicDetailsController{
 						from: "institutions",
 						localField: "institution",
 						foreignField: "_id",
-						as: "institution"
+						as: "institutiond"
 					}
 				},
 				{
@@ -45,7 +45,7 @@ class basicDetailsController{
 						from: "genders",
 						localField: "gender",
 						foreignField: "_id",
-						as: "gender"
+						as: "genderd"
 					}
 				},
 				{
@@ -54,7 +54,7 @@ class basicDetailsController{
 						from: "admission-types",
 						localField: "admissiontype",
 						foreignField: "_id",
-						as: "admissiontype"
+						as: "admissiontyped"
 					}
 				},
 				{
@@ -63,7 +63,7 @@ class basicDetailsController{
 						from: "boards",
 						localField: "board",
 						foreignField: "_id",
-						as: "board"
+						as: "boardd"
 					}
 				},
 				{
@@ -72,7 +72,7 @@ class basicDetailsController{
 						from: "referraltypes",
 						localField: "referenceType",
 						foreignField: "_id",
-						as: "referenceType"
+						as: "referenceTyped"
 					}
 				},
 				{
@@ -81,7 +81,7 @@ class basicDetailsController{
 						from: "scholarshipcategories",
 						localField: "scholarshipCategory",
 						foreignField: "_id",
-						as: "scholarshipCategory"
+						as: "scholarshipCategoryd"
 					}
 				},
 				{
@@ -90,7 +90,7 @@ class basicDetailsController{
 						from: "nationalities",
 						localField: "nationality",
 						foreignField: "_id",
-						as: "nationality"
+						as: "nationalityd"
 					}
 				},
 				{
@@ -99,7 +99,7 @@ class basicDetailsController{
 						from: "religions",
 						localField: "religion",
 						foreignField: "_id",
-						as: "religion"
+						as: "religiond"
 					}
 				},
 				{
@@ -108,7 +108,7 @@ class basicDetailsController{
 						from: "communities",
 						localField: "community",
 						foreignField: "_id",
-						as: "community"
+						as: "communityd"
 					}
 				},
 				{
@@ -117,7 +117,7 @@ class basicDetailsController{
 						from: "castes",
 						localField: "caste",
 						foreignField: "_id",
-						as: "caste"
+						as: "casted"
 					}
 				},
 				{
@@ -126,7 +126,7 @@ class basicDetailsController{
 						from: "admissioncategories",
 						localField: "admissionCategory",
 						foreignField: "_id",
-						as: "admissionCategory"
+						as: "admissionCategoryd"
 					}
 				},
 				{
@@ -135,7 +135,7 @@ class basicDetailsController{
 						from: "mothertongues",
 						localField: "motherTongue",
 						foreignField: "_id",
-						as: "motherTongue"
+						as: "motherTongued"
 					}
 				},
 				{
