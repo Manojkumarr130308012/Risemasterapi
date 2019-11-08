@@ -7,8 +7,11 @@ const ObjectId = mongoose.Types.ObjectId;
 class basicDetailsController{
 	async add(newDetail){
 		try {
-			return await basicDetailsSchema.create(newDetail);
-			
+			let response = await basicDetailsSchema.create(newDetail);
+			return {
+				status: "success",
+				response: response
+			};
 			 
 		} catch(error){
 			return {

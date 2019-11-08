@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+var Schema = mongoose.Schema;
+var ObjectId = Schema.ObjectId;
 
 const basicDetailsSchema = new mongoose.Schema({
     firstName: {
@@ -59,7 +61,7 @@ const basicDetailsSchema = new mongoose.Schema({
     },
     referenceType: {
         type: mongoose.Schema.ObjectId,
-        required: false
+        required: true
     },
     referenceBy: {
         type: String,
@@ -71,11 +73,11 @@ const basicDetailsSchema = new mongoose.Schema({
     },
     admissiontype: {
         type: mongoose.Schema.ObjectId,
-        required: false
+        required: true
     },
     admissionCategory: {
         type: mongoose.Schema.ObjectId,
-        required: false
+        required: true
     },
     scholarshipCategory: {
         type: mongoose.Schema.ObjectId,
@@ -87,6 +89,7 @@ const basicDetailsSchema = new mongoose.Schema({
     },
     nationality: {
         type: mongoose.Schema.ObjectId,
+        optional: ''
         // required: false
     },
     religion: {

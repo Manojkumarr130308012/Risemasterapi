@@ -20,24 +20,5 @@ class uploadController{
         return fileMeta.path;
     }
 
-
-    async saveFilepath2(profilePicMeta2){
-
-        let filePath2 = profilePicMeta2 ? this.saveProfilePic2(profilePicMeta2) : '';
-
-        let fileloc2 = new Uploadimage({
-            fileLocation : filePath2
-
-        })
-
-        let FileDetails2 = await fileloc2.save();
-        return { status: 'Successfully added', qdFileResult2:`${config.app.protocal}://${config.app.host}:${config.app.port}/${FileDetails2.fileLocation}`};
-    }
-
-    saveProfilePic2(fileMeta2){
-        return fileMeta2.path;
-    }
-
-
 }
 module.exports = new uploadController;

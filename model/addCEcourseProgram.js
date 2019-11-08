@@ -5,6 +5,10 @@ const addCECPSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         required: true
     },
+    coursecategory: {
+        type: mongoose.Schema.ObjectId,
+        required: true
+    },
     canId: {
         type: mongoose.Schema.ObjectId,
         required: false
