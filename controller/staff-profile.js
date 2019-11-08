@@ -55,6 +55,15 @@ class staffProfileController {
 					}
 				},
 				{
+					$lookup:
+					{
+						from: "institutions",
+						localField: "institution",
+						foreignField: "_id",
+						as: "InstitutionDetails"
+					}
+				},
+				{
 				$lookup:
 				{
 					from: "staff-types",
@@ -135,6 +144,116 @@ class staffProfileController {
 				{
 					$match: {
 						department: ObjectId(department)
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "institutions",
+						localField: "institution",
+						foreignField: "_id",
+						as: "InstitutionDetails"
+					}
+				},
+
+				{
+					$lookup:
+					{
+						from: "departments",
+						localField: "department",
+						foreignField: "_id",
+						as: "DepartmentDetails"
+					}
+				},
+				{
+				$lookup:
+				{
+					from: "staff-types",
+					localField: "stafftype",
+					foreignField: "_id",
+					as: "StaffTypeDetails"
+				}
+			},
+				{
+				$lookup:
+				{
+					from: "staff-roles",
+					localField: "staffrole",
+					foreignField: "_id",
+					as: "StaffRoleDetails"
+				}
+			},
+				{
+				$lookup:
+				{
+					from: "salutations",
+					localField: "salutation",
+					foreignField: "_id",
+					as: "salutationDetails"
+				}
+			},
+				{
+				$lookup:
+				{
+					from: "genders",
+					localField: "gender",
+					foreignField: "_id",
+					as: "GenderDetails"
+				}
+			},
+				{
+				$lookup:
+				{
+					from: "pay-types",
+					localField: "paytype",
+					foreignField: "_id",
+					as: "PayTypeDetails"
+				}
+			},
+				{
+				$lookup:
+				{
+					from: "marital-statuses",
+					localField: "maritalstatus",
+					foreignField: "_id",
+					as: "MaritalStatusDetails"
+				}
+			},
+				{
+				$lookup:
+				{
+					from: "bloodgroups",
+					localField: "bloodgroup",
+					foreignField: "_id",
+					as: "BloodGroupDetails"
+				}
+			},
+			]);
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
+
+	async fetchbyInstitution(institution){
+		try{
+			return await staffProfileSchema.aggregate([
+
+				{
+					$match: {
+						institution: ObjectId(institution)
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "institutions",
+						localField: "institution",
+						foreignField: "_id",
+						as: "InstitutionDetails"
 					}
 				},
 
