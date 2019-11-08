@@ -7,7 +7,7 @@ const studentDetailsSchema = new mongoose.Schema({
     },
     regNo: {
         type: String,
-        required: true
+        required: false
     },
     firstName: {
         type: String,
@@ -30,7 +30,7 @@ const studentDetailsSchema = new mongoose.Schema({
     },
     maritalStatus: {
         type: mongoose.Schema.ObjectId,
-        required: true
+        required: false
     },
     mobileNo: {
         type: String,
@@ -38,7 +38,7 @@ const studentDetailsSchema = new mongoose.Schema({
     },
     bloodGroup: {
         type: mongoose.Schema.ObjectId,
-        required: true
+        required: false
     },
     emailId: {
         type: String,
@@ -47,57 +47,61 @@ const studentDetailsSchema = new mongoose.Schema({
     //Father's Details
     ffirstName: {
         type: String,
-        required: true
+        required: false
     },
     flastName: {
         type: String,
-        required: true
+        required: false
     },
     foccupation: {
         type: String,
-        required: true
+        required: false
     },
     fannualIncome: {
         type: String,
-        required: true
+        required: false
     },
     fmobileNo: {
         type: String,
-        required: true
+        required: false
+    },
+    paadharNo: {
+        type: String,
+        required: false
     },
     //Mother's Detail
     mfirstName: {
         type: String,
-        required: true
+        required: false
     },
     mlastName: {
         type: String,
-        required: true
+        required: false
     },
     moccupation: {
         type: String,
-        required: true
+        required: false
     },
     mannualIncome: {
         type: String,
-        required: true
+        required: false
     },
     mmobileNo: {
         type: String,
-        required: true
+        required: false
     },
     //
     nationality: {
         type: mongoose.Schema.ObjectId,
-        required: true
+        required: false
     },
     religion: {
         type: mongoose.Schema.ObjectId,
-        required: true
+        required: false
     },
     caste: {
         type: mongoose.Schema.ObjectId,
-        required: true
+        required: false
     },
     community: {
         type: mongoose.Schema.ObjectId,
@@ -122,40 +126,40 @@ const studentDetailsSchema = new mongoose.Schema({
     },
     boardingStartDate: {
         type: String,
-        required: true
+        required: false
     },
     //
     applicationNo: {
         type: String,
-        required: true
+        required: false
     },
     admissionDate: {
         type: String,
-        required: true
+        required: false
     },
     admissionNo: {
         type: String,
-        required: true
+        required: false
     },
     joinDate: {
         type: String,
-        required: true
+        required: false
     },
     referalType: {
         type: mongoose.Schema.ObjectId,
-        required: true
+        required: false
     },
     referal: {
         type: String,
-        required: true
+        required: false
     },
     motherTongue: {
         type: mongoose.Schema.ObjectId,
-        required: true
+        required: false
     },
     secondLanguage: {
         type: mongoose.Schema.ObjectId,
-        required: true
+        required: false
     },
     //Others
     firstGraduate: {

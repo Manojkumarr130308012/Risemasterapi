@@ -3,7 +3,6 @@ const basicDetailsController = require('./../controller/ce-basicdetails');
 
 router.post('/add', async (req, res) => {
 	const response = await basicDetailsController.add(req.body);
-	console.log(response);
 	res.send(response);
 })
 router.get('/', async (req, res) => {
