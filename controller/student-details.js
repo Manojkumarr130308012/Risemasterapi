@@ -57,6 +57,15 @@ class studentDetailsController {
 					$match: {
 						_id: ObjectId(id)
 					}
+                },
+                {
+					$lookup:
+					{
+						from: "institutions",
+						localField: "institution",
+						foreignField: "_id",
+						as: "institution"
+					}
 				},
                 {
                     $lookup:
@@ -182,6 +191,15 @@ class studentDetailsController {
 				{
 					$match: {
 						department: ObjectId(department)
+					}
+                },
+                {
+					$lookup:
+					{
+						from: "institutions",
+						localField: "institution",
+						foreignField: "_id",
+						as: "institutiond"
 					}
 				},
                 {
@@ -333,6 +351,15 @@ class studentDetailsController {
 		try {
 
 			return await studentDetailsSchema.aggregate([
+                {
+					$lookup:
+					{
+						from: "institutions",
+						localField: "institution",
+						foreignField: "_id",
+						as: "institutiond"
+					}
+				},
                 {
                     $lookup:
                     {

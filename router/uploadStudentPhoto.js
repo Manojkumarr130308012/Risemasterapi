@@ -5,7 +5,7 @@ const server = express();
 const studentPhotoController = require('./../controller/uploadStudentPhoto');
 
 let multer       = require('multer');
-global.upload    = multer({dest: 'studentPhoto/'});
+global.upload    = multer({dest: 'uploads/studentPhoto/'});
 server.use('/studentPhoto', express.static('studentPhoto'));
 
 router.post('/upload',upload.single('photo'), async (req, res) => {

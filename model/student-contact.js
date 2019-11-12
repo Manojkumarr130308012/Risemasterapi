@@ -2,13 +2,16 @@ const mongoose = require("mongoose");
 
 const studentContactSchema = new mongoose.Schema({
     addressType: {
-        type: String
+        type: mongoose.Schema.ObjectId,
+        required: true
     },
     address1: {
-        type: String
+        type: String,
+        required: true
     },
     address2: {
-        type: String
+        type: String,
+        required: true
     },
     taluk: {
         type: String
@@ -17,19 +20,27 @@ const studentContactSchema = new mongoose.Schema({
         type: String
     },
     city: {
-        type: String
+        type: String,
+        required: true
     },
     district: {
-        type: String
+        type: String,
+        required: true
     },
     state: {
-        type: String
+        type: String,
+        required: true
     },
     country: {
-        type: String
+        type: String,
+        required: true
     },
     pin: {
-        type: String
+        type: String,
+        required: true
     },
+    stuId: {
+        type: mongoose.Schema.ObjectId
+    }
 })
 module.exports = new mongoose.model('student_contact', studentContactSchema);

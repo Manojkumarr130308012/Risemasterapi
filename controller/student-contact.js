@@ -58,9 +58,9 @@ class studentContactController{
 					$lookup:
 					{
 					  from: "addresstypes",
-					  localField: "addresstype",
+					  localField: "addressType",
 					  foreignField: "_id",
-					  as: "AddressTypeDetails"
+					  as: "addressType"
 					}
 			   },		
 			]);
@@ -103,12 +103,13 @@ class studentContactController{
 	async aggregation() {
 		try {
 		return  await studentContactSchema.aggregate([
-				{$lookup:
+				{
+					$lookup:
 					  {
 						from: "addresstypes",
-						localField: "addresstype",
+						localField: "addressType",
 						foreignField: "_id",
-						as: "AddressTypeDetails"
+						as: "addressType"
 					  }
 				 },			 
 				]);
@@ -118,6 +119,34 @@ class studentContactController{
 				error: errorHandler.parseMongoError(error)
 			};
 		}
-    }
+	}
+	async fetchbyId(stuId){
+		try{
+
+			return await studentContactSchema.aggregate([
+
+				{
+					$match: {
+						stuId: ObjectId(stuId)
+					}
+                },
+				{
+					$lookup:
+					  {
+						from: "addresstypes",
+						localField: "addressType",
+						foreignField: "_id",
+						as: "addressType"
+					  }
+				 },	
+			]);
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
+
 }
 module.exports = new studentContactController();

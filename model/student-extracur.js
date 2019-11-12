@@ -30,6 +30,9 @@ const studentExtraSchema = new mongoose.Schema({
     },
     remark: {
         type: String
+    },
+    stuId: {
+        type: mongoose.Schema.ObjectId
     }
 })
 module.exports = new mongoose.model('student_Extra', studentExtraSchema);

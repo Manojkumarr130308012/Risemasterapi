@@ -36,6 +36,9 @@ const studentGuardianSchema = new mongoose.Schema({
     },
     country: {
         type: String
+    },
+    stuId: {
+        type: mongoose.Schema.ObjectId
     }
 })
 module.exports = new mongoose.model('student_guardian', studentGuardianSchema);

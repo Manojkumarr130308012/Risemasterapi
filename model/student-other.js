@@ -27,6 +27,9 @@ const studentOtherSchema = new mongoose.Schema({
     },
     challanAmount: {
         type: String
+    },
+    stuId: {
+        type: mongoose.Schema.ObjectId
     }
 })
 module.exports = new mongoose.model('student_other', studentOtherSchema);

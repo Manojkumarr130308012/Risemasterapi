@@ -9,12 +9,8 @@ router.get('/', async (req, res) => {
 	const response = await studentDetailsController.fetch();
 	res.send(response);
 })
-router.get('/fetchdata', async (req, res) => {
-	const response = await studentDetailsController.fetchdata(req.query.id);
-	res.send(response);
-})
-router.get('/fetchbyVehicleId', async (req, res) => {
-	const response = await studentDetailsController.fetchbyVehicleId(req.query.IdValue);
+router.get('/fetchbyId', async (req, res) => {
+	const response = await studentDetailsController.fetchbyId(req.query.id);
 	res.send(response);
 })
 router.delete('/delete', async (req, res) => {

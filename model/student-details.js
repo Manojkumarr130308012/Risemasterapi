@@ -17,9 +17,9 @@ const studentDetailsSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    sphoto: {
-        type: String,
-    },
+    sPhoto : {
+		type: String
+	},
     gender: {
         type: mongoose.Schema.ObjectId,
         required: true
@@ -108,6 +108,10 @@ const studentDetailsSchema = new mongoose.Schema({
         required: true
     },
     //Admission
+    institution: {
+        type: mongoose.Schema.ObjectId,
+        required: true
+    },
     admissionCategory: {
         type: mongoose.Schema.ObjectId,
         required: true

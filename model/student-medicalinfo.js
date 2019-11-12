@@ -27,6 +27,9 @@ const studentMedicalSchema = new mongoose.Schema({
     },
     markDetails: {
         type: String
+    },
+    stuId: {
+        type: mongoose.Schema.ObjectId
     }
 })
 module.exports = new mongoose.model('student_medicainfo', studentMedicalSchema);
