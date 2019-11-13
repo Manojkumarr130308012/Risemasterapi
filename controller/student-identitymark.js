@@ -1,11 +1,11 @@
-const studentExtraSchema = require('./../model/student-extracur');
+const studentIdentityMarkSchema = require('./../model/student-identitymark');
 const errorHandler = require('./../utils/error.handler');
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
-class studentExtraController{
+class studentIdentityMarkController{
 	async add(newDetail){
 		try{
-			let response = await studentExtraSchema.create(newDetail);
+			let response = await studentIdentityMarkSchema.create(newDetail);
 			return { status: "success", result: response, message: "Added Successfully" };
 
 		} catch(error){
@@ -18,7 +18,7 @@ class studentExtraController{
 	
 	async fetch(){
 		try{
-			let response = await studentExtraSchema.find({});
+			let response = await studentIdentityMarkSchema.find({});
 			return {
 				response: response
 			};
@@ -32,7 +32,19 @@ class studentExtraController{
 
 	async fetchdata(id){
 		try{
-			let response = await studentExtraSchema.find({'_id':id});
+			let response = await studentIdentityMarkSchema.find({'_id':id});
+			return response;
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
+	async fetchbyId(stuId){
+		try{
+			let response = await studentIdentityMarkSchema.find({'stuId':stuId});
 			return response;
 			
 		} catch(error){
@@ -45,7 +57,7 @@ class studentExtraController{
 
 	async delete(id){
 		try{
-			let response = await studentExtraSchema.deleteOne({_id: id});
+			let response = await studentIdentityMarkSchema.deleteOne({_id: id});
 			return {
 				status: "success",
 				response: response
@@ -61,7 +73,7 @@ class studentExtraController{
 	async update(id, body) {
 
         try {
-            let response = await studentExtraSchema.updateOne({_id: id}, body);
+            let response = await studentIdentityMarkSchema.updateOne({_id: id}, body);
             return { status: "success", result: response, message: "Updated Successfully" };
 
         } catch (error) {
@@ -71,4 +83,4 @@ class studentExtraController{
     }
 
 }
-module.exports = new studentExtraController();
+module.exports = new studentIdentityMarkController();

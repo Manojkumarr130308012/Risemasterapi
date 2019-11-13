@@ -1,6 +1,7 @@
 const studentQualifictaionSchema = require('./../model/student-qualification');
 const errorHandler = require('./../utils/error.handler');
-
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 class studentQualificationController{
 	async add(newDetail){
 		try{

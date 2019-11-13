@@ -1,6 +1,7 @@
 const studentGardianSchema = require('../model/student-guardian');
 const errorHandler = require('../utils/error.handler');
-
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 class studentGuardianController{
 	async add(newdetail){
 		try{

@@ -86,7 +86,7 @@ const studentIdentityRouter = require('./router/student-identity');
 const studentMedicalRouter = require('./router/student-medicalinfo');
 const studentOtherRouter = require('./router/student-other');
 const studentQualificationRouter = require('./router/student-qualification');
-
+const studentIdentityMarkRouter = require('./router/student-identitymark');
 
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
@@ -175,6 +175,7 @@ server.use("/student-identity", studentIdentityRouter);
 server.use("/student-medicalinfo", studentMedicalRouter);
 server.use("/student-other", studentOtherRouter);
 server.use("/student-qualification", studentQualificationRouter);
+server.use("/student-identitymark", studentIdentityMarkRouter);
 
 // File Upload
 server.use('/uploads', express.static('uploads'));

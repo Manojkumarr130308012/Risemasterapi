@@ -1,6 +1,7 @@
 const studentMedicalSchema = require('./../model/student-medicalinfo');
 const errorHandler = require('./../utils/error.handler');
-
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 class studentMedicalController{
 	async add(newDetail){
 		try{

@@ -1,6 +1,7 @@
 const studentIdentitySchema = require('./../model/student-identity');
 const errorHandler = require('./../utils/error.handler');
-
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 class studentIdentityController{
 	async add(newDetail){
 		try{

@@ -17,7 +17,7 @@ const studentMedicalSchema = new mongoose.Schema({
         type: String
     },
     bloodGroup: {
-        type: String
+        type: mongoose.Schema.ObjectId
     },
     colorBlind: {
         type: String

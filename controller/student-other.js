@@ -1,6 +1,7 @@
 const studentOtherSchema = require('./../model/student-other');
 const errorHandler = require('./../utils/error.handler');
-
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 class studentOtherController{
 	async add(newDetail){
 		try{
