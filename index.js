@@ -37,6 +37,7 @@ const bankRouter = require('./router/bank');
 const qualificationTypeRouter = require("./router/qualification-type");
 const relationshipRouter = require('./router/relationship');
 const activityCategoryRouter = require('./router/activityCategory');
+const subCategoryRouter = require('./router/subCategory');
 //Staff Master
 const staffTypeRouter = require("./router/staff-type");
 const staffRoleRouter = require("./router/staff-role");
@@ -123,6 +124,7 @@ server.use("/bank", bankRouter);
 server.use("/qualification-type", qualificationTypeRouter);
 server.use("/relationship", relationshipRouter);
 server.use("/activityCategory", activityCategoryRouter);
+server.use("/subCategory", subCategoryRouter);
 
 //Staff Master
 server.use("/staff-type", staffTypeRouter);

@@ -1,10 +1,10 @@
-const activityCategorySchema = require('./../model/activityCategory');
+const subCategorySchema = require('./../model/subCategory');
 const errorHandler = require('./../utils/error.handler');
 
-class activityCategoryController{
+class subCategoryController{
 	async add(newactivity){
 		try{
-			let response = await activityCategorySchema.create(newactivity);
+			let response = await subCategorySchema.create(newactivity);
 			return { status: "success", result: response, message: "Added Successfully" };
 		} catch(error){
 			return {
@@ -16,7 +16,7 @@ class activityCategoryController{
 	
 	async fetch(){
 		try{
-			let response = await activityCategorySchema.find({});
+			let response = await subCategorySchema.find({});
 			return {
 				response: response
 			};
@@ -30,7 +30,7 @@ class activityCategoryController{
 
 	async fetchdata(id){
 		try{
-			let response = await activityCategorySchema.find({'_id':id});
+			let response = await subCategorySchema.find({'_id':id});
 			return response;
 			
 		} catch(error){
@@ -43,7 +43,7 @@ class activityCategoryController{
 
 	async delete(id){
 		try{
-			let response = await activityCategorySchema.deleteOne({_id: id});
+			let response = await subCategorySchema.deleteOne({_id: id});
 			return {
 				status: "success",
 				response: response
@@ -59,7 +59,7 @@ class activityCategoryController{
 	async update(id, body) {
 
         try {
-            let response = await activityCategorySchema.updateOne({_id: id}, body);
+            let response = await subCategorySchema.updateOne({_id: id}, body);
             return { status: "success", result: response, message: "Updated Successfully" };
 
         } catch (error) {
@@ -67,6 +67,26 @@ class activityCategoryController{
         }
 
     }
+    async aggregation() {
+		try {
+		return  await subCategorySchema.aggregate([
+				{
+					$lookup:
+					  {
+						from: "activitycategories",
+						localField: "activityCategory",
+						foreignField: "_id",
+						as: "activityCategory"
+					  }
+				 },			 
+				]);
+		} catch (error) {
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
 
 }
-module.exports = new activityCategoryController();
+module.exports = new subCategoryController();
