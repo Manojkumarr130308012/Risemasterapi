@@ -35,7 +35,8 @@ const referralTypeRouter = require('./router/referralType');
 const scholarshipCategoryRouter = require('./router/scholarshipCategory');
 const bankRouter = require('./router/bank');
 const qualificationTypeRouter = require("./router/qualification-type");
-
+const relationshipRouter = require('./router/relationship');
+const activityCategoryRouter = require('./router/activityCategory');
 //Staff Master
 const staffTypeRouter = require("./router/staff-type");
 const staffRoleRouter = require("./router/staff-role");
@@ -120,7 +121,8 @@ server.use("/referralType", referralTypeRouter);
 server.use("/scholarshipCategory", scholarshipCategoryRouter);
 server.use("/bank", bankRouter);
 server.use("/qualification-type", qualificationTypeRouter);
-
+server.use("/relationship", relationshipRouter);
+server.use("/activityCategory", activityCategoryRouter);
 
 //Staff Master
 server.use("/staff-type", staffTypeRouter);
