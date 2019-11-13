@@ -41,6 +41,33 @@ class studentMedicalController{
 			};
 		}
 	}
+	async fetchbyId(stuId){
+		try{
+
+			return await studentMedicalSchema.aggregate([
+
+				{
+					$match: {
+						stuId: ObjectId(stuId)
+					}
+                },
+				{
+					$lookup:
+					  {
+						from: "bloodgroups",
+						localField: "bloodGroup",
+						foreignField: "_id",
+						as: "bloodGroup"
+					  }
+				 },	
+			]);
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
 
 	async delete(id){
 		try{

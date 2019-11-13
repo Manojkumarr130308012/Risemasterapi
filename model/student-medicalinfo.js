@@ -28,6 +28,9 @@ const studentMedicalSchema = new mongoose.Schema({
     markDetails: {
         type: String
     },
+    medicallyFit: {
+        type: String
+    },
     stuId: {
         type: mongoose.Schema.ObjectId
     }

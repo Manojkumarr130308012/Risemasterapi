@@ -41,6 +41,18 @@ class studentIdentityController{
 			};
 		}
 	}
+	async fetchbyId(stuId){
+		try{
+			let response = await studentIdentitySchema.find({'stuId':stuId});
+			return response;
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
 
 	async delete(id){
 		try{

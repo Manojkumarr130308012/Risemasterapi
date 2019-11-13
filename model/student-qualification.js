@@ -10,9 +10,6 @@ const studentQualificationSchema = new mongoose.Schema({
     courseName: {
         type: String
     },
-    institutionType: {
-        type: mongoose.Schema.ObjectId,
-    },
     courseStartDate: {
         type: String,  
     },
@@ -24,6 +21,9 @@ const studentQualificationSchema = new mongoose.Schema({
     },
     medium: {
         type: mongoose.Schema.ObjectId,
+    },
+    institution: {
+        type: String,
     },
     city: {
         type: String,
@@ -40,6 +40,9 @@ const studentQualificationSchema = new mongoose.Schema({
     country: {
         type: String,
     },
+    pincode: {
+        type: String,
+    },
     yearOfPassing: {
         type: String,
     },
@@ -48,9 +51,6 @@ const studentQualificationSchema = new mongoose.Schema({
     },
     maxMark: {
         type: String,
-    },
-    percentage: {
-        type: String, 
     },
     organisationType: {
         type: String,

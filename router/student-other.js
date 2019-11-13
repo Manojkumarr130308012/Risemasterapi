@@ -25,4 +25,8 @@ router.get('/aggregation', async function  (req, res) {
 	let response = await studentOtherController.aggregation();
 	res.send(response);
 })
+router.get('/fetchbyId', async (req, res) => {
+	const response = await studentOtherController.fetchbyId(req.query.stuId);
+	res.send(response);
+})
 module.exports = router;

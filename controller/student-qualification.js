@@ -68,6 +68,54 @@ class studentQualificationController{
         }
 
     }
+	async aggregation() {
+		try {
+		return  await studentQualifictaionSchema.aggregate([
+			{
+				$lookup:
+				{
+					from: "media",
+					localField: "medium",
+					foreignField: "_id",
+					as: "medium"
+				}
+			},
+			{
+				$lookup:
+				{
+					from: "coursetypes",
+					localField: "courseType",
+					foreignField: "_id",
+					as: "courseType"
+				}
+			},
 
+			{
+				$lookup:
+				{
+					from: "boards",
+					localField: "board",
+					foreignField: "_id",
+					as: "board"
+				}
+			},
+
+			{
+				$lookup:
+				{
+					from: "qualificationtypes",
+					localField: "qualificationType",
+					foreignField: "_id",
+					as: "qualificationType"
+				}
+			},			 
+				  ]);
+		} catch (error) {
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
 }
 module.exports = new studentQualificationController();
