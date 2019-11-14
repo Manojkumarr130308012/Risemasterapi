@@ -2,10 +2,11 @@ const mongoose = require("mongoose");
 
 const studentExtraSchema = new mongoose.Schema({
     activityCate: {
-        type: String
+        type: mongoose.Schema.ObjectId,
+        required: true
     },
     subCate: {
-        type: String
+        type: mongoose.Schema.ObjectId
     },
     level: {
         type: String

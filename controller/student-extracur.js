@@ -42,6 +42,43 @@ class studentExtraController{
 			};
 		}
 	}
+	async fetchbyId(stuId){
+		try{
+
+			return await studentExtraSchema.aggregate([
+
+				{
+					$match: {
+						stuId: ObjectId(stuId)
+					}
+                },
+				{
+					$lookup:
+					  {
+						from: "activitycategories",
+						localField: "activityCate",
+						foreignField: "_id",
+						as: "activityCate"
+					  }
+				 },
+				 {
+					$lookup:
+					  {
+						from: "subcategories",
+						localField: "subCate",
+						foreignField: "_id",
+						as: "subCate"
+					  }
+				 },	
+			]);
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
+
 
 	async delete(id){
 		try{

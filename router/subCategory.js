@@ -29,7 +29,10 @@ router.put('/update', async (req, res) => {
 
 router.get('/aggregation', async (req, res) =>{
 	let response = await subCategoryController.aggregation();
+	res.send(response);	
+})
+router.get('/fetchSubCat', async (req, res) => {	
+	const response = await subCategoryController.fetchSubCat(req.query.activityCate);
 	res.send(response);
-	
 })
 module.exports = router;

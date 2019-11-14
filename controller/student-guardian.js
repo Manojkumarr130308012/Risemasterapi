@@ -68,7 +68,44 @@ class studentGuardianController{
             return { status: "error", error: error };
         }
 
-    }
+	}
+	async fetchbyId(stuId){
+		try{
+
+			return await studentGardianSchema.aggregate([
+
+				{
+					$match: {
+						stuId: ObjectId(stuId)
+					}
+                },
+				{
+					$lookup:
+					  {
+						from: "addresstypes",
+						localField: "addressType",
+						foreignField: "_id",
+						as: "addressType"
+					  }
+				 },
+				 {
+					$lookup:
+					  {
+						from: "relationships",
+						localField: "relationship",
+						foreignField: "_id",
+						as: "relationship"
+					  }
+				 },	
+			]);
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
+
 
 }
 module.exports = new studentGuardianController();

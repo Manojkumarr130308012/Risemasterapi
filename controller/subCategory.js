@@ -87,6 +87,17 @@ class subCategoryController{
 			};
 		}
 	}
-
+	async fetchSubCat(activityCate){
+		try{
+			let response = await subCategorySchema.find({'activityCategory':activityCate});
+			return response;
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
 }
 module.exports = new subCategoryController();
