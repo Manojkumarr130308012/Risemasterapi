@@ -1,5 +1,5 @@
 var fs = require('fs');
-const Uploadimage  = require('../model/ce-qd-fileupload');
+const uploadSchema  = require('../model/ce-qd-fileupload');
 const config = require('./../config');
 
 class uploadController{
@@ -8,7 +8,7 @@ class uploadController{
 
         let filePath = profilePicMeta ? this.saveProfilePic(profilePicMeta) : '';
 
-        let fileloc = new Uploadimage({
+        let fileloc = new uploadSchema({
             photoLocation : filePath
 
         })

@@ -1,6 +1,12 @@
-const router = require('express').Router();
+// const router = require('express').Router();
+// const server = require('express').Router();
 const studentQualificationController = require('./../controller/student-qualification');
-
+const express = require('express');
+const router = express.Router();
+const server = express();
+let multer       = require('multer');
+global.upload    = multer({dest: 'uploads/qdFile/'});
+server.use('/qdFile', express.static('qdFile'));
 router.post('/add', async (req, res) => {
 	const response = await studentQualificationController.add(req.body);
 	res.send(response);
@@ -29,4 +35,13 @@ router.get('/fetchbyId', async (req, res) => {
 	const response = await studentQualificationController.fetchbyId(req.query.stuId);
 	res.send(response);
 })
+router.post('/upload', upload.single('file'), async (req, res) => {
+	try {
+		let response = await studentQualificationController.saveFilepath(req.file);
+		res.send(response);
+	} catch (error) {
+		console.log(error);
+		res.status(500).send(JSON.stringify({ status: 'error', 'message': error.message }));
+	}
+});
 module.exports = router;
