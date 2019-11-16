@@ -5,11 +5,19 @@ const bankSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         required: true
     },
+    bankName: {
+        type: String,
+        required: true
+    },
     accountName: {
         type: String,
         required: true
     },
     accountNumber: {
+        type: String,
+        required: true
+    },
+    accountType: {
         type: String,
         required: true
     },

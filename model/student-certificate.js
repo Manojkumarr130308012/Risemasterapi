@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 
 const studentCertificateSchema = new mongoose.Schema({
     certificateType: {
-        type: String
+        type: mongoose.Schema.ObjectId
     },
-    RegisterNo: {
+    registerNo: {
         type: String
     },
     certificateNo: {

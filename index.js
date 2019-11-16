@@ -90,7 +90,7 @@ const studentOtherRouter = require('./router/student-other');
 const studentQualificationRouter = require('./router/student-qualification');
 const studentIdentityMarkRouter = require('./router/student-identitymark');
 const studentCertificateRouter = require('./router/student-certificate');
-
+const studentCertiUploadRouter = require('./router/student-certi-upload');
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 
@@ -180,11 +180,12 @@ server.use("/student-other", studentOtherRouter);
 server.use("/student-qualification", studentQualificationRouter);
 server.use("/student-identitymark", studentIdentityMarkRouter);
 server.use("/student-certificate", studentCertificateRouter);
-
+server.use("/student-certi-upload", studentCertiUploadRouter);
 // File Upload
 server.use('/uploads', express.static('uploads'));
 server.use('/driverFiles', express.static('driverFiles'));
 server.use('/studentPhoto', express.static('studentPhoto'));
+server.use('/certificate', express.static('certificate'));
 server.use('/qdFile', express.static('qdFile'));
 server.set('view engine', 'pug')
 

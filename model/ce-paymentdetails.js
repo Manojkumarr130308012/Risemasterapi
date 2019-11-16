@@ -11,7 +11,7 @@ const paymentDetailsSchema = new mongoose.Schema({
         required: true
     },
     bank: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: false
     },
     chequeDDDate: {
@@ -23,7 +23,7 @@ const paymentDetailsSchema = new mongoose.Schema({
         required: false
     },
     advanceFeeType: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     amount: {

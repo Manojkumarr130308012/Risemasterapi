@@ -183,6 +183,168 @@ class basicDetailsController{
 			};
 		}
 	}
+	
+	async fetchbyBatch(batch){
+		try{
+			return await basicDetailsSchema.aggregate([
+				{
+					$match: {
+						batch: batch
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "institutions",
+						localField: "institution",
+						foreignField: "_id",
+						as: "institutiond"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "genders",
+						localField: "gender",
+						foreignField: "_id",
+						as: "genderd"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "admission-types",
+						localField: "admissiontype",
+						foreignField: "_id",
+						as: "admissiontyped"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "boards",
+						localField: "board",
+						foreignField: "_id",
+						as: "boardd"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "referraltypes",
+						localField: "referenceType",
+						foreignField: "_id",
+						as: "referenceTyped"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "scholarshipcategories",
+						localField: "scholarshipCategory",
+						foreignField: "_id",
+						as: "scholarshipCategoryd"
+					}
+				},
+				{
+					$lookup:
+					{ 
+						from: "nationalities",
+						localField: "nationality",
+						foreignField: "_id",
+						as: "nationalityd"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "religions",
+						localField: "religion",
+						foreignField: "_id",
+						as: "religiond"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "communities",
+						localField: "community",
+						foreignField: "_id",
+						as: "communityd"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "castes",
+						localField: "caste",
+						foreignField: "_id",
+						as: "casted"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "admissioncategories",
+						localField: "admissionCategory",
+						foreignField: "_id",
+						as: "admissionCategoryd"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "mothertongues",
+						localField: "motherTongue",
+						foreignField: "_id",
+						as: "motherTongued"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "ce_paymentdetails",
+						localField: "_id",
+						foreignField: "canId",
+						as: "PaymentDetails"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "ce_addressdetails",
+						localField: "_id",
+						foreignField: "canId",
+						as: "AddressDetails"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "ce_qualifictaiondetails",
+						localField: "_id",
+						foreignField: "canId",
+						as: "QualificationDetails"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "ce_followups",
+						localField: "_id",
+						foreignField: "canId",
+						as: "FollowupsDetails"
+					}
+				},
+			]);
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
 	async fetch(){
 		try{
 			let response = await basicDetailsSchema.find({});
