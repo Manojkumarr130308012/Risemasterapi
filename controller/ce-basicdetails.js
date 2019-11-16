@@ -189,7 +189,7 @@ class basicDetailsController{
 			return await basicDetailsSchema.aggregate([
 				{
 					$match: {
-						batch: batch
+						batch: ObjectId(batch)
 					}
 				},
 				{
