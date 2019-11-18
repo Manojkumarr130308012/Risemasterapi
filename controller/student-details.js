@@ -378,6 +378,159 @@ class studentDetailsController {
 			};
 		}
 	}
+	async fetchbyBatch(batch){
+		try{
+
+			return await studentDetailsSchema.aggregate([
+
+				{
+					$match: {
+						batch: ObjectId(batch)
+					}
+                },
+                {
+					$lookup:
+					{
+						from: "institutions",
+						localField: "institution",
+						foreignField: "_id",
+						as: "institutiond"
+					}
+				},
+                {
+                    $lookup:
+                    {
+                        from: "nationalities",
+                        localField: "nationality",
+                        foreignField: "_id",
+                        as: "nationalityd"
+                    }
+                },
+                {
+                    $lookup:
+                    {
+                        from: "religions",
+                        localField: "religion",
+                        foreignField: "_id",
+                        as: "religiond"
+                    }
+                },
+                {
+                    $lookup:
+                    {
+                        from: "communities",
+                        localField: "community",
+                        foreignField: "_id",
+                        as: "communityd"
+                    }
+                },
+                {
+                    $lookup:
+                    {
+                        from: "castes",
+                        localField: "caste",
+                        foreignField: "_id",
+                        as: "casted"
+                    }
+                },
+                {
+                    $lookup:
+                    {
+                        from: "admissioncategories",
+                        localField: "admissionCategory",
+                        foreignField: "_id",
+                        as: "admissionCategoryd"
+                    }
+                },
+                {
+                    $lookup:
+                    {
+                        from: "mothertongues",
+                        localField: "motherTongue",
+                        foreignField: "_id",
+                        as: "motherTongued"
+                    }
+                },
+                {
+                    $lookup:
+                    {
+                        from: "mothertongues",
+                        localField: "secondLanguage",
+                        foreignField: "_id",
+                        as: "secondLanguaged"
+                    }
+                },
+                {
+                    $lookup:
+                    {
+                        from: "genders",
+                        localField: "gender",
+                        foreignField: "_id",
+                        as: "genderd"
+                    }
+                },
+                {
+                    $lookup:
+                    {
+                        from: "marital-statuses",
+                        localField: "maritalStatus",
+                        foreignField: "_id",
+                        as: "maritalStatusd"
+                    }
+                },
+                {
+                    $lookup:
+                    {
+                        from: "bloodgroups",
+                        localField: "bloodGroup",
+                        foreignField: "_id",
+                        as: "bloodGroupd"
+                    }
+                },
+                {
+					$lookup:
+					{
+						from: "referraltypes",
+						localField: "referalType",
+						foreignField: "_id",
+						as: "referalTyped"
+					}
+                },
+                {
+					$lookup:
+					{
+						from: "admission-types",
+						localField: "admissionType",
+						foreignField: "_id",
+						as: "admissionTyped"
+					}
+                },
+                {
+					$lookup:
+					{
+						from: "degrees",
+						localField: "degree",
+						foreignField: "_id",
+						as: "degreed"
+					}
+                },
+                {
+					$lookup:
+					{
+						from: "batches",
+						localField: "batch",
+						foreignField: "_id",
+						as: "batch"
+					}
+				},
+			]);
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
 
 }
 module.exports = new studentDetailsController();
