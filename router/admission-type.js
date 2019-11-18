@@ -22,6 +22,7 @@ router.get('/fetchbyIns', async (req, res) => {
 })
 router.delete('/delete', async (req, res) => {
 	const response = await admissionTypeController.delete(req.query.id);
+	console.log('id',req.query.id);
 	res.send(response);
 })
 router.put('/update', async (req, res) => {

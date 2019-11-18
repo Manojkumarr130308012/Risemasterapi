@@ -72,9 +72,10 @@ class stageDetailsController{
 	}
 
 	async update(id, body) {
-
+		//console.log("stageID",id);
         try {
-            let response = await stageDetailsSchema.updateOne({_id: id}, body);
+			let response = await stageDetailsSchema.updateOne({_id: id}, body);
+			//console.log("res1",response);
             return { status: "success", result: response, message: "Updated Successfully" };
 
         } catch (error) {

@@ -1,6 +1,10 @@
 const expensesEntrySchema = require('./../model/expenses-entry');
 const errorHandler = require('./../utils/error.handler');
 
+
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
+
 class expensesEntryController{
 	async add(newExpenses){
 		try{
@@ -85,6 +89,108 @@ class expensesEntryController{
         }
 
 	}
+
+	
+
+	async fetchExpenseReportbyDate(filterReportbyDate){
+		try{		
+
+				
+
+			let	vehicleNo   = filterReportbyDate.vehicleNo;
+			let	date     = filterReportbyDate.date;
+			let	date2     = filterReportbyDate.date2;
+			let expense = filterReportbyDate.expense;
+
+			
+
+			return  await expensesEntrySchema.aggregate([		
+
+					{
+						$match: {
+							vehicleNo: ObjectId(vehicleNo),
+							date: { "$gte": date, "$lt": date2 },
+							expense: ObjectId(expense)
+							
+						}
+					},
+					{
+					$lookup:	
+						{
+							from: "vehicle-masters",
+							localField: "vehicleNo",
+							foreignField: "_id",
+							as: "VehicleDetails"
+						}
+					},
+
+					{
+						$lookup:
+		
+							{
+								from: "vehicle-expenses",
+								localField: "expense",
+								foreignField: "_id",
+								as: "ExpenseDetails"
+							}
+						}
+					
+						
+					]);
+				
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: error
+			};
+		}
+	}
+
+
+	async getExpenseReportbyVehicle(vehicleNo){
+		try{	
+
+			//console.log(vehicleNo);	
+			return  await expensesEntrySchema.aggregate([		
+
+					{
+						$match: {
+							vehicleNo: ObjectId(vehicleNo)							
+						}
+					},
+					{
+					$lookup:	
+						{
+							from: "vehicle-masters",
+							localField: "vehicleNo",
+							foreignField: "_id",
+							as: "VehicleDetails"
+						}
+					},
+				
+					{
+						$lookup:
+		
+							{
+								from: "vehicle-expenses",
+								localField: "expense",
+								foreignField: "_id",
+								as: "ExpenseDetails"
+							}
+						}
+						
+					]);
+				
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: error
+			};
+		}
+	}
+
 	async aggregation() {
         try {
            return  await expensesEntrySchema.aggregate([
