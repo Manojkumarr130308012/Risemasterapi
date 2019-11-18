@@ -64,141 +64,6 @@ class studentDetailsController {
 						from: "institutions",
 						localField: "institution",
 						foreignField: "_id",
-						as: "institution"
-					}
-				},
-                {
-                    $lookup:
-                    {
-                        from: "nationalities",
-                        localField: "nationality",
-                        foreignField: "_id",
-                        as: "nationality"
-                    }
-                },
-                {
-                    $lookup:
-                    {
-                        from: "religions",
-                        localField: "religion",
-                        foreignField: "_id",
-                        as: "religion"
-                    }
-                },
-                {
-                    $lookup:
-                    {
-                        from: "communities",
-                        localField: "community",
-                        foreignField: "_id",
-                        as: "community"
-                    }
-                },
-                {
-                    $lookup:
-                    {
-                        from: "castes",
-                        localField: "caste",
-                        foreignField: "_id",
-                        as: "caste"
-                    }
-                },
-                {
-                    $lookup:
-                    {
-                        from: "admissioncategories",
-                        localField: "admissionCategory",
-                        foreignField: "_id",
-                        as: "admissionCategory"
-                    }
-                },
-                {
-                    $lookup:
-                    {
-                        from: "mothertongues",
-                        localField: "motherTongue",
-                        foreignField: "_id",
-                        as: "motherTongue"
-                    }
-                },
-                {
-                    $lookup:
-                    {
-                        from: "mothertongues",
-                        localField: "secondLanguage",
-                        foreignField: "_id",
-                        as: "secondLanguage"
-                    }
-                },
-                {
-                    $lookup:
-                    {
-                        from: "genders",
-                        localField: "gender",
-                        foreignField: "_id",
-                        as: "gender"
-                    }
-                },
-                {
-                    $lookup:
-                    {
-                        from: "marital-statuses",
-                        localField: "maritalStatus",
-                        foreignField: "_id",
-                        as: "maritalStatus"
-                    }
-                },
-                {
-                    $lookup:
-                    {
-                        from: "bloodgroups",
-                        localField: "bloodGroup",
-                        foreignField: "_id",
-                        as: "bloodGroup"
-                    }
-                },
-                {
-					$lookup:
-					{
-						from: "referraltypes",
-						localField: "referalType",
-						foreignField: "_id",
-						as: "referalType"
-					}
-                },
-                {
-					$lookup:
-					{
-						from: "admission-types",
-						localField: "admissionType",
-						foreignField: "_id",
-						as: "admissionType"
-					}
-				},
-			]);
-		} catch(error){
-			return {
-				status: "error",
-				error: errorHandler.parseMongoError(error)
-			};
-		}
-	}
-
-	async fetchbyDepartment(department){
-		try{
-			return await studentDetailsSchema.aggregate([
-
-				{
-					$match: {
-						department: ObjectId(department)
-					}
-                },
-                {
-					$lookup:
-					{
-						from: "institutions",
-						localField: "institution",
-						foreignField: "_id",
 						as: "institutiond"
 					}
 				},
@@ -208,7 +73,7 @@ class studentDetailsController {
                         from: "nationalities",
                         localField: "nationality",
                         foreignField: "_id",
-                        as: "nationality"
+                        as: "nationalityd"
                     }
                 },
                 {
@@ -217,7 +82,7 @@ class studentDetailsController {
                         from: "religions",
                         localField: "religion",
                         foreignField: "_id",
-                        as: "religion"
+                        as: "religiond"
                     }
                 },
                 {
@@ -226,7 +91,7 @@ class studentDetailsController {
                         from: "communities",
                         localField: "community",
                         foreignField: "_id",
-                        as: "community"
+                        as: "communityd"
                     }
                 },
                 {
@@ -235,7 +100,7 @@ class studentDetailsController {
                         from: "castes",
                         localField: "caste",
                         foreignField: "_id",
-                        as: "caste"
+                        as: "casted"
                     }
                 },
                 {
@@ -244,7 +109,7 @@ class studentDetailsController {
                         from: "admissioncategories",
                         localField: "admissionCategory",
                         foreignField: "_id",
-                        as: "admissionCategory"
+                        as: "admissionCategoryd"
                     }
                 },
                 {
@@ -253,7 +118,7 @@ class studentDetailsController {
                         from: "mothertongues",
                         localField: "motherTongue",
                         foreignField: "_id",
-                        as: "motherTongue"
+                        as: "motherTongued"
                     }
                 },
                 {
@@ -262,7 +127,7 @@ class studentDetailsController {
                         from: "mothertongues",
                         localField: "secondLanguage",
                         foreignField: "_id",
-                        as: "secondLanguage"
+                        as: "secondLanguaged"
                     }
                 },
                 {
@@ -271,7 +136,7 @@ class studentDetailsController {
                         from: "genders",
                         localField: "gender",
                         foreignField: "_id",
-                        as: "gender"
+                        as: "genderd"
                     }
                 },
                 {
@@ -280,7 +145,7 @@ class studentDetailsController {
                         from: "marital-statuses",
                         localField: "maritalStatus",
                         foreignField: "_id",
-                        as: "maritalStatus"
+                        as: "maritalStatusd"
                     }
                 },
                 {
@@ -289,7 +154,7 @@ class studentDetailsController {
                         from: "bloodgroups",
                         localField: "bloodGroup",
                         foreignField: "_id",
-                        as: "bloodGroup"
+                        as: "bloodGroupd"
                     }
                 },
                 {
@@ -298,7 +163,7 @@ class studentDetailsController {
 						from: "referraltypes",
 						localField: "referalType",
 						foreignField: "_id",
-						as: "referalType"
+						as: "referalTyped"
 					}
                 },
                 {
@@ -307,11 +172,28 @@ class studentDetailsController {
 						from: "admission-types",
 						localField: "admissionType",
 						foreignField: "_id",
-						as: "admissionType"
+						as: "admissionTyped"
+					}
+                },
+                {
+					$lookup:
+					{
+						from: "degrees",
+						localField: "degree",
+						foreignField: "_id",
+						as: "degreed"
+					}
+                },
+                {
+					$lookup:
+					{
+						from: "batches",
+						localField: "batch",
+						foreignField: "_id",
+						as: "batch"
 					}
 				},
 			]);
-			
 		} catch(error){
 			return {
 				status: "error",
@@ -319,6 +201,8 @@ class studentDetailsController {
 			};
 		}
 	}
+
+	
 
 	async delete(id) {
 		try {
@@ -467,9 +351,180 @@ class studentDetailsController {
 						foreignField: "_id",
 						as: "admissionType"
 					}
+                },
+                {
+					$lookup:
+					{
+						from: "degrees",
+						localField: "degree",
+						foreignField: "_id",
+						as: "degreed"
+					}
+                },
+                {
+					$lookup:
+					{
+						from: "batches",
+						localField: "batch",
+						foreignField: "_id",
+						as: "batchd"
+					}
 				},
 				]);
 		} catch (error) {
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
+	async fetchbyBatch(batch){
+		try{
+
+			return await studentDetailsSchema.aggregate([
+
+				{
+					$match: {
+						batch: ObjectId(batch)
+					}
+                },
+                {
+					$lookup:
+					{
+						from: "institutions",
+						localField: "institution",
+						foreignField: "_id",
+						as: "institutiond"
+					}
+				},
+                {
+                    $lookup:
+                    {
+                        from: "nationalities",
+                        localField: "nationality",
+                        foreignField: "_id",
+                        as: "nationalityd"
+                    }
+                },
+                {
+                    $lookup:
+                    {
+                        from: "religions",
+                        localField: "religion",
+                        foreignField: "_id",
+                        as: "religiond"
+                    }
+                },
+                {
+                    $lookup:
+                    {
+                        from: "communities",
+                        localField: "community",
+                        foreignField: "_id",
+                        as: "communityd"
+                    }
+                },
+                {
+                    $lookup:
+                    {
+                        from: "castes",
+                        localField: "caste",
+                        foreignField: "_id",
+                        as: "casted"
+                    }
+                },
+                {
+                    $lookup:
+                    {
+                        from: "admissioncategories",
+                        localField: "admissionCategory",
+                        foreignField: "_id",
+                        as: "admissionCategoryd"
+                    }
+                },
+                {
+                    $lookup:
+                    {
+                        from: "mothertongues",
+                        localField: "motherTongue",
+                        foreignField: "_id",
+                        as: "motherTongued"
+                    }
+                },
+                {
+                    $lookup:
+                    {
+                        from: "mothertongues",
+                        localField: "secondLanguage",
+                        foreignField: "_id",
+                        as: "secondLanguaged"
+                    }
+                },
+                {
+                    $lookup:
+                    {
+                        from: "genders",
+                        localField: "gender",
+                        foreignField: "_id",
+                        as: "genderd"
+                    }
+                },
+                {
+                    $lookup:
+                    {
+                        from: "marital-statuses",
+                        localField: "maritalStatus",
+                        foreignField: "_id",
+                        as: "maritalStatusd"
+                    }
+                },
+                {
+                    $lookup:
+                    {
+                        from: "bloodgroups",
+                        localField: "bloodGroup",
+                        foreignField: "_id",
+                        as: "bloodGroupd"
+                    }
+                },
+                {
+					$lookup:
+					{
+						from: "referraltypes",
+						localField: "referalType",
+						foreignField: "_id",
+						as: "referalTyped"
+					}
+                },
+                {
+					$lookup:
+					{
+						from: "admission-types",
+						localField: "admissionType",
+						foreignField: "_id",
+						as: "admissionTyped"
+					}
+                },
+                {
+					$lookup:
+					{
+						from: "degrees",
+						localField: "degree",
+						foreignField: "_id",
+						as: "degreed"
+					}
+                },
+                {
+					$lookup:
+					{
+						from: "batches",
+						localField: "batch",
+						foreignField: "_id",
+						as: "batch"
+					}
+				},
+			]);
+		} catch(error){
 			return {
 				status: "error",
 				error: errorHandler.parseMongoError(error)

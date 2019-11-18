@@ -25,8 +25,10 @@ router.put('/update', async (req, res) => {
 router.get('/aggregation', async (req, res) =>{
 	let response = await basicDetailsController.aggregation();
 	res.send(response);
-	
 })
-
+router.get('/fetchbyBatch', async (req, res) => {
+	const response = await basicDetailsController.fetchbyBatch(req.query.batch);
+	res.send(response);
+})
 
 module.exports = router;

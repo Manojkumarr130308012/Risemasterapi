@@ -13,6 +13,10 @@ router.get('/fetchbyId', async (req, res) => {
 	const response = await studentDetailsController.fetchbyId(req.query.id);
 	res.send(response);
 })
+router.get('/fetchbyBatch', async (req, res) => {
+	const response = await studentDetailsController.fetchbyBatch(req.query.batch);
+	res.send(response);
+})
 router.delete('/delete', async (req, res) => {
 	const response = await studentDetailsController.delete(req.query.id);
 	res.send(response);

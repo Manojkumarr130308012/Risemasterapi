@@ -118,5 +118,74 @@ class studentQualificationController{
 			};
 		}
 	}
+	async fetchbyId(stuId) {
+		try {
+		return  await studentQualifictaionSchema.aggregate([
+			{
+				$match: {
+					stuId: ObjectId(stuId)
+				}
+			},
+			{
+				$lookup:
+				{
+					from: "media",
+					localField: "medium",
+					foreignField: "_id",
+					as: "medium"
+				}
+			},
+			{
+				$lookup:
+				{
+					from: "coursetypes",
+					localField: "courseType",
+					foreignField: "_id",
+					as: "courseType"
+				}
+			},
+
+			{
+				$lookup:
+				{
+					from: "boards",
+					localField: "board",
+					foreignField: "_id",
+					as: "board"
+				}
+			},
+
+			{
+				$lookup:
+				{
+					from: "qualificationtypes",
+					localField: "qualificationType",
+					foreignField: "_id",
+					as: "qualificationType"
+				}
+			},			 
+				  ]);
+		} catch (error) {
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
+	async saveFilepath(profilePicMeta){
+
+        let filePath = profilePicMeta ? this.saveProfilePic(profilePicMeta) : '';
+
+        let fileloc = new Uploadimage({
+            fileLoctaion : filePath
+
+        })
+
+        let FileDetails = await fileloc.save();
+        return { status: 'Successfully added', qdFileResult1:`${config.app.protocal}://${config.app.host}:${config.app.port}/${FileDetails.fileLoctaion}`};
+    }
+    saveProfilePic(fileMeta){
+        return fileMeta.path;
+    }
 }
 module.exports = new studentQualificationController();

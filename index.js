@@ -38,6 +38,8 @@ const qualificationTypeRouter = require("./router/qualification-type");
 const relationshipRouter = require('./router/relationship');
 const activityCategoryRouter = require('./router/activityCategory');
 const subCategoryRouter = require('./router/subCategory');
+const certificateTypeRouter = require('./router/certificateType');
+
 //Staff Master
 const staffTypeRouter = require("./router/staff-type");
 const staffRoleRouter = require("./router/staff-role");
@@ -87,7 +89,8 @@ const studentMedicalRouter = require('./router/student-medicalinfo');
 const studentOtherRouter = require('./router/student-other');
 const studentQualificationRouter = require('./router/student-qualification');
 const studentIdentityMarkRouter = require('./router/student-identitymark');
-
+const studentCertificateRouter = require('./router/student-certificate');
+const studentCertiUploadRouter = require('./router/student-certi-upload');
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 
@@ -125,7 +128,7 @@ server.use("/qualification-type", qualificationTypeRouter);
 server.use("/relationship", relationshipRouter);
 server.use("/activityCategory", activityCategoryRouter);
 server.use("/subCategory", subCategoryRouter);
-
+server.use("/certificateType", certificateTypeRouter);
 //Staff Master
 server.use("/staff-type", staffTypeRouter);
 server.use("/staff-role", staffRoleRouter);
@@ -176,11 +179,13 @@ server.use("/student-medicalinfo", studentMedicalRouter);
 server.use("/student-other", studentOtherRouter);
 server.use("/student-qualification", studentQualificationRouter);
 server.use("/student-identitymark", studentIdentityMarkRouter);
-
+server.use("/student-certificate", studentCertificateRouter);
+server.use("/student-certi-upload", studentCertiUploadRouter);
 // File Upload
 server.use('/uploads', express.static('uploads'));
 server.use('/driverFiles', express.static('driverFiles'));
 server.use('/studentPhoto', express.static('studentPhoto'));
+server.use('/certificate', express.static('certificate'));
 server.use('/qdFile', express.static('qdFile'));
 server.set('view engine', 'pug')
 

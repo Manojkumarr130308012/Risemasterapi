@@ -16,7 +16,7 @@ const studentOtherSchema = new mongoose.Schema({
     universityAppNo: {
         type: String
     },
-    universirtAdmiNo: {
+    universityAdmiNo: {
         type: String
     },
     challanNo: {
@@ -26,6 +26,9 @@ const studentOtherSchema = new mongoose.Schema({
         type: String
     },
     challanAmount: {
+        type: String
+    },
+    optOut: {
         type: String
     },
     stuId: {

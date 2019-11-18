@@ -2,16 +2,19 @@ const mongoose = require("mongoose");
 
 const studentGuardianSchema = new mongoose.Schema({
     relationship: {
-        type: String
+        type: mongoose.Schema.ObjectId,
+        required: true
     },
     firstName: {
-        type: String
+        type: String,
+        required: true
     },
     lastName: {
         type: String
     },
     addressType: {
-        type: String
+        type: mongoose.Schema.ObjectId,
+        required: true
     },
     flatNo: {
         type: String
@@ -20,16 +23,19 @@ const studentGuardianSchema = new mongoose.Schema({
         type: String
     },
     mobileNo: {
-        type: String
+        type: String,
+        required: true
     },
     city: {
         type: String
     },
     district: {
-        type: String
+        type: String,
+        required: true
     },
     pincode: {
-        type: String
+        type: String,
+        required: true
     },
     state: {
         type: String

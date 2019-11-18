@@ -80,14 +80,33 @@ class paymentDetailsController{
 						canId: ObjectId(canId)
 					}
 				},
-				{$lookup:
+				{
+					$lookup:
 					{
-					  from: "paymentmethods",
-					  localField: "paymentmethod",
-					  foreignField: "_id",
-					  as: "paymentmethod"
+						from: "paymentmethods",
+						localField: "paymentmethod",
+						foreignField: "_id",
+						as: "paymentmethod"
 					}
-			   },			
+				},
+				{
+					$lookup:
+					{
+						from: "banks",
+						localField: "bank",
+						foreignField: "_id",
+						as: "bank"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "fee-types",
+						localField: "advanceFeeType",
+						foreignField: "_id",
+						as: "advanceFeeType"
+					}
+				},
 			]);
 			
 		} catch(error){
@@ -109,7 +128,25 @@ class paymentDetailsController{
 						foreignField: "_id",
 						as: "paymentmethod"
 					  }
-				 },			 
+				 },	
+				 {
+					$lookup:
+					{
+						from: "banks",
+						localField: "bank",
+						foreignField: "_id",
+						as: "bank"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "fee-types",
+						localField: "advanceFeeType",
+						foreignField: "_id",
+						as: "advanceFeeType"
+					}
+				},	 
 				]);
 		} catch (error) {
 			return {

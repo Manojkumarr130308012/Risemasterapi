@@ -55,7 +55,7 @@ const studentQualificationSchema = new mongoose.Schema({
     organisationType: {
         type: String,
     },
-    cerifcateNo: {
+    certificateNo: {
         type: String
     },
     registerNo: {
@@ -76,7 +76,13 @@ const studentQualificationSchema = new mongoose.Schema({
     groupCode: {
         type: String
     },
-    fileLoctaion : {
+    cutOff: {
+        type: String
+    },
+    percentage: {
+        type: String
+    },
+    photoLoctaion : {
 		type: String
     },
     stuId: {
