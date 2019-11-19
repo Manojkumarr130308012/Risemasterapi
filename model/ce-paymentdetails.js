@@ -36,6 +36,9 @@ const paymentDetailsSchema = new mongoose.Schema({
     canId: {
         type: mongoose.Schema.ObjectId,
         required: true
+    },
+    paymentStatus: {
+        type: String
     }
     
 })

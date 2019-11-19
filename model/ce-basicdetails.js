@@ -157,6 +157,9 @@ const basicDetailsSchema = new mongoose.Schema({
     },
     enquiryDate: {
         type: String
+    },
+    status: {
+        type: String
     }
 })
 

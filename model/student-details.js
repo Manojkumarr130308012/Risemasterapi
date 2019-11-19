@@ -151,5 +151,12 @@ const studentDetailsSchema = new mongoose.Schema({
     andhamanAndNicobarNative: {
         type: String,
     },
+    status: {
+        type: String
+    },
+    password: {
+        type: String
+    }
+
 })
 module.exports = new mongoose.model('Student_Details', studentDetailsSchema);
