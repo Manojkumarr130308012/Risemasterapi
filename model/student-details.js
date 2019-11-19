@@ -2,176 +2,135 @@ const mongoose = require("mongoose");
 
 const studentDetailsSchema = new mongoose.Schema({
     degree: {
-        type: mongoose.Schema.ObjectId,
-        required: true
+        type: mongoose.Schema.ObjectId
     },
     batch: {
-        type: mongoose.Schema.ObjectId,
-        required: true
+        type: mongoose.Schema.ObjectId
     },
     rollNo: {
-        type: String,
-        required: true
+        type: String
     },
     regNo: {
-        type: String,
-        required: false
+        type: String
     },
     firstName: {
-        type: String,
-        required: true
+        type: String
     },
     lastName: {
-        type: String,
-        required: true
+        type: String
     },
     sPhoto : {
 		type: String
 	},
     gender: {
-        type: mongoose.Schema.ObjectId,
-        required: true
+        type: mongoose.Schema.ObjectId
     },
     dob: {
-        type: String,
-        required: true
+        type: String
     },
     maritalStatus: {
-        type: mongoose.Schema.ObjectId,
-        required: false
+        type: mongoose.Schema.ObjectId
     },
     mobileNo: {
-        type: String,
-        required: true
+        type: String
     },
     bloodGroup: {
-        type: mongoose.Schema.ObjectId,
-        required: false
+        type: mongoose.Schema.ObjectId
     },
     emailId: {
-        type: String,
-        required: true
+        type: String
     },
     //Father's Details
     ffirstName: {
-        type: String,
-        required: false
+        type: String
     },
     flastName: {
-        type: String,
-        required: false
+        type: String
     },
     foccupation: {
-        type: String,
-        required: false
+        type: String
     },
     fannualIncome: {
-        type: String,
-        required: false
+        type: String
     },
     fmobileNo: {
-        type: String,
-        required: false
+        type: String
     },
     paadharNO: {
-        type: String,
-        required: false
+        type: String
     },
     //Mother's Detail
     mfirstName: {
-        type: String,
-        required: false
+        type: String
     },
     mlastName: {
-        type: String,
-        required: false
+        type: String
     },
     moccupation: {
-        type: String,
-        required: false
+        type: String
     },
     mannualIncome: {
-        type: String,
-        required: false
+        type: String
     },
     mmobileNo: {
-        type: String,
-        required: false
+        type: String
     },
     //
     nationality: {
-        type: mongoose.Schema.ObjectId,
-        required: false
+        type: mongoose.Schema.ObjectId
     },
     religion: {
-        type: mongoose.Schema.ObjectId,
-        required: false
+        type: mongoose.Schema.ObjectId
     },
     caste: {
-        type: mongoose.Schema.ObjectId,
-        required: false
+        type: mongoose.Schema.ObjectId
     },
     community: {
-        type: mongoose.Schema.ObjectId,
-        required: true
+        type: mongoose.Schema.ObjectId
     },
     //Admission
     institution: {
-        type: mongoose.Schema.ObjectId,
-        required: true
+        type: mongoose.Schema.ObjectId
     },
     admissionCategory: {
-        type: mongoose.Schema.ObjectId,
-        required: true
+        type: mongoose.Schema.ObjectId
     },
     admissionType: {
-        type: mongoose.Schema.ObjectId,
-        required: true
+        type: mongoose.Schema.ObjectId
     },
     financialCategory: {
-        type: String,
-        required: true
+        type: String
     },
     boarding: {
-        type: String,
-        required: true
+        type: String
     },
     boardingStartDate: {
-        type: String,
-        required: false
+        type: String
     },
     //
     applicationNo: {
-        type: String,
-        required: false
+        type: String
     },
     admissionDate: {
-        type: String,
-        required: false
+        type: String
     },
     admissionNo: {
-        type: String,
-        required: false
+        type: String
     },
     joinDate: {
-        type: String,
-        required: false
+        type: String
     },
     referalType: {
-        type: mongoose.Schema.ObjectId,
-        required: false
+        type: mongoose.Schema.ObjectId
     },
     referal: {
-        type: String,
-        required: false
+        type: String
     },
     motherTongue: {
-        type: mongoose.Schema.ObjectId,
-        required: false
+        type: mongoose.Schema.ObjectId
     },
     secondLanguage: {
-        type: mongoose.Schema.ObjectId,
-        required: false
+        type: mongoose.Schema.ObjectId
     },
     //Others
     firstGraduate: {
