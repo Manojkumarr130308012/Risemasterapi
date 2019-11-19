@@ -31,4 +31,19 @@ router.get('/aggregation', async function  (req, res) {
 	res.send(response);
 })
 
+
+
+router.post('/fetchExpenseReportbyDate', async (req, res) => {
+
+	const response = await expensesEntryController.fetchExpenseReportbyDate(req.body);	
+	//console.log('fetchFuelReportbyDate',response);
+	res.send(response);
+})
+
+router.get('/getExpenseReportbyVehicle', async (req, res) => {
+
+	const response = await expensesEntryController.getExpenseReportbyVehicle(req.query.vehicleNo);	
+	res.send(response);
+})
+
 module.exports = router;

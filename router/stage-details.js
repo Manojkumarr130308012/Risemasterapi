@@ -23,6 +23,7 @@ router.delete('/delete', async (req, res) => {
 })
 router.put('/update', async (req, res) => {
 	const response = await stageDetailsController.update(req.query.id, req.body);
+	console.log("res2",response);
 	res.send(response);
 })
 

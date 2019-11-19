@@ -6,7 +6,7 @@ router.post('/add', async (req, res) => {
 	res.send(response);
 })
 router.get('/', async (req, res) => {
-	res.setHeader('Access-Control-Allow-Origin', '*');
+	//res.setHeader('Access-Control-Allow-Origin', '*');
 	const response = await expenseController.fetch();
 	res.send(response);
 })
@@ -23,5 +23,6 @@ router.put('/update', async (req, res) => {
 	const response = await expenseController.update(req.query.id, req.body);
 	res.send(response);
 })
+
 
 module.exports = router;

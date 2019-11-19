@@ -17,9 +17,7 @@ class expenseController{
 	async fetch(){
 		try{
 			let response = await expenseSchema.find({});
-			return {
-				response: response
-			};
+			return response;
 		} catch(error){
 			return {
 				status: "error",
