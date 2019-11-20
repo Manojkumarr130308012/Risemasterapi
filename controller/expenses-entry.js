@@ -93,16 +93,11 @@ class expensesEntryController{
 	
 
 	async fetchExpenseReportbyDate(filterReportbyDate){
-		try{		
-
-				
-
+		try{
 			let	vehicleNo   = filterReportbyDate.vehicleNo;
 			let	date     = filterReportbyDate.date;
 			let	date2     = filterReportbyDate.date2;
-			let expense = filterReportbyDate.expense;
-
-			
+			let expense = filterReportbyDate.expense;			
 
 			return  await expensesEntrySchema.aggregate([		
 
