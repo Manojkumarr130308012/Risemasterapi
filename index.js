@@ -60,6 +60,7 @@ const qualificationDetailsRouter = require("./router/ce-qualificationdetails");
 const studentPhotoRouter = require("./router/uploadStudentPhoto");
 const ceCourseProgramRouter = require("./router/addCEcourseProgram");
 const qdFileUpload = require('./router/ce-qd-fileupload');
+const convertRouter = require('./router/ce-converttostudent');
 
 // Vehicle Management 
 const vehicleRouter = require("./router/vehicleMaster");
@@ -149,7 +150,7 @@ server.use("/ce-qualificationdetails", qualificationDetailsRouter);
 server.use("/uploadStudentPhoto", studentPhotoRouter);
 server.use("/addCEcourseProgram", ceCourseProgramRouter);
 server.use("/ce-qd-fileupload",qdFileUpload );
-//server.use(cors({origin: 'http://localhost:4200'}));
+server.use("/ce-converttostudent",convertRouter );
 
 // Vehicle Management
 server.use("/vehicle",vehicleRouter);

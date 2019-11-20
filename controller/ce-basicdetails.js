@@ -174,6 +174,15 @@ class basicDetailsController{
 						as: "FollowupsDetails"
 					}
 				},
+				{
+					$lookup:
+					{
+						from: "ce_converttostudents",
+						localField: "_id",
+						foreignField: "canId",
+						as: "ConvertToStudentDetails"
+					}
+				},
 			]);
 			
 		} catch(error){
@@ -334,6 +343,15 @@ class basicDetailsController{
 						localField: "_id",
 						foreignField: "canId",
 						as: "FollowupsDetails"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "ce_converttostudents",
+						localField: "_id",
+						foreignField: "canId",
+						as: "ConvertToStudentDetails"
 					}
 				},
 			]);
@@ -531,6 +549,15 @@ class basicDetailsController{
 						localField: "_id",
 						foreignField: "canId",
 						as: "FollowupsDetails"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "ce_converttostudents",
+						localField: "_id",
+						foreignField: "canId",
+						as: "ConvertToStudentDetails"
 					}
 				},
 			]);

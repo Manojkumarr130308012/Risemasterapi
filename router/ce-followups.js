@@ -6,17 +6,14 @@ router.post('/add', async (req, res) => {
 	res.send(response);
 })
 router.get('/', async (req, res) => {
-	// res.setHeader('Access-Control-Allow-Origin', '*');
 	const response = await followupsController.fetch();
 	res.send(response);
 })
 router.get('/fetchdata', async (req, res) => {
-	//res.setHeader('Access-Control-Allow-Origin', '*');
 	const response = await followupsController.fetchdata(req.query.id);
 	res.send(response);
 })
 router.get('/fetchfollowups', async (req, res) => {
-	//res.setHeader('Access-Control-Allow-Origin', '*');
 	const response = await followupsController.fetchfollowups(req.query.canId);
 	res.send(response);
 })
@@ -33,9 +30,5 @@ router.get('/aggregation', async (req, res) =>{
 	res.send(response);
 	
 })
-// router.get('/fetchFollowup', async (req, res) => {
-// 	const response = await followupsController.fetchFollowup(req.query.canId);
-// 	res.send(response);
-// })
 
 module.exports = router;

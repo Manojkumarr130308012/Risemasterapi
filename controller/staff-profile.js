@@ -7,6 +7,9 @@ class staffProfileController {
 	async add(newStaffProfile) {
 		try {
 			let response = await staffProfileSchema.create(newStaffProfile);
+			let password = this.generateToken(response.staffCode);
+			this.saveToken(response._id, password);
+            response.password = password;
 			return { status: "success", result: response, message: "Added Successfully" };
 
 		} catch (error) {
@@ -16,7 +19,19 @@ class staffProfileController {
 			};
 		}
 	}
-
+ //////Password Encryption
+ async saveToken(staffID, password){
+	try{
+		await staffProfileSchema.update({_id: staffID}, {password: password})
+	} catch(err){
+		console.log(err);
+	}
+}
+ generateToken(staffCode) {
+	let password = staffCode;
+	return require('crypto').createHash('md5').update(password).digest('hex')
+}
+//////////////
 	async fetch() {
 		try {
 			let response = await staffProfileSchema.find({});

@@ -90,6 +90,9 @@ const staffProfileSchema = new mongoose.Schema({
     },
     reason: {
         type: String
+    },
+    password: {
+        type: String
     }
 })
 module.exports = new mongoose.model('staff-profile', staffProfileSchema);

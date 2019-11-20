@@ -6,7 +6,10 @@ const ObjectId = mongoose.Types.ObjectId;
 class studentDetailsController {
 	async add(newstudentdetails) {
 		try {
-			let response = await studentDetailsSchema.create(newstudentdetails);
+            let response = await studentDetailsSchema.create(newstudentdetails);
+            let password = this.generateToken(response.rollNo);
+            this.saveToken(response._id, password);
+            response.password = password;
 			return { 
                 status: "success", 
                 result: response, 
@@ -19,8 +22,20 @@ class studentDetailsController {
 				error: errorHandler.parseMongoError(error)
 			};
 		}
-	}
-
+    }
+    //////Password Encryption
+    async saveToken(studID, password){
+        try{
+            await studentDetailsSchema.update({_id: studID}, {password: password})
+        } catch(err){
+            console.log(err);
+        }
+    }
+     generateToken(rollNO) {
+        let password = rollNO;
+        return require('crypto').createHash('md5').update(password).digest('hex')
+    }
+//////////////
 	async fetch() {
 		try {
 			let response = await studentDetailsSchema.find({});
