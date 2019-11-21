@@ -26,5 +26,12 @@ router.put('/update', async (req, res) => {
 	const response = await academicYearController.update(req.query.id, req.body);
 	res.send(response);
 })
-
+router.get('/aggregation', async (req, res) =>{
+	let response = await academicYearController.aggregation();
+	res.send(response);
+})
+router.get('/fetchbyIns', async (req, res) => {
+	const response = await academicYearController.fetchbyIns(req.query.institution);
+	res.send(response);
+})
 module.exports = router;

@@ -68,6 +68,40 @@ class academicYearController{
         }
 
     }
+	async aggregation() {
+		try {
+			return await academicYearSchema.aggregate([
+				{
+					$lookup:
+					{
+						from: "institutions",
+						localField: "institution",
+						foreignField: "_id",
+						as: "institution"
+					}
+				},
+			]);
+		} catch (error) {
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
+	async fetchbyIns(institution){
+		try{
+			let response = await academicYearSchema.find({'institution':institution});
+			return {
+				response: response
+			};
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
 
 }
 module.exports = new academicYearController();

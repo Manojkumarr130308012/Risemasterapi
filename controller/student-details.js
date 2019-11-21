@@ -7,9 +7,9 @@ class studentDetailsController {
 	async add(newstudentdetails) {
 		try {
             let response = await studentDetailsSchema.create(newstudentdetails);
-            let password = this.generateToken(response.rollNo);
-            this.saveToken(response._id, password);
-            response.password = password;
+            // let password = this.generateToken(response.rollNo);
+            // this.saveToken(response._id, password);
+            // response.password = password;
 			return { 
                 status: "success", 
                 result: response, 

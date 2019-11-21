@@ -25,7 +25,6 @@ router.get('/fetchbyDepartment', async (req, res) => {
 router.get('/fetchbyInstitution', async (req, res) => {
 	const response = await staffProfileController.fetchbyInstitution(req.query.institution);
 	res.send(response);
-	console.log('/fetchbyInstitution',response);
 })
 router.delete('/delete', async (req, res) => {
 	const response = await staffProfileController.delete(req.query.id);

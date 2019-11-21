@@ -1,9 +1,9 @@
 const basicDetailsSchema = require('../model/ce-basicdetails');
 const errorHandler = require('../utils/error.handler');
 
-
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
+
 class basicDetailsController{
 	async add(newDetail){
 		try {
@@ -141,6 +141,15 @@ class basicDetailsController{
 				{
 					$lookup:
 					{
+						from: "academicyears",
+						localField: "academicYear",
+						foreignField: "_id",
+						as: "academicYeard"
+					}
+				},
+				{
+					$lookup:
+					{
 						from: "ce_paymentdetails",
 						localField: "_id",
 						foreignField: "canId",
@@ -244,6 +253,15 @@ class basicDetailsController{
 						localField: "referenceType",
 						foreignField: "_id",
 						as: "referenceTyped"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "academicyears",
+						localField: "academicYear",
+						foreignField: "_id",
+						as: "academicYeard"
 					}
 				},
 				{
@@ -428,6 +446,15 @@ class basicDetailsController{
 				{
 					$lookup:
 					{
+						from: "academicyears",
+						localField: "academicYear",
+						foreignField: "_id",
+						as: "academicYeard"
+					}
+				},
+				{
+					$lookup:
+					{
 						from: "admission-types",
 						localField: "admissiontype",
 						foreignField: "_id",
@@ -569,7 +596,157 @@ class basicDetailsController{
 			};
 		}
 	}
+	async fetchReportbyDate(filterReportbyDate){
+		console.log('fetchReportbyDate', filterReportbyDate);
+		try{
+			let	institution   = filterReportbyDate.institution;
+			// let	coursecategory   = filterReportbyDate.coursecategory;
+			// let	courseprogram   = filterReportbyDate.courseprogram;
+			let	admissiontype   = filterReportbyDate.admissiontype;
+			let	fromDate     = filterReportbyDate.fromDate;
+			let	toDate     = filterReportbyDate.toDate;
 
+			return await basicDetailsSchema.aggregate([
+
+				{
+					$match: {
+						institution: ObjectId(institution),
+						// coursecategory: ObjectId(coursecategory),
+						// courseprogram: ObjectId(courseprogram),
+						enquiryDate: { "$gte": fromDate, "$lt": toDate },
+						admissiontype: ObjectId(admissiontype),
+
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "institutions",
+						localField: "institution",
+						foreignField: "_id",
+						as: "InstitutionDetails"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "academicyears",
+						localField: "academicYear",
+						foreignField: "_id",
+						as: "academicYearDetails"
+					}
+				},
+				
+				{
+					$lookup:
+
+					{
+						from: "admission-types",
+						localField: "admissiontype",
+						foreignField: "_id",
+						as: "AdmissiontypeDetails"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "genders",
+						localField: "gender",
+						foreignField: "_id",
+						as: "genderd"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "boards",
+						localField: "board",
+						foreignField: "_id",
+						as: "boardd"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "referraltypes",
+						localField: "referenceType",
+						foreignField: "_id",
+						as: "referenceTyped"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "scholarshipcategories",
+						localField: "scholarshipCategory",
+						foreignField: "_id",
+						as: "scholarshipCategoryd"
+					}
+				},
+				{
+					$lookup:
+					{ 
+						from: "nationalities",
+						localField: "nationality",
+						foreignField: "_id",
+						as: "nationalityd"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "religions",
+						localField: "religion",
+						foreignField: "_id",
+						as: "religiond"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "communities",
+						localField: "community",
+						foreignField: "_id",
+						as: "communityd"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "castes",
+						localField: "caste",
+						foreignField: "_id",
+						as: "casted"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "admissioncategories",
+						localField: "admissionCategory",
+						foreignField: "_id",
+						as: "admissionCategoryd"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "mothertongues",
+						localField: "motherTongue",
+						foreignField: "_id",
+						as: "motherTongued"
+					}
+				},
+			]);
+				
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: error
+			};
+		}
+	}
 
 }
 module.exports = new basicDetailsController();

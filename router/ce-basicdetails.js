@@ -30,5 +30,8 @@ router.get('/fetchbyBatch', async (req, res) => {
 	const response = await basicDetailsController.fetchbyBatch(req.query.batch);
 	res.send(response);
 })
-
+router.post('/fetchReportbyDate', async (req, res) => {
+	const response = await basicDetailsController.fetchReportbyDate(req.body);
+	res.send(response);
+})
 module.exports = router;
