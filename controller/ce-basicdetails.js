@@ -4,26 +4,26 @@ const errorHandler = require('../utils/error.handler');
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 
-class basicDetailsController{
-	async add(newDetail){
+class basicDetailsController {
+	async add(newDetail) {
 		try {
 			let response = await basicDetailsSchema.create(newDetail);
 			return {
 				status: "success",
 				response: response
 			};
-			 
-		} catch(error){
+
+		} catch (error) {
 			return {
 				status: "error",
 				error: error
 			};
 		}
 	}
-	
 
-	async fetchdata(id){
-		try{
+
+	async fetchdata(id) {
+		try {
 			return await basicDetailsSchema.aggregate([
 				{
 					$match: {
@@ -86,7 +86,7 @@ class basicDetailsController{
 				},
 				{
 					$lookup:
-					{ 
+					{
 						from: "nationalities",
 						localField: "nationality",
 						foreignField: "_id",
@@ -193,17 +193,17 @@ class basicDetailsController{
 					}
 				},
 			]);
-			
-		} catch(error){
+
+		} catch (error) {
 			return {
 				status: "error",
 				error: errorHandler.parseMongoError(error)
 			};
 		}
 	}
-	
-	async fetchbyBatch(batch){
-		try{
+
+	async fetchbyBatch(batch) {
+		try {
 			return await basicDetailsSchema.aggregate([
 				{
 					$match: {
@@ -275,7 +275,7 @@ class basicDetailsController{
 				},
 				{
 					$lookup:
-					{ 
+					{
 						from: "nationalities",
 						localField: "nationality",
 						foreignField: "_id",
@@ -373,21 +373,21 @@ class basicDetailsController{
 					}
 				},
 			]);
-			
-		} catch(error){
+
+		} catch (error) {
 			return {
 				status: "error",
 				error: errorHandler.parseMongoError(error)
 			};
 		}
 	}
-	async fetch(){
-		try{
+	async fetch() {
+		try {
 			let response = await basicDetailsSchema.find({});
 			return {
 				response: response
 			};
-		} catch(error){
+		} catch (error) {
 			return {
 				status: "error",
 				error: errorHandler.parseMongoError(error)
@@ -395,33 +395,33 @@ class basicDetailsController{
 		}
 	}
 
-	async delete(id){
-		try{
-			let response = await basicDetailsSchema.deleteOne({_id: id});
+	async delete(id) {
+		try {
+			let response = await basicDetailsSchema.deleteOne({ _id: id });
 			return {
 				status: "success",
 				response: response
 			};
-		} catch(error){
+		} catch (error) {
 			return {
 				status: "error",
 				error: errorHandler.parseMongoError(error)
 			};
 		}
 	}
-	
+
 	async update(id, body) {
 
-        try {
-            let response = await basicDetailsSchema.updateOne({_id: id}, body);
-            return { status: "success", result: response };
+		try {
+			let response = await basicDetailsSchema.updateOne({ _id: id }, body);
+			return { status: "success", result: response };
 
-        } catch (error) {
-            return { status: "error", error: error };
-        }
+		} catch (error) {
+			return { status: "error", error: error };
+		}
 
 	}
-	
+
 	async aggregation() {
 		try {
 			return await basicDetailsSchema.aggregate([
@@ -490,7 +490,7 @@ class basicDetailsController{
 				},
 				{
 					$lookup:
-					{ 
+					{
 						from: "nationalities",
 						localField: "nationality",
 						foreignField: "_id",
@@ -596,27 +596,89 @@ class basicDetailsController{
 			};
 		}
 	}
-	async fetchReportbyDate(filterReportbyDate){
+	async fetchReportbyDate(filterReportbyDate) {
 		console.log('fetchReportbyDate', filterReportbyDate);
-		try{
-			let	institution   = filterReportbyDate.institution;
-			// let	coursecategory   = filterReportbyDate.coursecategory;
-			// let	courseprogram   = filterReportbyDate.courseprogram;
-			let	admissiontype   = filterReportbyDate.admissiontype;
-			let	fromDate     = filterReportbyDate.fromDate;
-			let	toDate     = filterReportbyDate.toDate;
+
+		console.log('coursecategory', filterReportbyDate.coursecategory);
+		console.log('courseprogram', filterReportbyDate.courseprogram);
+		console.log('id', filterReportbyDate._id);
+
+		try {
+			let institution = filterReportbyDate.institution;
+			let coursecategory = filterReportbyDate.coursecategory;
+			let courseprogram = filterReportbyDate.courseprogram;
+			let admissiontype = filterReportbyDate.admissiontype;
+			let fromDate = filterReportbyDate.fromDate;
+			let toDate = filterReportbyDate.toDate;
+			let id = filterReportbyDate._id;
 
 			return await basicDetailsSchema.aggregate([
 
+					{
+						
+							$match: {
+								//institution: ObjectId(institution),
+								//coursecategory: ObjectId(coursecategory),
+								// courseprogram: ObjectId(courseprogram),
+								//enquiryDate: { "$gte": fromDate, "$lt": toDate },
+								//admissiontype: ObjectId(admissiontype),
+	
+								// _id: ObjectId(id)						
+							
+	
+						}
+					},
+
+					
+				
+					{ "$lookup": {
+					  "from": "cecourseprograms",
+					  "let": { "canId":ObjectId(id), "coursecategory": ObjectId(coursecategory), "courseprogram": ObjectId(courseprogram) },
+					  "pipeline": [
+						{ "$match": {
+						  "$expr": {
+							"$and": [
+							  { "$eq": [ "$canId", "$$canId" ] },
+							  { "$eq": [ "$coursecategory", "$$coursecategory" ] },
+							  { "$eq": [ "$courseprogram", "$$courseprogram" ] }
+							]
+						  }
+						}}
+					  ],
+					  "as": "CourseDetails"
+					}},			
+
+
+				
+
+			
+
+
+             /*	{ $lookup: { from: "cecourseprograms", localField: "_id", foreignField: "canId", as: "CourseCatPrgmDetail" } },
 				{
-					$match: {
-						institution: ObjectId(institution),
-						// coursecategory: ObjectId(coursecategory),
-						// courseprogram: ObjectId(courseprogram),
-						enquiryDate: { "$gte": fromDate, "$lt": toDate },
-						admissiontype: ObjectId(admissiontype),
+					$project: {
+						posts: {
+							$filter: {
+								input: "$CourseCatPrgmDetail", as: "post", cond: {
+									$eq: ['$$post.coursecategory', ObjectId(coursecategory)],
+									$eq: ['$$post.courseprogram', ObjectId(courseprogram)]
+								}
+							}
+						}
 
 					}
+				},*/
+
+				{
+
+					$lookup:
+					{
+						from: "cecourseprograms",
+						localField: "_id",
+						foreignField: "canId",
+						as: "CourseCatPrgmDetail"
+					}
+
 				},
 				{
 					$lookup:
@@ -636,7 +698,7 @@ class basicDetailsController{
 						as: "academicYearDetails"
 					}
 				},
-				
+
 				{
 					$lookup:
 
@@ -685,7 +747,7 @@ class basicDetailsController{
 				},
 				{
 					$lookup:
-					{ 
+					{
 						from: "nationalities",
 						localField: "nationality",
 						foreignField: "_id",
@@ -738,9 +800,9 @@ class basicDetailsController{
 					}
 				},
 			]);
-				
-			
-		} catch(error){
+
+
+		} catch (error) {
 			return {
 				status: "error",
 				error: error
