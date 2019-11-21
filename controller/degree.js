@@ -69,6 +69,38 @@ class degreeController{
         }
 
     }
-
+	async fetchbyIns(institution){
+		try{
+			let response = await degreeSchema.find({'institution':institution});
+			return {
+				response: response
+			};
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
+    async aggregation() {
+        try {
+           return  await degreeSchema.aggregate([
+			{$lookup:
+				{
+				  from: "institutions",
+				  localField: "institution",
+				  foreignField: "_id",
+				  as: "InstitutionDetails"
+				}
+		   },				 
+		  ]);
+        } catch (error) {
+            return {
+                status: "error",
+                error: errorHandler.parseMongoError(error)
+            };
+        }
+	}
 }
 module.exports = new degreeController();

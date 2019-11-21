@@ -39,7 +39,7 @@ const relationshipRouter = require('./router/relationship');
 const activityCategoryRouter = require('./router/activityCategory');
 const subCategoryRouter = require('./router/subCategory');
 const certificateTypeRouter = require('./router/certificateType');
-
+const hostelRouter = require('./router/hostel');
 //Staff Master
 const staffTypeRouter = require("./router/staff-type");
 const staffRoleRouter = require("./router/staff-role");
@@ -92,6 +92,9 @@ const studentQualificationRouter = require('./router/student-qualification');
 const studentIdentityMarkRouter = require('./router/student-identitymark');
 const studentCertificateRouter = require('./router/student-certificate');
 const studentCertiUploadRouter = require('./router/student-certi-upload');
+
+
+
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 
@@ -111,10 +114,12 @@ server.use("/admissionCategory", admissionCategoryRouter);
 server.use("/upload", uploadRouter);
 server.use("/driverFileUpload", driverFileUploadRouter);
 
+
+
+//Student Master
 server.use("/course-category", courseCategoryRouter);
 server.use("/course-program", courseProgramRouter);
 server.use("/batch", batchRouter);
-//Student Master
 server.use("/addressType", addressTypeRouter);
 server.use("/courseType", courseTypeRouter);
 server.use("/degree", degreeRouter);
@@ -130,6 +135,7 @@ server.use("/relationship", relationshipRouter);
 server.use("/activityCategory", activityCategoryRouter);
 server.use("/subCategory", subCategoryRouter);
 server.use("/certificateType", certificateTypeRouter);
+server.use("/hostel", hostelRouter);
 //Staff Master
 server.use("/staff-type", staffTypeRouter);
 server.use("/staff-role", staffRoleRouter);
@@ -182,6 +188,7 @@ server.use("/student-qualification", studentQualificationRouter);
 server.use("/student-identitymark", studentIdentityMarkRouter);
 server.use("/student-certificate", studentCertificateRouter);
 server.use("/student-certi-upload", studentCertiUploadRouter);
+
 // File Upload
 server.use('/uploads', express.static('uploads'));
 server.use('/driverFiles', express.static('driverFiles'));

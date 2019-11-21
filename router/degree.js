@@ -7,7 +7,6 @@ router.post('/add', async (req, res) => {
 })
 
 router.get('/', async (req, res) => {
-	//res.setHeader('Access-Control-Allow-Origin', '*');
 	const response = await degreeController.fetch();
 	res.send(response);
 })
@@ -26,5 +25,12 @@ router.put('/update', async (req, res) => {
 	const response = await degreeController.update(req.query.id, req.body);
 	res.send(response);
 })
-
+router.get('/aggregation', async function  (req, res) {
+	let response = await degreeController.aggregation();
+	res.send(response);
+})
+router.get('/fetchbyIns', async (req, res) => {
+	const response = await degreeController.fetchbyIns(req.query.institution);
+	res.send(response);
+})
 module.exports = router;

@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const batchSchema = new mongoose.Schema({
+    institution: {
+        type: mongoose.Schema.ObjectId,
+        required: true
+    },
     degree: {
         type: mongoose.Schema.ObjectId,
         required: true

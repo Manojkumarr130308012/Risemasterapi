@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
 
-const degreeSchema = new mongoose.Schema({
+const hostelSchema = new mongoose.Schema({
     institution: {
         type: mongoose.Schema.ObjectId,
         required: true
     },
-    degree: {
+    hostel: {
         type: String,
         required: true
     }
 })
-module.exports = new mongoose.model('degree', degreeSchema);
+module.exports = new mongoose.model('hostel', hostelSchema);

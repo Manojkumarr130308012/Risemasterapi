@@ -1,15 +1,12 @@
-const batchSchema = require('./../model/batch');
+const hostelSchema = require('./../model/hostel');
 const errorHandler = require('./../utils/error.handler');
 
-class batchController{
-	async add(newbatch){
-        try {
-            let response = await batchSchema.create(newbatch);
-            return {
-                status: "success",
-                result: response,
-                message: "Added Successfully"
-            };
+class hostelController{
+	async add(newhostel){
+		try{
+			let response = await hostelSchema.create(newhostel);
+			return { status: "success", result: response, message: "Added Successfully" };
+
 		} catch(error){
 			return {
 				status: "error",
@@ -20,7 +17,7 @@ class batchController{
 	
 	async fetch(){
 		try{
-			let response = await batchSchema.find({});
+			let response = await hostelSchema.find({});
 			return {
 				response: response
 			};
@@ -34,7 +31,7 @@ class batchController{
 
 	async fetchdata(id){
 		try{
-			let response = await batchSchema.find({'_id':id});
+			let response = await hostelSchema.find({'_id':id});
 			return response;
 			
 		} catch(error){
@@ -44,23 +41,10 @@ class batchController{
 			};
 		}
 	}
-	async fetchByDeg(degree){
-		try{
-			let response = await batchSchema.find({'degree':degree});
-			return {
-				response: response
-			};
-			
-		} catch(error){
-			return {
-				status: "error",
-				error: errorHandler.parseMongoError(error)
-			};
-		}
-	}
+
 	async delete(id){
 		try{
-			let response = await batchSchema.deleteOne({_id: id});
+			let response = await hostelSchema.deleteOne({_id: id});
 			return {
 				status: "success",
 				response: response
@@ -76,34 +60,39 @@ class batchController{
 	async update(id, body) {
 
         try {
-            let response = await batchSchema.updateOne({_id: id}, body);
+            let response = await hostelSchema.updateOne({_id: id}, body);
             return { status: "success", result: response, message: "Updated Successfully" };
 
         } catch (error) {
             return { status: "error", error: error };
         }
 
+    }
+    async fetchbyIns(institution){
+		try{
+			let response = await hostelSchema.find({'institution':institution});
+			return {
+				response: response
+			};
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
 	}
-	async aggregation() {
+    async aggregation() {
         try {
-           return  await batchSchema.aggregate([
-			{
-                $lookup:
-                {
-                    from: "degrees",
-                    localField: "degree",
-                    foreignField: "_id",
-                    as: "degree"
-                }
-			},
+           return  await hostelSchema.aggregate([
 			{$lookup:
 				{
 				  from: "institutions",
 				  localField: "institution",
 				  foreignField: "_id",
-				  as: "institution"
+				  as: "InstitutionDetails"
 				}
-		   },			 
+		   },				 
 		  ]);
         } catch (error) {
             return {
@@ -112,6 +101,5 @@ class batchController{
             };
         }
 	}
-
 }
-module.exports = new batchController();
+module.exports = new hostelController();
