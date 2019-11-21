@@ -596,22 +596,17 @@ class basicDetailsController {
 			};
 		}
 	}
-	async fetchReportbyDate(filterReportbyDate) {
-		console.log('fetchReportbyDate', filterReportbyDate);
-
-		console.log('coursecategory', filterReportbyDate.coursecategory);
-		console.log('courseprogram', filterReportbyDate.courseprogram);
-		console.log('id', filterReportbyDate._id);
-
-		try {
-			let institution = filterReportbyDate.institution;
-			let coursecategory = filterReportbyDate.coursecategory;
-			let courseprogram = filterReportbyDate.courseprogram;
-			let admissiontype = filterReportbyDate.admissiontype;
-			let fromDate = filterReportbyDate.fromDate;
-			let toDate = filterReportbyDate.toDate;
-			let id = filterReportbyDate._id;
-
+	async fetchReportbyDate(filterReportbyDate){
+		// console.log('fetchReportbyDate', filterReportbyDate);
+		try{
+			let	institution   = filterReportbyDate.institution;
+			// let	coursecategory   = filterReportbyDate.coursecategory;
+			// let	courseprogram   = filterReportbyDate.courseprogram;
+			let	admissiontype   = filterReportbyDate.admissiontype;
+			let	academicYear   = filterReportbyDate.academicYear;
+			let	fromDate     = filterReportbyDate.fromDate;
+			let	toDate     = filterReportbyDate.toDate;
+			let confirmedStatus = filterReportbyDate.confirmedStatus;
 			return await basicDetailsSchema.aggregate([
 
 					{
@@ -670,6 +665,7 @@ class basicDetailsController {
 				},*/
 
 				{
+<<<<<<< HEAD
 
 					$lookup:
 					{
@@ -677,6 +673,16 @@ class basicDetailsController {
 						localField: "_id",
 						foreignField: "canId",
 						as: "CourseCatPrgmDetail"
+=======
+					$match: {
+						institution: ObjectId(institution),
+						// coursecategory: ObjectId(coursecategory),
+						// courseprogram: ObjectId(courseprogram),
+						enquiryDate: { "$gte": fromDate, "$lt": toDate },
+						admissiontype: ObjectId(admissiontype),
+						academicYear: ObjectId(academicYear),
+						status: confirmedStatus
+>>>>>>> 139928b43e38056ac2555c11d319d8d255643769
 					}
 
 				},
