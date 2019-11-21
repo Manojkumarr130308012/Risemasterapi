@@ -10,7 +10,7 @@ server.use('/', (req, res, next) => {
 	//mongoose.connect('mongodb://127.0.0.1:27017/users', {useNewUrlParser: true});
 	let  {protocol,host,port,name}= config.app.database;	
 	mongoose.connect(`${protocol}${host}:
-	${port}/${name}`, {useNewUrlParser:true});
+	${port}/${name}`, {useUnifiedTopology: true, useNewUrlParser:true});
 	next();
 });
 
