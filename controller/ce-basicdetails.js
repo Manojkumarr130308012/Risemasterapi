@@ -597,15 +597,16 @@ class basicDetailsController{
 		}
 	}
 	async fetchReportbyDate(filterReportbyDate){
-		console.log('fetchReportbyDate', filterReportbyDate);
+		// console.log('fetchReportbyDate', filterReportbyDate);
 		try{
 			let	institution   = filterReportbyDate.institution;
 			// let	coursecategory   = filterReportbyDate.coursecategory;
 			// let	courseprogram   = filterReportbyDate.courseprogram;
 			let	admissiontype   = filterReportbyDate.admissiontype;
+			let	academicYear   = filterReportbyDate.academicYear;
 			let	fromDate     = filterReportbyDate.fromDate;
 			let	toDate     = filterReportbyDate.toDate;
-
+			let confirmedStatus = filterReportbyDate.confirmedStatus;
 			return await basicDetailsSchema.aggregate([
 
 				{
@@ -615,7 +616,8 @@ class basicDetailsController{
 						// courseprogram: ObjectId(courseprogram),
 						enquiryDate: { "$gte": fromDate, "$lt": toDate },
 						admissiontype: ObjectId(admissiontype),
-
+						academicYear: ObjectId(academicYear),
+						status: confirmedStatus
 					}
 				},
 				{
