@@ -597,7 +597,7 @@ class basicDetailsController {
 		}
 	}
 	async fetchReportbyDate(filterReportbyDate) {
-		// console.log('fetchReportbyDate', filterReportbyDate);
+		console.log('fetchReportbyDate', filterReportbyDate);
 		try {
 			let institution = filterReportbyDate.institution;
 			let coursecategory = filterReportbyDate.coursecategory;
@@ -608,54 +608,46 @@ class basicDetailsController {
 			let toDate = filterReportbyDate.toDate;
 			let confirmedStatus = filterReportbyDate.confirmedStatus;
 
-			let id = filterReportbyDate._id;
+			// let id = filterReportbyDate._id;
 			return await basicDetailsSchema.aggregate([
-
 				{
 
 					$match: {
-						//institution: ObjectId(institution),
-						// coursecategory: ObjectId(coursecategory),
-						// courseprogram: ObjectId(courseprogram),
-						//enquiryDate: { "$gte": fromDate, "$lt": toDate },
-						//admissiontype: ObjectId(admissiontype),
-						//academicYear: ObjectId(academicYear),
-						//status: confirmedStatus
+						institution: ObjectId(institution),
+						coursecategory: ObjectId(coursecategory),
+						courseprogram: ObjectId(courseprogram),
+						enquiryDate: { "$gte": fromDate, "$lt": toDate },
+						admissiontype: ObjectId(admissiontype),
+						academicYear: ObjectId(academicYear),
+						status: confirmedStatus,
 						// _id: ObjectId(id)						
 
 
 					}
 				},
 
-
-
-				{
-					"$lookup": {
-						"from": "cecourseprograms",
-						"let": { "canId": ObjectId(id), "coursecategory": ObjectId(coursecategory), "courseprogram": ObjectId(courseprogram) },
-						"pipeline": [
-							{
-								"$match": {
-									"$expr": {
-										"$and": [
-											{ "$eq": ["$canId", "$$canId"] },
-											{ "$eq": ["$coursecategory", "$$coursecategory"] },
-											{ "$eq": ["$courseprogram", "$$courseprogram"] }
-										]
-									}
-								}
-							}
-						],
-						"as": "CourseDetails"
-					}
-				},
-
-
-
-
-
-
-
+				// {
+				// 	"$lookup": {
+				// 		"from": "cecourseprograms",
+				// 		"let": { "canId": ObjectId(id), "coursecategory": ObjectId(coursecategory), "courseprogram": ObjectId(courseprogram) },
+				// 		"pipeline": [
+				// 			{
+				// 				"$match": {
+				// 					"$expr": {
+				// 						"$and": [
+				// 							{ "$eq": ["$canId", "$$canId"] },
+				// 							{ "$eq": ["$coursecategory", "$$coursecategory"] },
+				// 							{ "$eq": ["$courseprogram", "$$courseprogram"] }
+				// 						]
+				// 					}
+				// 				}
+				// 			},
+				// 		],
+				// 		"as": "CourseDetails",
+				// 	}
+				// },
+				
+					
 				/*	{ $lookup: { from: "cecourseprograms", localField: "_id", foreignField: "canId", as: "CourseCatPrgmDetail" } },
 				   {
 					   $project: {
@@ -671,17 +663,23 @@ class basicDetailsController {
 					   }
 				   },*/
 
-				{
-
-					$lookup:
-					{
-						from: "cecourseprograms",
-						localField: "_id",
-						foreignField: "canId",
-						as: "CourseCatPrgmDetail"
-					}
-
-				},
+				   {"$lookup":
+				   {
+					 from: "course-categories",
+					 localField: "coursecategory",
+					 foreignField: "_id",
+					 as: "coursecategoryDetails"
+				   }
+			  },	
+			   {$lookup:
+				   {
+					 from: "course-programs",
+					 localField: "courseprogram",
+					 foreignField: "_id",
+					 as: "courseprogramDetails"
+				   }
+			  },
+				
 				{
 					$lookup:
 					{

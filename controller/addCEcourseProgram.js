@@ -9,7 +9,10 @@ class addCECPController{
 		try{
 			let response = await addCECPSchema.create(newcourseprogram);
 
-			return { status: "success", result: response, message: "Added Successfully" };
+			return { 
+				status: "success", 
+				res: response
+			};
 			
 		} catch(error){
 			return {
