@@ -93,6 +93,8 @@ const studentIdentityMarkRouter = require('./router/student-identitymark');
 const studentCertificateRouter = require('./router/student-certificate');
 const studentCertiUploadRouter = require('./router/student-certi-upload');
 
+const userLoginRouter = require('./router/userLogin');
+
 
 
 server.use(bodyParser.json());
@@ -100,6 +102,8 @@ server.use(bodyParser.urlencoded({ extended: true }));
 
 server.use(middleware);
 
+
+server.use("/user", userLoginRouter);
 server.use("/user-designation", userDesignationRouter);
 server.use("/academic-year", academicYearRouter);
 server.use("/nationality", nationalityRouter);

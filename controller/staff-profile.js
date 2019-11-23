@@ -3,6 +3,8 @@ const errorHandler = require('./../utils/error.handler');
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 
+const crypto = require('crypto');
+
 class staffProfileController {
 	async add(newStaffProfile) {
 		try {
@@ -29,7 +31,21 @@ class staffProfileController {
 }
  generateToken(staffCode) {
 	let password = staffCode;
-	return require('crypto').createHash('md5').update(password).digest('hex')
+	var mykey = crypto.createCipher('aes-128-cbc', 'password');
+	var mystr = mykey.update(password, 'utf8', 'hex')
+	mystr += mykey.final('hex');
+
+	return mystr;
+	
+	console.log('crypt',mystr);
+
+/*	var mykey1 = crypto.createDecipher('aes-128-cbc', 'password');
+var mystr1 = mykey1.update(mystr, 'hex', 'utf8')
+mystr1 += mykey1.final('utf8');
+
+console.log('decrypt',mystr1);*/
+
+//	return require('crypto').createHash('md5').update(password).digest('hex')
 }
 //////////////
 	async fetch() {
