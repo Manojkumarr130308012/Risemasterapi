@@ -114,7 +114,20 @@ class courseProgramController {
 			};
 		}
 	}
-
+	async fetchbyIns(institution){
+		try{
+			let response = await courseProgramSchema.find({'institution':institution});
+			return {
+				response: response
+			};
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
 
 }
 module.exports = new courseProgramController();

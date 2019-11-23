@@ -7,9 +7,9 @@ class studentDetailsController {
 	async add(newstudentdetails) {
 		try {
             let response = await studentDetailsSchema.create(newstudentdetails);
-            // let password = this.generateToken(response.rollNo);
-            // this.saveToken(response._id, password);
-            // response.password = password;
+            let password = this.generateToken(response.rollNo);
+            this.saveToken(response._id, password);
+            response.password = password;
 			return { 
                 status: "success", 
                 result: response, 
@@ -36,6 +36,21 @@ class studentDetailsController {
         return require('crypto').createHash('md5').update(password).digest('hex')
     }
 //////////////
+async convert(newstudentdetails) {
+    try {
+        let response = await studentDetailsSchema.create(newstudentdetails);
+        return { 
+            status: "success", 
+            result: response 
+        };
+
+    } catch (error) {
+        return {
+            status: "error",
+            error: errorHandler.parseMongoError(error)
+        };
+    }
+}
 	async fetch() {
 		try {
 			let response = await studentDetailsSchema.find({});
