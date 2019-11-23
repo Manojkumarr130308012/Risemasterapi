@@ -58,7 +58,15 @@ class addCECPController{
 					  foreignField: "_id",
 					  as: "courseprogram"
 					}
-			   },	
+			   },
+			   {$lookup:
+				{
+				  from: "institutions",
+				  localField: "institution",
+				  foreignField: "_id",
+				  as: "institution"
+				}
+		   },	
 			]);
 			
 		} catch(error){
@@ -105,7 +113,15 @@ class addCECPController{
 					  foreignField: "_id",
 					  as: "courseprogram"
 					}
-			   },	
+			   },
+			   {$lookup:
+				{
+				  from: "institutions",
+				  localField: "institution",
+				  foreignField: "_id",
+				  as: "institution"
+				}
+		   },	
 			]);
 			
 		} catch(error){

@@ -190,15 +190,14 @@ class studentDetailsController {
 						as: "admissionTyped"
 					}
                 },
-                {
-					$lookup:
-					{
-						from: "degrees",
-						localField: "degree",
-						foreignField: "_id",
-						as: "degreed"
-					}
-                },
+                {$lookup:
+                    {
+                      from: "course-programs",
+                      localField: "courseprogram",
+                      foreignField: "_id",
+                      as: "courseprogram"
+                    }
+               },
                 {
 					$lookup:
 					{
@@ -367,15 +366,14 @@ class studentDetailsController {
 						as: "admissionType"
 					}
                 },
-                {
-					$lookup:
-					{
-						from: "degrees",
-						localField: "degree",
-						foreignField: "_id",
-						as: "degreed"
-					}
-                },
+                {$lookup:
+                    {
+                      from: "course-programs",
+                      localField: "courseprogram",
+                      foreignField: "_id",
+                      as: "courseprogram"
+                    }
+               },
                 {
 					$lookup:
 					{
@@ -520,15 +518,14 @@ class studentDetailsController {
 						as: "admissionTyped"
 					}
                 },
-                {
-					$lookup:
-					{
-						from: "degrees",
-						localField: "degree",
-						foreignField: "_id",
-						as: "degreed"
-					}
-                },
+                {$lookup:
+                    {
+                      from: "course-programs",
+                      localField: "courseprogram",
+                      foreignField: "_id",
+                      as: "courseprogram"
+                    }
+               },
                 {
 					$lookup:
 					{

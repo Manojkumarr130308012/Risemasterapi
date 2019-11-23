@@ -160,12 +160,7 @@ const basicDetailsSchema = new mongoose.Schema({
     status: {
         type: String
     },
-    courseprogram: {
-        type: mongoose.Schema.ObjectId,
-    },
-    coursecategory: {
-        type: mongoose.Schema.ObjectId,
-    }
+   
 })
 
 
