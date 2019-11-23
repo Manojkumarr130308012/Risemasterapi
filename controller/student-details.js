@@ -40,7 +40,7 @@ async convert(newstudentdetails) {
     try {
         let response = await studentDetailsSchema.create(newstudentdetails);
         return { 
-            status: "success", sdsada
+            status: "success", 
             result: response 
         };
 
