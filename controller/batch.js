@@ -44,9 +44,9 @@ class batchController{
 			};
 		}
 	}
-	async fetchByDeg(degree){
+	async fetchByCour(courseprogram){
 		try{
-			let response = await batchSchema.find({'degree':degree});
+			let response = await batchSchema.find({'courseprogram':courseprogram});
 			return {
 				response: response
 			};
@@ -87,15 +87,14 @@ class batchController{
 	async aggregation() {
         try {
            return  await batchSchema.aggregate([
-			{
-                $lookup:
-                {
-                    from: "degrees",
-                    localField: "degree",
-                    foreignField: "_id",
-                    as: "degree"
-                }
-			},
+			{$lookup:
+				{
+				  from: "course-programs",
+				  localField: "courseprogram",
+				  foreignField: "_id",
+				  as: "courseprogram"
+				}
+		   },
 			{$lookup:
 				{
 				  from: "institutions",

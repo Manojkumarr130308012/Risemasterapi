@@ -159,7 +159,8 @@ const basicDetailsSchema = new mongoose.Schema({
     },
     status: {
         type: String
-    }
+    },
+   
 })
 
 

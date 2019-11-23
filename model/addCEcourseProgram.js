@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const addCECPSchema = new mongoose.Schema({
+    institution: {
+        type: mongoose.Schema.ObjectId,
+        required: true
+    },
     courseprogram: {
         type: mongoose.Schema.ObjectId,
         required: true

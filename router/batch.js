@@ -15,8 +15,8 @@ router.get('/fetchdata', async (req, res) => {
 	const response = await batchController.fetchdata(req.query.id);
 	res.send(response);
 })
-router.get('/fetchByDeg', async (req, res) => {
-	const response = await batchController.fetchByDeg(req.query.degree);
+router.get('/fetchByCour', async (req, res) => {
+	const response = await batchController.fetchByCour(req.query.courseprogram);
 	res.send(response);
 })
 router.delete('/delete', async (req, res) => {

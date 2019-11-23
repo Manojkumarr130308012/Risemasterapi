@@ -5,7 +5,7 @@ const batchSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         required: true
     },
-    degree: {
+    courseprogram: {
         type: mongoose.Schema.ObjectId,
         required: true
     },

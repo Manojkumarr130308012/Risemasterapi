@@ -9,7 +9,10 @@ class addCECPController{
 		try{
 			let response = await addCECPSchema.create(newcourseprogram);
 
-			return { status: "success", result: response, message: "Added Successfully" };
+			return { 
+				status: "success", 
+				res: response
+			};
 			
 		} catch(error){
 			return {
@@ -55,7 +58,15 @@ class addCECPController{
 					  foreignField: "_id",
 					  as: "courseprogram"
 					}
-			   },	
+			   },
+			   {$lookup:
+				{
+				  from: "institutions",
+				  localField: "institution",
+				  foreignField: "_id",
+				  as: "institution"
+				}
+		   },	
 			]);
 			
 		} catch(error){
@@ -102,7 +113,15 @@ class addCECPController{
 					  foreignField: "_id",
 					  as: "courseprogram"
 					}
-			   },	
+			   },
+			   {$lookup:
+				{
+				  from: "institutions",
+				  localField: "institution",
+				  foreignField: "_id",
+				  as: "institution"
+				}
+		   },	
 			]);
 			
 		} catch(error){

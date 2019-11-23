@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const convertSchema = new mongoose.Schema({
-    degree: {
+    courseprogram: {
         type: mongoose.Schema.ObjectId,
         required: true
     },

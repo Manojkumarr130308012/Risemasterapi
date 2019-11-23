@@ -9,7 +9,7 @@ class convertController{
 			return {
 				status: "success",
 				response: response
-			};
+			}; 
 		} catch(error){
 			return {
 				status: "error",
@@ -40,12 +40,12 @@ class convertController{
 				},
 				{$lookup:
 					{
-					  from: "degrees",
-					  localField: "degree",
+					  from: "course-programs",
+					  localField: "courseprogram",
 					  foreignField: "_id",
-					  as: "degree"
+					  as: "courseprogram"
 					}
-               },	
+			   },	
                {$lookup:
                 {
                   from: "batches",
