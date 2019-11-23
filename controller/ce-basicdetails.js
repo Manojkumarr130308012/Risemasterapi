@@ -24,7 +24,10 @@ class basicDetailsController {
 
 	async fetchdata(id) {
 		try {
-			return await basicDetailsSchema.aggregate([
+			
+			
+			
+			await basicDetailsSchema.aggregate([
 				{
 					$match: {
 						_id: ObjectId(id)
@@ -609,19 +612,20 @@ class basicDetailsController {
 			let confirmedStatus = filterReportbyDate.confirmedStatus;
 
 			let id = filterReportbyDate._id;
+			console.log(id);
 			return await basicDetailsSchema.aggregate([
 
 				{
 
 					$match: {
-						//institution: ObjectId(institution),
+						institution: ObjectId(institution),
 						// coursecategory: ObjectId(coursecategory),
 						// courseprogram: ObjectId(courseprogram),
-						//enquiryDate: { "$gte": fromDate, "$lt": toDate },
-						//admissiontype: ObjectId(admissiontype),
-						//academicYear: ObjectId(academicYear),
-						//status: confirmedStatus
-						// _id: ObjectId(id)						
+					enquiryDate: { "$gte": fromDate, "$lt": toDate },
+						admissiontype: ObjectId(admissiontype),
+						academicYear: ObjectId(academicYear),
+						status: confirmedStatus
+										
 
 
 					}
@@ -629,7 +633,7 @@ class basicDetailsController {
 
 
 
-				{
+			/*	{
 					"$lookup": {
 						"from": "cecourseprograms",
 						"let": { "canId": ObjectId(id), "coursecategory": ObjectId(coursecategory), "courseprogram": ObjectId(courseprogram) },
@@ -648,7 +652,7 @@ class basicDetailsController {
 						],
 						"as": "CourseDetails"
 					}
-				},
+				},*/
 
 
 
@@ -775,7 +779,7 @@ class basicDetailsController {
 					}
 				},
 				{
-					$lookup:
+				 	$lookup:
 					{
 						from: "castes",
 						localField: "caste",
