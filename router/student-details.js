@@ -5,6 +5,10 @@ router.post('/add', async (req, res) => {
 	const response = await studentDetailsController.add(req.body);
 	res.send(response);
 })
+router.post('/convert', async (req, res) => {
+	const response = await studentDetailsController.convert(req.body);
+	res.send(response);
+})
 router.get('/', async (req, res) => {
 	const response = await studentDetailsController.fetch();
 	res.send(response);

@@ -32,4 +32,9 @@ router.get('/fetchByCouCate', async (req, res) => {
 	const response = await courseProgramController.fetchByCouCate(req.query.coursecategory);
 	res.send(response);
 })
+router.get('/fetchbyIns', async (req, res) => {
+	//res.setHeader('Access-Control-Allow-Origin', '*');
+	const response = await courseProgramController.fetchbyIns(req.query.institution);
+	res.send(response);
+})
 module.exports = router;
