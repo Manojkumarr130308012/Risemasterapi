@@ -24,10 +24,7 @@ class basicDetailsController {
 
 	async fetchdata(id) {
 		try {
-			
-			
-			
-			await basicDetailsSchema.aggregate([
+			return await basicDetailsSchema.aggregate([
 				{
 					$match: {
 						_id: ObjectId(id)

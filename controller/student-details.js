@@ -210,7 +210,7 @@ async convert(newstudentdetails) {
                       from: "course-programs",
                       localField: "courseprogram",
                       foreignField: "_id",
-                      as: "courseprogram"
+                      as: "courseprogramd"
                     }
                },
                 {
@@ -219,7 +219,7 @@ async convert(newstudentdetails) {
 						from: "batches",
 						localField: "batch",
 						foreignField: "_id",
-						as: "batch"
+						as: "batchd"
 					}
 				},
 			]);
@@ -386,7 +386,7 @@ async convert(newstudentdetails) {
                       from: "course-programs",
                       localField: "courseprogram",
                       foreignField: "_id",
-                      as: "courseprogram"
+                      as: "courseprogramd"
                     }
                },
                 {
@@ -538,7 +538,7 @@ async convert(newstudentdetails) {
                       from: "course-programs",
                       localField: "courseprogram",
                       foreignField: "_id",
-                      as: "courseprogram"
+                      as: "courseprogramd"
                     }
                },
                 {
@@ -547,7 +547,7 @@ async convert(newstudentdetails) {
 						from: "batches",
 						localField: "batch",
 						foreignField: "_id",
-						as: "batch"
+						as: "batchd"
 					}
 				},
 			]);
