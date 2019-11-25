@@ -21,10 +21,12 @@ class userLoginController{
 
             let token = this.generateToken();
 
+         
+
             this.saveToken(user._id, token);
 
             user.token = token;
-
+         
             return {
                 status: "success",
                 data: user,
@@ -39,6 +41,8 @@ class userLoginController{
     }
 
     async saveToken(userID, token){
+
+        
         try{
             await staffProfileSchema.update({_id: userID}, {token: token})
         } catch(err){
@@ -58,11 +62,13 @@ class userLoginController{
                 token: token
             });
 
+           // console.log(user);
+
             if(!user){
                 throw new Error('invalid token');
             }
-
             global.userSession = user;
+
         } catch(error){
             res.send({
                 status: 'error',
