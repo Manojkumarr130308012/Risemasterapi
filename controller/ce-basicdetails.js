@@ -552,8 +552,13 @@ class basicDetailsController {
 						localField: "_id",
 						foreignField: "canId",
 						as: "PaymentDetails"
-					}
+					},
+					
+
 				},
+
+				
+			
 				{
 					$lookup:
 					{
