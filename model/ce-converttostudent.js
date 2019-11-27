@@ -28,7 +28,7 @@ const convertSchema = new mongoose.Schema({
         type: String
     },
     hostel: {
-        type: String
+        type: mongoose.Schema.ObjectId,
     },
     rout: {
         type: String
