@@ -53,7 +53,7 @@ class addCECPController{
 			   },	
 				{$lookup:
 					{
-					  from: "course-programs",
+					  from: "course_programs",
 					  localField: "courseprogram",
 					  foreignField: "_id",
 					  as: "courseprogram"
@@ -108,7 +108,7 @@ class addCECPController{
 			   },	
 				{$lookup:
 					{
-					  from: "course-programs",
+					  from: "course_programs",
 					  localField: "courseprogram",
 					  foreignField: "_id",
 					  as: "courseprogram"
@@ -170,7 +170,7 @@ class addCECPController{
 		   },	
 				{$lookup:
 					  {
-						from: "course-programs",
+						from: "course_programs",
 						localField: "courseprogram",
 						foreignField: "_id",
 						as: "courseprogram"

@@ -207,7 +207,7 @@ async convert(newstudentdetails) {
                 },
                 {$lookup:
                     {
-                      from: "course-programs",
+                      from: "course_programs",
                       localField: "courseprogram",
                       foreignField: "_id",
                       as: "courseprogramd"
@@ -383,7 +383,7 @@ async convert(newstudentdetails) {
                 },
                 {$lookup:
                     {
-                      from: "course-programs",
+                      from: "course_programs",
                       localField: "courseprogram",
                       foreignField: "_id",
                       as: "courseprogramd"
@@ -535,7 +535,7 @@ async convert(newstudentdetails) {
                 },
                 {$lookup:
                     {
-                      from: "course-programs",
+                      from: "course_programs",
                       localField: "courseprogram",
                       foreignField: "_id",
                       as: "courseprogramd"

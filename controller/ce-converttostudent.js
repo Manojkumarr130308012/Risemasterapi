@@ -40,7 +40,7 @@ class convertController{
 				},
 				{$lookup:
 					{
-					  from: "course-programs",
+					  from: "course_programs",
 					  localField: "courseprogram",
 					  foreignField: "_id",
 					  as: "courseprogram"
@@ -107,7 +107,7 @@ class convertController{
             return await convertSchema.aggregate([
                 {$lookup:
 					{
-					  from: "course-programs",
+					  from: "course_programs",
 					  localField: "courseprogram",
 					  foreignField: "_id",
 					  as: "courseprogram"
