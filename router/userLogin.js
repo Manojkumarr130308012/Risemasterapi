@@ -2,7 +2,11 @@ const router = require('express').Router();
 const userLoginController = require('./../controller/userLogin');
 
 router.post('/login', async (req, res) => {
-    res.send(await userLoginController.login(req.body));
+
+    const response= await userLoginController.login(req.body);
+   // console.log(req.body);
+    res.send(response);    
+   
     
 });
 

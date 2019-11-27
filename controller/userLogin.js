@@ -1,38 +1,43 @@
 const staffProfileSchema = require('./../model/staff-profile');
 
-class userLoginController{
-    constructor(){ }
+const crypto = require('crypto');
 
-   
+class userLoginController {
 
-    async login(credentials){
-        try{
+    async login(credentials) {
+
+
+        try {
             let username = credentials.username;
-			let password = credentials.password;
+            let Inpassword = credentials.password;
 
             let user = await staffProfileSchema.findOne({
-                staffCode: username,
-                password: password,
+                staffCode: username
+
             });
 
-            if(!user){
+            let pass = user.password;
+
+            let Depassword = this.DecryptPassword(pass);
+
+            if (!user) {
                 throw new Error('invalid creds');
             }
 
-            let token = this.generateToken();
+            if (Inpassword == Depassword) {
+                let token = this.generateToken();
 
-         
+                this.saveToken(user._id, token);
+                user.token = token;
+            }
 
-            this.saveToken(user._id, token);
 
-            user.token = token;
-         
             return {
                 status: "success",
                 data: user,
             };
 
-        } catch(error){
+        } catch (error) {
             return {
                 status: 'error',
                 msg: 'username or password invalid'
@@ -40,12 +45,21 @@ class userLoginController{
         }
     }
 
-    async saveToken(userID, token){
+    DecryptPassword(password) {
+        let depass = password;
+        var mykey1 = crypto.createDecipher('aes-128-cbc', 'password');
+        var mystr1 = mykey1.update(depass, 'hex', 'utf8')
+        mystr1 += mykey1.final('utf8');
 
-        
-        try{
-            await staffProfileSchema.update({_id: userID}, {token: token})
-        } catch(err){
+        return mystr1;
+
+    }
+
+    async saveToken(userID, token) {
+
+        try {
+            await staffProfileSchema.update({ _id: userID }, { token: token })
+        } catch (err) {
             console.log(err);
         }
     }
@@ -56,20 +70,20 @@ class userLoginController{
         return require('crypto').createHash('md5').update(timeStamp).digest('hex')
     }
 
-    async validateToken(res, token, userId){
-        try{
+    async validateToken(res, token, userId) {
+        try {
             let user = await staffProfileSchema.findOne({
                 token: token
             });
 
-           // console.log(user);
+            // console.log(user);
 
-            if(!user){
+            if (!user) {
                 throw new Error('invalid token');
             }
             global.userSession = user;
 
-        } catch(error){
+        } catch (error) {
             res.send({
                 status: 'error',
                 msg: 'Invalid token'

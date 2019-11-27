@@ -10,8 +10,10 @@ class staffProfileController {
 		try {
 			let response = await staffProfileSchema.create(newStaffProfile);
 			let password = this.generateToken(response.staffCode);
+
 			this.saveToken(response._id, password);
-            response.password = password;
+
+			response.password = password;
 			return { status: "success", result: response, message: "Added Successfully" };
 
 		} catch (error) {
@@ -21,33 +23,25 @@ class staffProfileController {
 			};
 		}
 	}
- //////Password Encryption
- async saveToken(staffID, password){
-	try{
-		await staffProfileSchema.update({_id: staffID}, {password: password})
-	} catch(err){
-		console.log(err);
+	//////Password Encryption
+	async saveToken(staffID, password) {
+		try {
+			await staffProfileSchema.update({ _id: staffID }, { password: password })
+
+		} catch (err) {
+			console.log(err);
+		}
 	}
-}
- generateToken(staffCode) {
-	let password = staffCode;
-	var mykey = crypto.createCipher('aes-128-cbc', 'password');
-	var mystr = mykey.update(password, 'utf8', 'hex')
-	mystr += mykey.final('hex');
+	generateToken(staffCode) {
+		let password = staffCode;
+		var mykey = crypto.createCipher('aes-128-cbc', 'password');
+		var mystr = mykey.update(password, 'utf8', 'hex')
+		mystr += mykey.final('hex');
 
-	return mystr;
-	
-	console.log('crypt',mystr);
+		return mystr;
 
-/*	var mykey1 = crypto.createDecipher('aes-128-cbc', 'password');
-var mystr1 = mykey1.update(mystr, 'hex', 'utf8')
-mystr1 += mykey1.final('utf8');
-
-console.log('decrypt',mystr1);*/
-
-//	return require('crypto').createHash('md5').update(password).digest('hex')
-}
-//////////////
+	}
+	//////////////
 	async fetch() {
 		try {
 			let response = await staffProfileSchema.find({});
@@ -75,8 +69,8 @@ console.log('decrypt',mystr1);*/
 		}
 	}
 
-	async fetchbyStaffProfileId(id){
-		try{
+	async fetchbyStaffProfileId(id) {
+		try {
 
 			return await staffProfileSchema.aggregate([
 
@@ -95,72 +89,72 @@ console.log('decrypt',mystr1);*/
 					}
 				},
 				{
-				$lookup:
+					$lookup:
+					{
+						from: "staff-types",
+						localField: "stafftype",
+						foreignField: "_id",
+						as: "StaffTypeDetails"
+					}
+				},
 				{
-					from: "staff-types",
-					localField: "stafftype",
-					foreignField: "_id",
-					as: "StaffTypeDetails"
-				}
-			},
+					$lookup:
+					{
+						from: "staff-roles",
+						localField: "staffrole",
+						foreignField: "_id",
+						as: "StaffRoleDetails"
+					}
+				},
 				{
-				$lookup:
+					$lookup:
+					{
+						from: "salutations",
+						localField: "salutation",
+						foreignField: "_id",
+						as: "salutationDetails"
+					}
+				},
 				{
-					from: "staff-roles",
-					localField: "staffrole",
-					foreignField: "_id",
-					as: "StaffRoleDetails"
-				}
-			},
+					$lookup:
+					{
+						from: "genders",
+						localField: "gender",
+						foreignField: "_id",
+						as: "GenderDetails"
+					}
+				},
 				{
-				$lookup:
+					$lookup:
+					{
+						from: "pay-types",
+						localField: "paytype",
+						foreignField: "_id",
+						as: "PayTypeDetails"
+					}
+				},
 				{
-					from: "salutations",
-					localField: "salutation",
-					foreignField: "_id",
-					as: "salutationDetails"
-				}
-			},
+					$lookup:
+					{
+						from: "marital-statuses",
+						localField: "maritalstatus",
+						foreignField: "_id",
+						as: "MaritalStatusDetails"
+					}
+				},
 				{
-				$lookup:
-				{
-					from: "genders",
-					localField: "gender",
-					foreignField: "_id",
-					as: "GenderDetails"
-				}
-			},
-				{
-				$lookup:
-				{
-					from: "pay-types",
-					localField: "paytype",
-					foreignField: "_id",
-					as: "PayTypeDetails"
-				}
-			},
-				{
-				$lookup:
-				{
-					from: "marital-statuses",
-					localField: "maritalstatus",
-					foreignField: "_id",
-					as: "MaritalStatusDetails"
-				}
-			},
-				{
-				$lookup:
-				{
-					from: "bloodgroups",
-					localField: "bloodgroup",
-					foreignField: "_id",
-					as: "BloodGroupDetails"
-				}
-			},
+					$lookup:
+					{
+						from: "bloodgroups",
+						localField: "bloodgroup",
+						foreignField: "_id",
+						as: "BloodGroupDetails"
+					}
+				},
 			]);
-			
-			
-		} catch(error){
+
+
+		} catch (error) {
 			return {
 				status: "error",
 				error: errorHandler.parseMongoError(error)
@@ -168,8 +162,8 @@ console.log('decrypt',mystr1);*/
 		}
 	}
 
-	async fetchbyDepartment(department){
-		try{
+	async fetchbyDepartment(department) {
+		try {
 			return await staffProfileSchema.aggregate([
 
 				{
@@ -197,71 +191,71 @@ console.log('decrypt',mystr1);*/
 					}
 				},
 				{
-				$lookup:
+					$lookup:
+					{
+						from: "staff-types",
+						localField: "stafftype",
+						foreignField: "_id",
+						as: "StaffTypeDetails"
+					}
+				},
 				{
-					from: "staff-types",
-					localField: "stafftype",
-					foreignField: "_id",
-					as: "StaffTypeDetails"
-				}
-			},
+					$lookup:
+					{
+						from: "staff-roles",
+						localField: "staffrole",
+						foreignField: "_id",
+						as: "StaffRoleDetails"
+					}
+				},
 				{
-				$lookup:
+					$lookup:
+					{
+						from: "salutations",
+						localField: "salutation",
+						foreignField: "_id",
+						as: "salutationDetails"
+					}
+				},
 				{
-					from: "staff-roles",
-					localField: "staffrole",
-					foreignField: "_id",
-					as: "StaffRoleDetails"
-				}
-			},
+					$lookup:
+					{
+						from: "genders",
+						localField: "gender",
+						foreignField: "_id",
+						as: "GenderDetails"
+					}
+				},
 				{
-				$lookup:
+					$lookup:
+					{
+						from: "pay-types",
+						localField: "paytype",
+						foreignField: "_id",
+						as: "PayTypeDetails"
+					}
+				},
 				{
-					from: "salutations",
-					localField: "salutation",
-					foreignField: "_id",
-					as: "salutationDetails"
-				}
-			},
+					$lookup:
+					{
+						from: "marital-statuses",
+						localField: "maritalstatus",
+						foreignField: "_id",
+						as: "MaritalStatusDetails"
+					}
+				},
 				{
-				$lookup:
-				{
-					from: "genders",
-					localField: "gender",
-					foreignField: "_id",
-					as: "GenderDetails"
-				}
-			},
-				{
-				$lookup:
-				{
-					from: "pay-types",
-					localField: "paytype",
-					foreignField: "_id",
-					as: "PayTypeDetails"
-				}
-			},
-				{
-				$lookup:
-				{
-					from: "marital-statuses",
-					localField: "maritalstatus",
-					foreignField: "_id",
-					as: "MaritalStatusDetails"
-				}
-			},
-				{
-				$lookup:
-				{
-					from: "bloodgroups",
-					localField: "bloodgroup",
-					foreignField: "_id",
-					as: "BloodGroupDetails"
-				}
-			},
+					$lookup:
+					{
+						from: "bloodgroups",
+						localField: "bloodgroup",
+						foreignField: "_id",
+						as: "BloodGroupDetails"
+					}
+				},
 			]);
-			
-		} catch(error){
+
+		} catch (error) {
 			return {
 				status: "error",
 				error: errorHandler.parseMongoError(error)
@@ -269,8 +263,8 @@ console.log('decrypt',mystr1);*/
 		}
 	}
 
-	async fetchbyInstitution(institution){
-		try{
+	async fetchbyInstitution(institution) {
+		try {
 			return await staffProfileSchema.aggregate([
 
 				{
@@ -298,71 +292,71 @@ console.log('decrypt',mystr1);*/
 					}
 				},
 				{
-				$lookup:
+					$lookup:
+					{
+						from: "staff-types",
+						localField: "stafftype",
+						foreignField: "_id",
+						as: "StaffTypeDetails"
+					}
+				},
 				{
-					from: "staff-types",
-					localField: "stafftype",
-					foreignField: "_id",
-					as: "StaffTypeDetails"
-				}
-			},
+					$lookup:
+					{
+						from: "staff-roles",
+						localField: "staffrole",
+						foreignField: "_id",
+						as: "StaffRoleDetails"
+					}
+				},
 				{
-				$lookup:
+					$lookup:
+					{
+						from: "salutations",
+						localField: "salutation",
+						foreignField: "_id",
+						as: "salutationDetails"
+					}
+				},
 				{
-					from: "staff-roles",
-					localField: "staffrole",
-					foreignField: "_id",
-					as: "StaffRoleDetails"
-				}
-			},
+					$lookup:
+					{
+						from: "genders",
+						localField: "gender",
+						foreignField: "_id",
+						as: "GenderDetails"
+					}
+				},
 				{
-				$lookup:
+					$lookup:
+					{
+						from: "pay-types",
+						localField: "paytype",
+						foreignField: "_id",
+						as: "PayTypeDetails"
+					}
+				},
 				{
-					from: "salutations",
-					localField: "salutation",
-					foreignField: "_id",
-					as: "salutationDetails"
-				}
-			},
+					$lookup:
+					{
+						from: "marital-statuses",
+						localField: "maritalstatus",
+						foreignField: "_id",
+						as: "MaritalStatusDetails"
+					}
+				},
 				{
-				$lookup:
-				{
-					from: "genders",
-					localField: "gender",
-					foreignField: "_id",
-					as: "GenderDetails"
-				}
-			},
-				{
-				$lookup:
-				{
-					from: "pay-types",
-					localField: "paytype",
-					foreignField: "_id",
-					as: "PayTypeDetails"
-				}
-			},
-				{
-				$lookup:
-				{
-					from: "marital-statuses",
-					localField: "maritalstatus",
-					foreignField: "_id",
-					as: "MaritalStatusDetails"
-				}
-			},
-				{
-				$lookup:
-				{
-					from: "bloodgroups",
-					localField: "bloodgroup",
-					foreignField: "_id",
-					as: "BloodGroupDetails"
-				}
-			},
+					$lookup:
+					{
+						from: "bloodgroups",
+						localField: "bloodgroup",
+						foreignField: "_id",
+						as: "BloodGroupDetails"
+					}
+				},
 			]);
-			
-		} catch(error){
+
+		} catch (error) {
 			return {
 				status: "error",
 				error: errorHandler.parseMongoError(error)
@@ -401,25 +395,25 @@ console.log('decrypt',mystr1);*/
 		try {
 
 			return await staffProfileSchema.aggregate([
+				{
+					$lookup:
 					{
-						$lookup:
-						{
-							from: "institutions",
-							localField: "institution",
-							foreignField: "_id",
-							as: "InstitutionDetails"
-						}
-					},
+						from: "institutions",
+						localField: "institution",
+						foreignField: "_id",
+						as: "InstitutionDetails"
+					}
+				},
+				{
+					$lookup:
 					{
-						$lookup:
-						{
-							from: "departments",
-							localField: "department",
-							foreignField: "_id",
-							as: "DepartmentDetails"
-						}
-					},
-					{
+						from: "departments",
+						localField: "department",
+						foreignField: "_id",
+						as: "DepartmentDetails"
+					}
+				},
+				{
 					$lookup:
 					{
 						from: "staff-types",
@@ -428,7 +422,7 @@ console.log('decrypt',mystr1);*/
 						as: "StaffTypeDetails"
 					}
 				},
-					{
+				{
 					$lookup:
 					{
 						from: "staff-roles",
@@ -437,7 +431,7 @@ console.log('decrypt',mystr1);*/
 						as: "StaffRoleDetails"
 					}
 				},
-					{
+				{
 					$lookup:
 					{
 						from: "salutations",
@@ -446,7 +440,7 @@ console.log('decrypt',mystr1);*/
 						as: "salutationDetails"
 					}
 				},
-					{
+				{
 					$lookup:
 					{
 						from: "genders",
@@ -455,7 +449,7 @@ console.log('decrypt',mystr1);*/
 						as: "GenderDetails"
 					}
 				},
-					{
+				{
 					$lookup:
 					{
 						from: "pay-types",
@@ -464,7 +458,7 @@ console.log('decrypt',mystr1);*/
 						as: "PayTypeDetails"
 					}
 				},
-					{
+				{
 					$lookup:
 					{
 						from: "marital-statuses",
@@ -473,7 +467,7 @@ console.log('decrypt',mystr1);*/
 						as: "MaritalStatusDetails"
 					}
 				},
-					{
+				{
 					$lookup:
 					{
 						from: "bloodgroups",
@@ -482,7 +476,7 @@ console.log('decrypt',mystr1);*/
 						as: "BloodGroupDetails"
 					}
 				},
-				]);
+			]);
 		} catch (error) {
 			return {
 				status: "error",

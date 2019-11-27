@@ -103,7 +103,7 @@ server.use(bodyParser.urlencoded({ extended: true }));
 server.use(middleware);
 
 
-server.use("/user", userLoginRouter);
+server.use("/userLogin", userLoginRouter);
 server.use("/user-designation", userDesignationRouter);
 server.use("/academic-year", academicYearRouter);
 server.use("/nationality", nationalityRouter);

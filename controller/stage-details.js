@@ -76,7 +76,7 @@ class stageDetailsController{
         try {
 			let response = await stageDetailsSchema.updateOne({_id: id}, body);
 			//console.log("res1",response);
-            return { status: "success", result: response, message: "Updated Successfully" };
+            return { status: "success", response: body, message: "Updated Successfully" };
 
         } catch (error) {
             return { status: "error", error: error };
