@@ -24,9 +24,6 @@ class basicDetailsController {
 
 	async fetchdata(id) {
 		try {
-			
-			
-			
 		return	await basicDetailsSchema.aggregate([
 				{
 					$match: {
@@ -662,10 +659,10 @@ class basicDetailsController {
 				{
 					$lookup:
 						{
-						  from: "course-programs",
+						  from: "course_programs",
 						  localField: "CourseDetails.courseprogram",
 						  foreignField: "_id",
-						  as: "CourseDetails.course-programs"
+						  as: "CourseDetails.course_programs"
 						}				   
 
 				},		
@@ -696,7 +693,7 @@ class basicDetailsController {
 			  },	*/
 			  /* {$lookup:
 				   {
-					 from: "course-programs",
+					 from: "course_programs",
 					 localField: "courseprogram",
 					 foreignField: "_id",
 					 as: "courseprogramDetails"

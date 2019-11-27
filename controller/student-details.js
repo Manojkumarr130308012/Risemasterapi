@@ -3,6 +3,8 @@ const errorHandler = require('./../utils/error.handler');
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 
+const crypto = require('crypto');
+
 class studentDetailsController {
 	async add(newstudentdetails) {
 		try {
@@ -23,7 +25,7 @@ class studentDetailsController {
 			};
 		}
     }
-    //////Password Encryption
+//Password Encryption
     async saveToken(studID, password){
         try{
             await studentDetailsSchema.update({_id: studID}, {password: password})
@@ -33,9 +35,14 @@ class studentDetailsController {
     }
      generateToken(rollNO) {
         let password = rollNO;
-        return require('crypto').createHash('md5').update(password).digest('hex')
+        // return require('crypto').createHash('md5').update(password).digest('hex')
+         var mykey = crypto.createCipher('aes-128-cbc', 'password');
+         var mystr = mykey.update(password, 'utf8', 'hex')
+         mystr += mykey.final('hex');
+        //  console.log(mystr);
+	    return mystr;
     }
-//////////////
+//Convert To Student
 async convert(newstudentdetails) {
     try {
         let response = await studentDetailsSchema.create(newstudentdetails);
@@ -51,6 +58,7 @@ async convert(newstudentdetails) {
         };
     }
 }
+//
 	async fetch() {
 		try {
 			let response = await studentDetailsSchema.find({});
@@ -207,10 +215,10 @@ async convert(newstudentdetails) {
                 },
                 {$lookup:
                     {
-                      from: "course-programs",
+                      from: "course_programs",
                       localField: "courseprogram",
                       foreignField: "_id",
-                      as: "courseprogram"
+                      as: "courseprogramd"
                     }
                },
                 {
@@ -219,7 +227,7 @@ async convert(newstudentdetails) {
 						from: "batches",
 						localField: "batch",
 						foreignField: "_id",
-						as: "batch"
+						as: "batchd"
 					}
 				},
 			]);
@@ -251,8 +259,15 @@ async convert(newstudentdetails) {
 	async update(id, body) {
 
 		try {
-			let response = await studentDetailsSchema.updateOne({ _id: id }, body);
-			return { status: "success", result: response, message: "Updated Successfully" };
+            let response = await studentDetailsSchema.updateOne({ _id: id }, body);
+            //password generation - rollNo
+            let password = this.generateToken(body.rollNo);
+            this.saveToken(id, password);
+            body.password = password;
+            return { 
+                status: "success", 
+                result: response
+        };
 
 		} catch (err) {
 			return { status: "error", err: err };
@@ -383,10 +398,10 @@ async convert(newstudentdetails) {
                 },
                 {$lookup:
                     {
-                      from: "course-programs",
+                      from: "course_programs",
                       localField: "courseprogram",
                       foreignField: "_id",
-                      as: "courseprogram"
+                      as: "courseprogramd"
                     }
                },
                 {
@@ -535,10 +550,10 @@ async convert(newstudentdetails) {
                 },
                 {$lookup:
                     {
-                      from: "course-programs",
+                      from: "course_programs",
                       localField: "courseprogram",
                       foreignField: "_id",
-                      as: "courseprogram"
+                      as: "courseprogramd"
                     }
                },
                 {
@@ -547,7 +562,7 @@ async convert(newstudentdetails) {
 						from: "batches",
 						localField: "batch",
 						foreignField: "_id",
-						as: "batch"
+						as: "batchd"
 					}
 				},
 			]);

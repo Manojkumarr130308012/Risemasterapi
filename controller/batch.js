@@ -89,7 +89,7 @@ class batchController{
            return  await batchSchema.aggregate([
 			{$lookup:
 				{
-				  from: "course-programs",
+				  from: "course_programs",
 				  localField: "courseprogram",
 				  foreignField: "_id",
 				  as: "courseprogram"
