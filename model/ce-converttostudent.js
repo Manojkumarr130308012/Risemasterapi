@@ -10,9 +10,13 @@ const convertSchema = new mongoose.Schema({
         required: true
     },
     semester: {
-        type: String,
-        required: false
+        type: mongoose.Schema.ObjectId,
+        required: true
     },
+    //  section: {
+    //     type: mongoose.Schema.ObjectId,
+    //     required: true
+    // },
     languageSubject: {
         type: String,
         required: false

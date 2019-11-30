@@ -38,22 +38,42 @@ class convertController{
 						canId: ObjectId(canId)
 					}
 				},
-				{$lookup:
+				{
+					$lookup:
 					{
-					  from: "course_programs",
-					  localField: "courseprogram",
-					  foreignField: "_id",
-					  as: "courseprogram"
+						from: "course_programs",
+						localField: "courseprogram",
+						foreignField: "_id",
+						as: "courseprogram"
 					}
-			   },	
-               {$lookup:
-                {
-                  from: "batches",
-                  localField: "batch",
-                  foreignField: "_id",
-                  as: "batch"
-                }
-           },
+				},
+				{
+					$lookup:
+					{
+						from: "batches",
+						localField: "batch",
+						foreignField: "_id",
+						as: "batch"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "semesters",
+						localField: "semester",
+						foreignField: "_id",
+						as: "semester"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "sections",
+						localField: "section",
+						foreignField: "_id",
+						as: "section"
+					}
+				},
 			]);
 		} catch (error) {
 			return {
@@ -121,7 +141,25 @@ class convertController{
                         foreignField: "_id",
                         as: "batch"
                     }
-                },
+				},
+				{
+					$lookup:
+					{
+						from: "semesters",
+						localField: "semester",
+						foreignField: "_id",
+						as: "semester"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "sections",
+						localField: "section",
+						foreignField: "_id",
+						as: "section"
+					}
+				},
             ]);
 		} catch (error) {
 			return {
