@@ -107,6 +107,8 @@ const subjectTopicCoverageRouter = require('./router/subject-topic-coverage');
 const subjectIntMarkCatRouter = require('./router/subject-intMarkCat');
 const subjectExtMarkCatRouter = require('./router/subject-extMarkCat');
 const subjectAddRouter = require('./router/subject-add');
+const subjectStaffRouter = require('./router/subject-staff');
+const subjectSyllabusRouter = require('./router/subject-syllabus');
 
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
@@ -214,6 +216,8 @@ server.use("/subject-topic-coverage", subjectTopicCoverageRouter);
 server.use("/subject-intMarkCat", subjectIntMarkCatRouter);
 server.use("/subject-extMarkCat", subjectExtMarkCatRouter);
 server.use("/subject-add", subjectAddRouter);
+server.use("/subject-staff", subjectStaffRouter);
+server.use("/subject-syllabus", subjectSyllabusRouter);
 
 // File Upload
 server.use('/uploads', express.static('uploads'));

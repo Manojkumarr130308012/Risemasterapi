@@ -21,7 +21,7 @@ router.put('/update', async (req, res) => {
 	const response = await subjectMarkDefinitionController.update(req.query.id, req.body);
 	res.send(response);
 })
-router.get('/aggregation', async function  (req, res) {
+router.get('/aggregation', async (req, res) =>{
 	let response = await subjectMarkDefinitionController.aggregation();
 	res.send(response);
 })
