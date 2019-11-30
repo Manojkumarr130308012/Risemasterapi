@@ -22,6 +22,7 @@ const courseCategoryRouter = require("./router/course-category");
 const courseProgramRouter = require("./router/course-program");
 const admissionTypeRouter = require("./router/admission-type");
 const batchRouter = require("./router/batch");
+const semesterRouter = require("./router/semester");
 
 //Student Master
 const addressTypeRouter = require('./router/addressType');
@@ -93,18 +94,28 @@ const studentIdentityMarkRouter = require('./router/student-identitymark');
 const studentCertificateRouter = require('./router/student-certificate');
 const studentCertiUploadRouter = require('./router/student-certi-upload');
 
+//Login
 const studentLoginRouter = require('./router/studentLogin');
 const staffLoginRouter = require('./router/staffLogin');
 
-
+//Subject Master
+const subjectTypeRouter = require('./router/subject-type');
+const subjectClassificationRouter = require('./router/subject-classification');
+const subjectCategoryRouter = require('./router/subject-category');
+const subjectMarkDefinitionRouter = require('./router/subject-mark-definition');
+const subjectTopicCoverageRouter = require('./router/subject-topic-coverage');
+const subjectIntMarkCatRouter = require('./router/subject-intMarkCat');
+const subjectExtMarkCatRouter = require('./router/subject-extMarkCat');
+const subjectAddRouter = require('./router/subject-add');
 
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 
 server.use(middleware);
-
+//Login
 server.use("/studentLogin", studentLoginRouter);
 server.use("/staffLogin", staffLoginRouter);
+//Master
 server.use("/user-designation", userDesignationRouter);
 server.use("/academic-year", academicYearRouter);
 server.use("/nationality", nationalityRouter);
@@ -118,7 +129,7 @@ server.use("/boardOfEducation", boardOfEducationRouter);
 server.use("/admissionCategory", admissionCategoryRouter);
 server.use("/upload", uploadRouter);
 server.use("/driverFileUpload", driverFileUploadRouter);
-
+server.use("/semester", semesterRouter);
 
 
 //Student Master
@@ -193,6 +204,16 @@ server.use("/student-qualification", studentQualificationRouter);
 server.use("/student-identitymark", studentIdentityMarkRouter);
 server.use("/student-certificate", studentCertificateRouter);
 server.use("/student-certi-upload", studentCertiUploadRouter);
+
+//Subject Master
+server.use("/subject-type", subjectTypeRouter);
+server.use("/subject-classification", subjectClassificationRouter);
+server.use("/subject-category", subjectCategoryRouter);
+server.use("/subject-mark-definition", subjectMarkDefinitionRouter);
+server.use("/subject-topic-coverage", subjectTopicCoverageRouter);
+server.use("/subject-intMarkCat", subjectIntMarkCatRouter);
+server.use("/subject-extMarkCat", subjectExtMarkCatRouter);
+server.use("/subject-add", subjectAddRouter);
 
 // File Upload
 server.use('/uploads', express.static('uploads'));
