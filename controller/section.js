@@ -93,12 +93,30 @@ class sectionController{
 	async aggregation() {
         try {
            return  await sectionSchema.aggregate([
-			{$lookup:
+			   {
+				   $lookup:
+				   {
+					   from: "institutions",
+					   localField: "institution",
+					   foreignField: "_id",
+					   as: "institutiond"
+				   }
+			   },
+			   {
+				   $lookup:
+				   {
+					   from: "departments",
+					   localField: "department",
+					   foreignField: "_id",
+					   as: "departmentd"
+				   }
+			   },
+			   {$lookup:
 				{
-				  from: "institutions",
-				  localField: "institution",
+				  from: "course_programs",
+				  localField: "courseprogram",
 				  foreignField: "_id",
-				  as: "InstitutionDetails"
+				  as: "courseprogramd"
 				}
 		   },				 
 		  ]);

@@ -29,4 +29,8 @@ router.get('/fetchByDep', async (req, res) => {
 	const response = await subjectAddController.fetchByDep(req.query.department);
 	res.send(response);
 })
+router.get('/fetchBySem', async (req, res) => {
+	const response = await subjectAddController.fetchBySem(req.query.semester);
+	res.send(response);
+})
 module.exports = router;

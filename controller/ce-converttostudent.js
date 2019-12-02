@@ -65,15 +65,7 @@ class convertController{
 						as: "semester"
 					}
 				},
-				{
-					$lookup:
-					{
-						from: "sections",
-						localField: "section",
-						foreignField: "_id",
-						as: "section"
-					}
-				},
+				
 			]);
 		} catch (error) {
 			return {
@@ -151,15 +143,7 @@ class convertController{
 						as: "semester"
 					}
 				},
-				{
-					$lookup:
-					{
-						from: "sections",
-						localField: "section",
-						foreignField: "_id",
-						as: "section"
-					}
-				},
+				
             ]);
 		} catch (error) {
 			return {

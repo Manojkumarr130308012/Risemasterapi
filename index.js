@@ -42,6 +42,7 @@ const subCategoryRouter = require('./router/subCategory');
 const certificateTypeRouter = require('./router/certificateType');
 const hostelRouter = require('./router/hostel');
 const sectionRouter = require("./router/section");
+const sectionStaffRouter = require("./router/section-staff");
 
 //Staff Master
 const staffTypeRouter = require("./router/staff-type");
@@ -157,6 +158,8 @@ server.use("/subCategory", subCategoryRouter);
 server.use("/certificateType", certificateTypeRouter);
 server.use("/hostel", hostelRouter);
 server.use("/section", sectionRouter);
+server.use("/section-staff", sectionStaffRouter);
+
 //Staff Master
 server.use("/staff-type", staffTypeRouter);
 server.use("/staff-role", staffRoleRouter);
