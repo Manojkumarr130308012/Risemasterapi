@@ -364,6 +364,96 @@ class subjectAddController{
 			};
 		}
 	}
+	async fetchBySem(semester){	
+		try{
+			return await subjectAddSchema.aggregate([
+
+				{
+					$match: {
+						semester: ObjectId(semester)
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "institutions",
+						localField: "institution",
+						foreignField: "_id",
+						as: "InstitutionDetails"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "departments",
+						localField: "department",
+						foreignField: "_id",
+						as: "department"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "course_programs",
+						localField: "courseprogram",
+						foreignField: "_id",
+						as: "courseprogram"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "subject_types",
+						localField: "subjectType",
+						foreignField: "_id",
+						as: "subjectType"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "subject_categories",
+						localField: "subjectCategory",
+						foreignField: "_id",
+						as: "subjectCategory"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "subject_classifications",
+						localField: "subjectClassification",
+						foreignField: "_id",
+						as: "subjectClassification"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "subject_markdefinitions",
+						localField: "markDefinition",
+						foreignField: "_id",
+						as: "markDefinition"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "subject_topiccoverages",
+						localField: "topicCoverage",
+						foreignField: "_id",
+						as: "topicCoverage"
+					}
+				},		
+			]);
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: error
+			};
+		}
+	}
 
 }
 module.exports = new subjectAddController();

@@ -97,14 +97,14 @@ async convert(newstudentdetails) {
 					}
                 },
                 {
-					$lookup:
-					{
-						from: "institutions",
-						localField: "institution",
-						foreignField: "_id",
-						as: "institutiond"
-					}
-				},
+                    $lookup:
+                    {
+                        from: "institutions",
+                        localField: "institution",
+                        foreignField: "_id",
+                        as: "institutiond"
+                    }
+                },
                 {
                     $lookup:
                     {
@@ -196,40 +196,50 @@ async convert(newstudentdetails) {
                     }
                 },
                 {
-					$lookup:
-					{
-						from: "referraltypes",
-						localField: "referalType",
-						foreignField: "_id",
-						as: "referalTyped"
-					}
-                },
-                {
-					$lookup:
-					{
-						from: "admission-types",
-						localField: "admissionType",
-						foreignField: "_id",
-						as: "admissionTyped"
-					}
-                },
-                {$lookup:
+                    $lookup:
                     {
-                      from: "course_programs",
-                      localField: "courseprogram",
-                      foreignField: "_id",
-                      as: "courseprogramd"
+                        from: "referraltypes",
+                        localField: "referalType",
+                        foreignField: "_id",
+                        as: "referalTyped"
                     }
-               },
+                },
                 {
-					$lookup:
-					{
-						from: "batches",
-						localField: "batch",
-						foreignField: "_id",
-						as: "batchd"
-					}
-				},
+                    $lookup:
+                    {
+                        from: "admission-types",
+                        localField: "admissionType",
+                        foreignField: "_id",
+                        as: "admissionTyped"
+                    }
+                },
+                {
+                    $lookup:
+                    {
+                        from: "course_programs",
+                        localField: "courseprogram",
+                        foreignField: "_id",
+                        as: "courseprogramd"
+                    }
+                },
+                {
+                    $lookup:
+                    {
+                        from: "batches",
+                        localField: "batch",
+                        foreignField: "_id",
+                        as: "batchd"
+                    }
+                },
+                {
+                    $lookup:
+                    {
+                        from: "hostels",
+                        localField: "hostel",
+                        foreignField: "_id",
+                        as: "hosteld"
+                    }
+                },
 			]);
 		} catch(error){
 			return {
@@ -412,7 +422,16 @@ async convert(newstudentdetails) {
 						foreignField: "_id",
 						as: "batchd"
 					}
-				},
+                },
+                {
+                    $lookup:
+                    {
+                        from: "hostels",
+                        localField: "hostel",
+                        foreignField: "_id",
+                        as: "hosteld"
+                    }
+                },
 				]);
 		} catch (error) {
 			return {
@@ -424,22 +443,22 @@ async convert(newstudentdetails) {
 	async fetchbyBatch(batch){
 		try{
 
-			return await studentDetailsSchema.aggregate([
+            return await studentDetailsSchema.aggregate([
 
-				{
-					$match: {
-						batch: ObjectId(batch)
-					}
+                {
+                    $match: {
+                        batch: ObjectId(batch)
+                    }
                 },
                 {
-					$lookup:
-					{
-						from: "institutions",
-						localField: "institution",
-						foreignField: "_id",
-						as: "institutiond"
-					}
-				},
+                    $lookup:
+                    {
+                        from: "institutions",
+                        localField: "institution",
+                        foreignField: "_id",
+                        as: "institutiond"
+                    }
+                },
                 {
                     $lookup:
                     {
@@ -531,41 +550,51 @@ async convert(newstudentdetails) {
                     }
                 },
                 {
-					$lookup:
-					{
-						from: "referraltypes",
-						localField: "referalType",
-						foreignField: "_id",
-						as: "referalTyped"
-					}
-                },
-                {
-					$lookup:
-					{
-						from: "admission-types",
-						localField: "admissionType",
-						foreignField: "_id",
-						as: "admissionTyped"
-					}
-                },
-                {$lookup:
+                    $lookup:
                     {
-                      from: "course_programs",
-                      localField: "courseprogram",
-                      foreignField: "_id",
-                      as: "courseprogramd"
+                        from: "referraltypes",
+                        localField: "referalType",
+                        foreignField: "_id",
+                        as: "referalTyped"
                     }
-               },
+                },
                 {
-					$lookup:
-					{
-						from: "batches",
-						localField: "batch",
-						foreignField: "_id",
-						as: "batchd"
-					}
-				},
-			]);
+                    $lookup:
+                    {
+                        from: "admission-types",
+                        localField: "admissionType",
+                        foreignField: "_id",
+                        as: "admissionTyped"
+                    }
+                },
+                {
+                    $lookup:
+                    {
+                        from: "course_programs",
+                        localField: "courseprogram",
+                        foreignField: "_id",
+                        as: "courseprogramd"
+                    }
+                },
+                {
+                    $lookup:
+                    {
+                        from: "batches",
+                        localField: "batch",
+                        foreignField: "_id",
+                        as: "batchd"
+                    }
+                },
+                {
+                    $lookup:
+                    {
+                        from: "hostels",
+                        localField: "hostel",
+                        foreignField: "_id",
+                        as: "hosteld"
+                    }
+                },
+            ]);
 		} catch(error){
 			return {
 				status: "error",
