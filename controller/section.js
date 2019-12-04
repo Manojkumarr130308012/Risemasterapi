@@ -1,6 +1,8 @@
 const sectionSchema = require('./../model/section');
 const errorHandler = require('./../utils/error.handler');
 
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 class sectionController{
 	async add(newdetail){
 		try{
@@ -127,6 +129,49 @@ class sectionController{
             };
         }
 	}
+	async fetchbycourseprogram(courseprogram){	
+		try{
+			return await sectionSchema.aggregate([
 
+                {
+                    $match: {
+                        courseprogram: ObjectId(courseprogram)
+                    }
+                },
+				{
+					$lookup:
+					{
+						from: "institutions",
+						localField: "institution",
+						foreignField: "_id",
+						as: "institutiond"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "departments",
+						localField: "department",
+						foreignField: "_id",
+						as: "departmentd"
+					}
+				},
+				{$lookup:
+				 {
+				   from: "course_programs",
+				   localField: "courseprogram",
+				   foreignField: "_id",
+				   as: "courseprogramd"
+				 }
+			},	
+			]);
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: error
+			};
+		}
+	}
 }
 module.exports = new sectionController();

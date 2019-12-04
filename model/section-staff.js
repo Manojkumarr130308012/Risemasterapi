@@ -34,7 +34,5 @@ const sectionStaffSchema = new mongoose.Schema({
         required: true
     }
 
-  
-
 })
 module.exports = new mongoose.model('section_staff', sectionStaffSchema);

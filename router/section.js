@@ -13,6 +13,10 @@ router.get('/fetchdata', async (req, res) => {
 	const response = await sectionController.fetchdata(req.query.id);
 	res.send(response);
 })
+router.get('/fetchbycourseprogram', async (req, res) => {
+	const response = await sectionController.fetchbycourseprogram(req.query.courseprogram);
+	res.send(response);
+})
 router.delete('/delete', async (req, res) => {
 	const response = await sectionController.delete(req.query.id);
 	res.send(response);

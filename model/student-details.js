@@ -151,6 +151,19 @@ const studentDetailsSchema = new mongoose.Schema({
     andhamanAndNicobarNative: {
         type: String,
     },
+    semester: {
+        type: mongoose.Schema.ObjectId,
+        required: true
+    },
+    section: {
+        type: mongoose.Schema.ObjectId
+    },
+    transportRoute: {
+        type: String
+    },
+    hostel: {
+        type:  mongoose.Schema.ObjectId
+    },
     status: {
         type: String
     },
