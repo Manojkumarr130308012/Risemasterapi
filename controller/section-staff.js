@@ -266,6 +266,97 @@ class sectionStaffController{
 				error: error
 			};
 		}
+    }
+    async fetchbySubject(subject){	
+		try{
+			return await sectionStaffSchema.aggregate([
+
+                {
+                    $match: {
+                        subject: ObjectId(subject)
+                    }
+                },
+                {
+                    $lookup:
+                    {
+                        from: "institutions",
+                        localField: "institution",
+                        foreignField: "_id",
+                        as: "institutiond"
+                    }
+                },
+                {
+                    $lookup:
+                    {
+                        from: "departments",
+                        localField: "department",
+                        foreignField: "_id",
+                        as: "departmentd"
+                    }
+                },
+                {
+					$lookup:
+					{
+						from: "course_programs",
+						localField: "courseprogram",
+						foreignField: "_id",
+						as: "courseprogramd"
+					}
+				},
+                {
+                    $lookup:
+                    {
+                        from: "batches",
+                        localField: "batch",
+                        foreignField: "_id",
+                        as: "batchd"
+                    }
+                },
+                {
+                    $lookup:
+                    {
+                        from: "semesters",
+                        localField: "semester",
+                        foreignField: "_id",
+                        as: "semesterd"
+                    }
+                },
+
+                {
+                    $lookup:
+                    {
+                        from: "sections",
+                        localField: "section",
+                        foreignField: "_id",
+                        as: "sectiond"
+                    }
+                },
+                {
+                    $lookup:
+                    {
+                        from: "staff-profiles",
+                        localField: "staff",
+                        foreignField: "_id",
+                        as: "staffd"
+                    }
+                },
+                {
+                    $lookup:
+                    {
+                        from: "subject_details",
+                        localField: "subject",
+                        foreignField: "_id",
+                        as: "subjectd"
+                    }
+                }		
+			]);
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: error
+			};
+		}
 	}
 
 }
