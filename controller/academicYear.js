@@ -1,6 +1,7 @@
 const academicYearSchema = require('./../model/academicYear');
 const errorHandler = require('./../utils/error.handler');
-
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 class academicYearController{
 	async add(newYear){
 		try{
@@ -77,7 +78,25 @@ class academicYearController{
 						from: "institutions",
 						localField: "institution",
 						foreignField: "_id",
-						as: "institution"
+						as: "institutiond"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "course_programs",
+						localField: "courseprogram",
+						foreignField: "_id",
+						as: "courseprogramd"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "batches",
+						localField: "batch",
+						foreignField: "_id",
+						as: "batchd"
 					}
 				},
 			]);
@@ -94,6 +113,51 @@ class academicYearController{
 			return {
 				response: response
 			};
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
+	async fetchbybatch(batch){
+		try{
+			return await academicYearSchema.aggregate([
+
+				{
+					$match: {
+						batch: ObjectId(batch)
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "institutions",
+						localField: "institution",
+						foreignField: "_id",
+						as: "institutiond"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "course_programs",
+						localField: "courseprogram",
+						foreignField: "_id",
+						as: "courseprogramd"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "batches",
+						localField: "batch",
+						foreignField: "_id",
+						as: "batchd"
+					}
+				},
+			]);
 			
 		} catch(error){
 			return {

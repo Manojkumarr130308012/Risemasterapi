@@ -1,8 +1,24 @@
 const mongoose = require("mongoose");
 
 const semesterSchema = new mongoose.Schema({
-    institution: {
+   institution: {
         type: mongoose.Schema.ObjectId,
+        required: true
+    },
+    courseprogram: {
+        type: mongoose.Schema.ObjectId,
+        required: true
+    },
+    batch: {
+        type: mongoose.Schema.ObjectId,
+        required: true
+    },
+    academicYear: {
+        type: mongoose.Schema.ObjectId,
+        required: true
+    }, 
+    semesterType: {
+        type: String,
         required: true
     },
     semester: {

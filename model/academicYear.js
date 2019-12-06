@@ -5,6 +5,14 @@ const academicYearSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         required: true
     },
+    courseprogram: {
+        type: mongoose.Schema.ObjectId,
+        required: true
+    },
+    batch: {
+        type: mongoose.Schema.ObjectId,
+        required: true
+    },
     year: {
         type: String,
         required: true

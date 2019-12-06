@@ -113,14 +113,42 @@ class sectionController{
 					   as: "departmentd"
 				   }
 			   },
-			   {$lookup:
+			   {
+				$lookup:
+				{
+					from: "semesters",
+					localField: "semester",
+					foreignField: "_id",
+					as: "semesterd"
+				}
+			},
+			   {
+				   $lookup:
 				{
 				  from: "course_programs",
 				  localField: "courseprogram",
 				  foreignField: "_id",
 				  as: "courseprogramd"
 				}
-		   },				 
+		   },	
+		   {
+			$lookup:
+			{
+				from: "academicyears",
+				localField: "academicYear",
+				foreignField: "_id",
+				as: "academicYeard"
+			}
+		},
+		{
+			$lookup:
+			{
+				from: "batches",
+				localField: "batch",
+				foreignField: "_id",
+				as: "batchd"
+			}
+		},			 
 		  ]);
         } catch (error) {
             return {
@@ -133,11 +161,11 @@ class sectionController{
 		try{
 			return await sectionSchema.aggregate([
 
-                {
-                    $match: {
-                        courseprogram: ObjectId(courseprogram)
-                    }
-                },
+				{
+					$match: {
+						courseprogram: ObjectId(courseprogram)
+					}
+				},
 				{
 					$lookup:
 					{
@@ -156,14 +184,42 @@ class sectionController{
 						as: "departmentd"
 					}
 				},
-				{$lookup:
-				 {
-				   from: "course_programs",
-				   localField: "courseprogram",
-				   foreignField: "_id",
-				   as: "courseprogramd"
-				 }
-			},	
+				{
+					$lookup:
+					{
+						from: "course_programs",
+						localField: "courseprogram",
+						foreignField: "_id",
+						as: "courseprogramd"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "semesters",
+						localField: "semester",
+						foreignField: "_id",
+						as: "semesterd"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "academicyears",
+						localField: "academicYear",
+						foreignField: "_id",
+						as: "academicYeard"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "batches",
+						localField: "batch",
+						foreignField: "_id",
+						as: "batchd"
+					}
+				},
 			]);
 			
 		} catch(error){

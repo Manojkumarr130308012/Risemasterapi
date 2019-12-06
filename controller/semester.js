@@ -1,6 +1,7 @@
 const semesterSchema = require('./../model/semester');
 const errorHandler = require('./../utils/error.handler');
-
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 class semesterController{
 	async add(newdetail){
 		try{
@@ -92,16 +93,44 @@ class semesterController{
 	}
 	async aggregation() {
         try {
-           return  await semesterSchema.aggregate([
-			{$lookup:
+			return await semesterSchema.aggregate([
 				{
-				  from: "institutions",
-				  localField: "institution",
-				  foreignField: "_id",
-				  as: "InstitutionDetails"
-				}
-		   },				 
-		  ]);
+					$lookup:
+					{
+						from: "course_programs",
+						localField: "courseprogram",
+						foreignField: "_id",
+						as: "courseprogramd"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "institutions",
+						localField: "institution",
+						foreignField: "_id",
+						as: "institutiond"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "academicyears",
+						localField: "academicYear",
+						foreignField: "_id",
+						as: "academicYeard"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "batches",
+						localField: "batch",
+						foreignField: "_id",
+						as: "batchd"
+					}
+				},
+			]);
         } catch (error) {
             return {
                 status: "error",
@@ -109,6 +138,113 @@ class semesterController{
             };
         }
 	}
+	async fetchbyAcademic(academicYear){
+		try{
+			return await semesterSchema.aggregate([
 
+				{
+					$match: {
+						academicYear: ObjectId(academicYear)
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "course_programs",
+						localField: "courseprogram",
+						foreignField: "_id",
+						as: "courseprogram"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "institutions",
+						localField: "institution",
+						foreignField: "_id",
+						as: "institution"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "academicyears",
+						localField: "academicYear",
+						foreignField: "_id",
+						as: "academicYeard"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "batches",
+						localField: "batch",
+						foreignField: "_id",
+						as: "batchd"
+					}
+				},
+			]);
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
+	async fetchbysemType(semesterType){
+		try{
+			return await semesterSchema.aggregate([
+
+				{
+					$match: {
+						semesterType: ObjectId(semesterType)
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "course_programs",
+						localField: "courseprogram",
+						foreignField: "_id",
+						as: "courseprogram"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "institutions",
+						localField: "institution",
+						foreignField: "_id",
+						as: "institution"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "academicyears",
+						localField: "academicYear",
+						foreignField: "_id",
+						as: "academicYeard"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "batches",
+						localField: "batch",
+						foreignField: "_id",
+						as: "batchd"
+					}
+				},
+			]);
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
 }
 module.exports = new semesterController();

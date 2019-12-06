@@ -124,6 +124,24 @@ class subjectAddController{
 						as: "semesterd"
 					}
 				},
+				{
+					$lookup:
+					{
+						from: "academicyears",
+						localField: "academicYear",
+						foreignField: "_id",
+						as: "academicYeard"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "batches",
+						localField: "batch",
+						foreignField: "_id",
+						as: "batchd"
+					}
+				},
 
 			]);
 			
@@ -261,7 +279,25 @@ class subjectAddController{
 						from: "semesters",
 						localField: "semester",
 						foreignField: "_id",
-						as: "semester"
+						as: "semesterd"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "academicyears",
+						localField: "academicYear",
+						foreignField: "_id",
+						as: "academicYeard"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "batches",
+						localField: "batch",
+						foreignField: "_id",
+						as: "batchd"
 					}
 				},
 
@@ -290,6 +326,15 @@ class subjectAddController{
 						localField: "institution",
 						foreignField: "_id",
 						as: "InstitutionDetails"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "semesters",
+						localField: "semester",
+						foreignField: "_id",
+						as: "semesterd"
 					}
 				},
 				{
@@ -354,7 +399,25 @@ class subjectAddController{
 						foreignField: "_id",
 						as: "topicCoverage"
 					}
-				},		
+				},	
+				{
+					$lookup:
+					{
+						from: "academicyears",
+						localField: "academicYear",
+						foreignField: "_id",
+						as: "academicYeard"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "batches",
+						localField: "batch",
+						foreignField: "_id",
+						as: "batchd"
+					}
+				},	
 			]);
 			
 		} catch(error){
@@ -403,6 +466,15 @@ class subjectAddController{
 				{
 					$lookup:
 					{
+						from: "semesters",
+						localField: "semester",
+						foreignField: "_id",
+						as: "semesterd"
+					}
+				},
+				{
+					$lookup:
+					{
 						from: "subject_types",
 						localField: "subjectType",
 						foreignField: "_id",
@@ -444,6 +516,24 @@ class subjectAddController{
 						foreignField: "_id",
 						as: "topicCoverage"
 					}
+				},
+				{
+					$lookup:
+					{
+						from: "academicyears",
+						localField: "academicYear",
+						foreignField: "_id",
+						as: "academicYeard"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "batches",
+						localField: "batch",
+						foreignField: "_id",
+						as: "batchd"
+					}
 				},		
 			]);
 			
@@ -454,6 +544,8 @@ class subjectAddController{
 			};
 		}
 	}
+
+	
 
 }
 module.exports = new subjectAddController();

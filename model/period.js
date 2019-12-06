@@ -5,7 +5,7 @@ const periodSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         required: true
     },
-    periofName: {
+    periodName: {
         type: String,
         required: true
     },
@@ -18,7 +18,7 @@ const periodSchema = new mongoose.Schema({
         required: true
     }, 
     periodOrder: {
-        type: Number,
+        type: String,
         required: true
     }
 

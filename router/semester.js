@@ -29,4 +29,12 @@ router.get('/fetchbyIns', async (req, res) => {
 	const response = await semesterController.fetchbyIns(req.query.institution);
 	res.send(response);
 })
+router.get('/fetchbyAcademic', async (req, res) => {
+	const response = await semesterController.fetchbyAcademic(req.query.academicYear);
+	res.send(response);
+})
+router.get('/fetchbysemType', async (req, res) => {
+	const response = await semesterController.fetchbysemType(req.query.semesterType);
+	res.send(response);
+})
 module.exports = router;
