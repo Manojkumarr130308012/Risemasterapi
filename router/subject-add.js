@@ -34,7 +34,7 @@ router.get('/fetchBySem', async (req, res) => {
 	res.send(response);
 })
 router.post('/fetchsubject', async (req, res) => {
-	const response = await subjectAddController.update(req.body);
+	const response = await subjectAddController.fetchsubject(req.body);
 	res.send(response);
 })
 module.exports = router;

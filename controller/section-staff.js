@@ -95,42 +95,6 @@ class sectionStaffController{
 	async aggregation() {
         try {
            return  await sectionStaffSchema.aggregate([
-               {
-                   $lookup:
-                   {
-                       from: "institutions",
-                       localField: "institution",
-                       foreignField: "_id",
-                       as: "institutiond"
-                   }
-               },
-               {
-                   $lookup:
-                   {
-                       from: "departments",
-                       localField: "department",
-                       foreignField: "_id",
-                       as: "departmentd"
-                   }
-               },
-               {
-                $lookup:
-                {
-                    from: "batches",
-                    localField: "batch",
-                    foreignField: "_id",
-                    as: "batchd"
-                }
-            },
-            {
-                $lookup:
-                {
-                    from: "course_programs",
-                    localField: "courseprogram",
-                    foreignField: "_id",
-                    as: "courseprogramd"
-                }
-            },
             {
                 $lookup:
                 {
@@ -185,51 +149,6 @@ class sectionStaffController{
                         section: ObjectId(section)
                     }
                 },
-                {
-                    $lookup:
-                    {
-                        from: "institutions",
-                        localField: "institution",
-                        foreignField: "_id",
-                        as: "institutiond"
-                    }
-                },
-                {
-                    $lookup:
-                    {
-                        from: "departments",
-                        localField: "department",
-                        foreignField: "_id",
-                        as: "departmentd"
-                    }
-                },
-                {
-					$lookup:
-					{
-						from: "course_programs",
-						localField: "courseprogram",
-						foreignField: "_id",
-						as: "courseprogramd"
-					}
-				},
-                {
-                    $lookup:
-                    {
-                        from: "batches",
-                        localField: "batch",
-                        foreignField: "_id",
-                        as: "batchd"
-                    }
-                },
-                {
-                    $lookup:
-                    {
-                        from: "semesters",
-                        localField: "semester",
-                        foreignField: "_id",
-                        as: "semesterd"
-                    }
-                },
 
                 {
                     $lookup:
@@ -274,51 +193,6 @@ class sectionStaffController{
                 {
                     $match: {
                         subject: ObjectId(subject)
-                    }
-                },
-                {
-                    $lookup:
-                    {
-                        from: "institutions",
-                        localField: "institution",
-                        foreignField: "_id",
-                        as: "institutiond"
-                    }
-                },
-                {
-                    $lookup:
-                    {
-                        from: "departments",
-                        localField: "department",
-                        foreignField: "_id",
-                        as: "departmentd"
-                    }
-                },
-                {
-					$lookup:
-					{
-						from: "course_programs",
-						localField: "courseprogram",
-						foreignField: "_id",
-						as: "courseprogramd"
-					}
-				},
-                {
-                    $lookup:
-                    {
-                        from: "batches",
-                        localField: "batch",
-                        foreignField: "_id",
-                        as: "batchd"
-                    }
-                },
-                {
-                    $lookup:
-                    {
-                        from: "semesters",
-                        localField: "semester",
-                        foreignField: "_id",
-                        as: "semesterd"
                     }
                 },
 
