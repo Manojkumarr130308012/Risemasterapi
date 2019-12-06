@@ -13,6 +13,14 @@ const subjectAddSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         required: true
     },
+    batch: {
+        type: mongoose.Schema.ObjectId,
+        required: true
+    },
+    academicYear: {
+        type: mongoose.Schema.ObjectId,
+        required: true
+    }, 
     subjectCode: {
         type: String,
         required: true

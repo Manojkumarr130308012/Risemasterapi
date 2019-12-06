@@ -102,7 +102,25 @@ class batchController{
 				  foreignField: "_id",
 				  as: "institution"
 				}
-		   },			 
+		   },	
+		   {
+			$lookup:
+			{
+				from: "academicyears",
+				localField: "academicYear",
+				foreignField: "_id",
+				as: "academicYeard"
+			}
+		},
+		{
+			$lookup:
+			{
+				from: "batches",
+				localField: "batch",
+				foreignField: "_id",
+				as: "batchd"
+			}
+		},		 
 		  ]);
         } catch (error) {
             return {

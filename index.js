@@ -101,6 +101,7 @@ const studentCertiUploadRouter = require('./router/student-certi-upload');
 const studentLoginRouter = require('./router/studentLogin');
 const staffLoginRouter = require('./router/staffLogin');
 
+
 //Subject Master
 const subjectTypeRouter = require('./router/subject-type');
 const subjectClassificationRouter = require('./router/subject-classification');
@@ -113,13 +114,22 @@ const subjectAddRouter = require('./router/subject-add');
 const subjectStaffRouter = require('./router/subject-staff');
 const subjectSyllabusRouter = require('./router/subject-syllabus');
 
+//Timetable 
+const weekDayRouter = require('./router/weekDay');
+const periodRouter = require('./router/period');
+
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
-
 server.use(middleware);
+
+//Timetable
+server.use("/weekDay", weekDayRouter);
+server.use("/period", periodRouter);
+
 //Login
 server.use("/studentLogin", studentLoginRouter);
 server.use("/staffLogin", staffLoginRouter);
+
 //Master
 server.use("/user-designation", userDesignationRouter);
 server.use("/academic-year", academicYearRouter);

@@ -95,42 +95,6 @@ class sectionStaffController{
 	async aggregation() {
         try {
            return  await sectionStaffSchema.aggregate([
-               {
-                   $lookup:
-                   {
-                       from: "institutions",
-                       localField: "institution",
-                       foreignField: "_id",
-                       as: "institutiond"
-                   }
-               },
-               {
-                   $lookup:
-                   {
-                       from: "departments",
-                       localField: "department",
-                       foreignField: "_id",
-                       as: "departmentd"
-                   }
-               },
-               {
-                $lookup:
-                {
-                    from: "batches",
-                    localField: "batch",
-                    foreignField: "_id",
-                    as: "batchd"
-                }
-            },
-            {
-                $lookup:
-                {
-                    from: "course_programs",
-                    localField: "courseprogram",
-                    foreignField: "_id",
-                    as: "courseprogramd"
-                }
-            },
             {
                 $lookup:
                 {
@@ -185,49 +149,50 @@ class sectionStaffController{
                         section: ObjectId(section)
                     }
                 },
+
                 {
                     $lookup:
                     {
-                        from: "institutions",
-                        localField: "institution",
+                        from: "sections",
+                        localField: "section",
                         foreignField: "_id",
-                        as: "institutiond"
+                        as: "sectiond"
                     }
                 },
                 {
                     $lookup:
                     {
-                        from: "departments",
-                        localField: "department",
+                        from: "staff-profiles",
+                        localField: "staff",
                         foreignField: "_id",
-                        as: "departmentd"
-                    }
-                },
-                {
-					$lookup:
-					{
-						from: "course_programs",
-						localField: "courseprogram",
-						foreignField: "_id",
-						as: "courseprogramd"
-					}
-				},
-                {
-                    $lookup:
-                    {
-                        from: "batches",
-                        localField: "batch",
-                        foreignField: "_id",
-                        as: "batchd"
+                        as: "staffd"
                     }
                 },
                 {
                     $lookup:
                     {
-                        from: "semesters",
-                        localField: "semester",
+                        from: "subject_details",
+                        localField: "subject",
                         foreignField: "_id",
-                        as: "semesterd"
+                        as: "subjectd"
+                    }
+                }		
+			]);
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: error
+			};
+		}
+    }
+    async fetchbySubject(subject){	
+		try{
+			return await sectionStaffSchema.aggregate([
+
+                {
+                    $match: {
+                        subject: ObjectId(subject)
                     }
                 },
 

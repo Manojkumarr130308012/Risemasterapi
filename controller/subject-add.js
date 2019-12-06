@@ -1,8 +1,8 @@
 const subjectAddSchema = require('./../model/subject-add');
 const errorHandler = require('./../utils/error.handler');
-
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
+
 class subjectAddController{
 	async add(newdetail){
 		try{
@@ -122,6 +122,24 @@ class subjectAddController{
 						localField: "semester",
 						foreignField: "_id",
 						as: "semesterd"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "academicyears",
+						localField: "academicYear",
+						foreignField: "_id",
+						as: "academicYeard"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "batches",
+						localField: "batch",
+						foreignField: "_id",
+						as: "batchd"
 					}
 				},
 
@@ -261,7 +279,25 @@ class subjectAddController{
 						from: "semesters",
 						localField: "semester",
 						foreignField: "_id",
-						as: "semester"
+						as: "semesterd"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "academicyears",
+						localField: "academicYear",
+						foreignField: "_id",
+						as: "academicYeard"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "batches",
+						localField: "batch",
+						foreignField: "_id",
+						as: "batchd"
 					}
 				},
 
@@ -290,6 +326,15 @@ class subjectAddController{
 						localField: "institution",
 						foreignField: "_id",
 						as: "InstitutionDetails"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "semesters",
+						localField: "semester",
+						foreignField: "_id",
+						as: "semesterd"
 					}
 				},
 				{
@@ -354,7 +399,25 @@ class subjectAddController{
 						foreignField: "_id",
 						as: "topicCoverage"
 					}
-				},		
+				},	
+				{
+					$lookup:
+					{
+						from: "academicyears",
+						localField: "academicYear",
+						foreignField: "_id",
+						as: "academicYeard"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "batches",
+						localField: "batch",
+						foreignField: "_id",
+						as: "batchd"
+					}
+				},	
 			]);
 			
 		} catch(error){
@@ -403,6 +466,15 @@ class subjectAddController{
 				{
 					$lookup:
 					{
+						from: "semesters",
+						localField: "semester",
+						foreignField: "_id",
+						as: "semesterd"
+					}
+				},
+				{
+					$lookup:
+					{
 						from: "subject_types",
 						localField: "subjectType",
 						foreignField: "_id",
@@ -444,6 +516,24 @@ class subjectAddController{
 						foreignField: "_id",
 						as: "topicCoverage"
 					}
+				},
+				{
+					$lookup:
+					{
+						from: "academicyears",
+						localField: "academicYear",
+						foreignField: "_id",
+						as: "academicYeard"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "batches",
+						localField: "batch",
+						foreignField: "_id",
+						as: "batchd"
+					}
 				},		
 			]);
 			
@@ -454,6 +544,139 @@ class subjectAddController{
 			};
 		}
 	}
+	async fetchsubject(filterSubject) {
+		//console.log('Filter Subject', filterSubject);
+			try {
+				let institution = filterSubject.institution;
+				let department = filterSubject.department;
+				let courseprogram = filterSubject.courseprogram;
+				let batch = filterSubject.batch;
+				let academicYear = filterSubject.academicYear;
+				let semester = filterSubject.semester;
+				 
+				return await subjectAddSchema.aggregate([
+					{
+
+						$match: {
+							institution: ObjectId(institution),
+							department: ObjectId(department),
+							courseprogram: ObjectId(courseprogram),
+							batch: ObjectId(batch),
+							academicYear: ObjectId(academicYear),
+							semester: ObjectId(semester),
+						}
+					},				
+					{
+						$lookup:
+						{
+							from: "institutions",
+							localField: "institution",
+							foreignField: "_id",
+							as: "institutiond"
+						}
+					},
+					{
+						$lookup:
+						{
+							from: "departments",
+							localField: "department",
+							foreignField: "_id",
+							as: "departmentd"
+						}
+					},
+					{
+						$lookup:
+						{
+							from: "course_programs",
+							localField: "courseprogram",
+							foreignField: "_id",
+							as: "courseprogramd"
+						}
+					},
+					{
+						$lookup:
+						{
+							from: "semesters",
+							localField: "semester",
+							foreignField: "_id",
+							as: "semesterd"
+						}
+					},
+					{
+						$lookup:
+						{
+							from: "subject_types",
+							localField: "subjectType",
+							foreignField: "_id",
+							as: "subjectTyped"
+						}
+					},
+					{
+						$lookup:
+						{
+							from: "subject_categories",
+							localField: "subjectCategory",
+							foreignField: "_id",
+							as: "subjectCategoryd"
+						}
+					},
+					{
+						$lookup:
+						{
+							from: "subject_classifications",
+							localField: "subjectClassification",
+							foreignField: "_id",
+							as: "subjectClassificationd"
+						}
+					},
+					{
+						$lookup:
+						{
+							from: "subject_markdefinitions",
+							localField: "markDefinition",
+							foreignField: "_id",
+							as: "markDefinitiond"
+						}
+					},
+					{
+						$lookup:
+						{
+							from: "subject_topiccoverages",
+							localField: "topicCoverage",
+							foreignField: "_id",
+							as: "topicCoveraged"
+						}
+					},
+					{
+						$lookup:
+						{
+							from: "academicyears",
+							localField: "academicYear",
+							foreignField: "_id",
+							as: "academicYeard"
+						}
+					},
+					{
+						$lookup:
+						{
+							from: "batches",
+							localField: "batch",
+							foreignField: "_id",
+							as: "batchd"
+						}
+					},		
+	
+				]);
+	
+	
+			} catch (error) {
+				return {
+					status: "error",
+					error: error
+				};
+			}
+		}
+
 
 }
 module.exports = new subjectAddController();

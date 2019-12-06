@@ -21,6 +21,10 @@ router.get('/fetchbySection', async (req, res) => {
 	const response = await sectionStaffController.fetchbySection(req.query.section);
 	res.send(response);
 })
+router.get('/fetchbySubject', async (req, res) => {
+	const response = await sectionStaffController.fetchbySubject(req.query.subject);
+	res.send(response);
+})
 router.delete('/delete', async (req, res) => {
 	const response = await sectionStaffController.delete(req.query.id);
 	res.send(response);
