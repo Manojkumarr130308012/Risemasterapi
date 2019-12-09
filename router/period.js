@@ -9,6 +9,11 @@ router.get('/', async (req, res) => {
 	const response = await periodController.fetch();
 	res.send(response);
 })
+
+router.get('/fetchPeriods', async (req, res) => {
+	const response = await periodController.fetchPeriods();
+	res.send(response);
+})
 router.get('/fetchdata', async (req, res) => {
 	const response = await periodController.fetchdata(req.query.id);
 	res.send(response);
