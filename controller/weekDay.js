@@ -18,12 +18,10 @@ class weekDayController{
 		}
 	}
 	
-	async fetch(){
+	async fetchweekdays(){
 		try{
 			let response = await weekDaySchema.find({});
-			return {
-				response: response
-			};
+			return response;
 		} catch(error){
 			return {
 				status: "error",

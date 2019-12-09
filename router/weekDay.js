@@ -5,8 +5,8 @@ router.post('/add', async (req, res) => {
 	const response = await weekDayController.add(req.body);
 	res.send(response);
 })
-router.get('/', async (req, res) => {
-	const response = await weekDayController.fetch();
+router.get('/fetchweekdays', async (req, res) => {
+	const response = await weekDayController.fetchweekdays();
 	res.send(response);
 })
 router.get('/fetchdata', async (req, res) => {
