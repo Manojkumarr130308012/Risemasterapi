@@ -24,6 +24,14 @@ const semesterSchema = new mongoose.Schema({
     semester: {
         type: String,
         required: true
+    },
+    fromDate: {
+        type: String,
+        required: true
+    },
+    toDate: {
+        type: String,
+        required: true
     }
 
 })

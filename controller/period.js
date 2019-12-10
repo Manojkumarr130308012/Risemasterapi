@@ -3,6 +3,7 @@ const errorHandler = require('./../utils/error.handler');
 
 class periodController{
 	async add(newdetail){
+	//	console.log(newdetail);
 		try{
 			let response = await periodSchema.create(newdetail);
             return  { 
@@ -21,9 +22,24 @@ class periodController{
 	async fetch(){
 		try{
 			let response = await periodSchema.find({});
+			//console.log(response);
 			return {
 				response: response
 			};
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
+
+	async fetchPeriods(){
+		try{
+			let response = await periodSchema.find({}).sort({periodOrder:1});
+			//console.log(response);
+			return  response;
+			
 		} catch(error){
 			return {
 				status: "error",

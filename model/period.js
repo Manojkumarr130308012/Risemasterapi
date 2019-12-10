@@ -21,7 +21,5 @@ const periodSchema = new mongoose.Schema({
         type: String,
         required: true
     }
-
-
 })
 module.exports = new mongoose.model('period', periodSchema);

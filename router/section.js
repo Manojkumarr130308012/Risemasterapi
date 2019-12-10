@@ -17,6 +17,14 @@ router.get('/fetchbycourseprogram', async (req, res) => {
 	const response = await sectionController.fetchbycourseprogram(req.query.courseprogram);
 	res.send(response);
 })
+router.get('/fetchbyAcademic', async (req, res) => {
+	const response = await sectionController.fetchbyAcademic(req.query.academicYear);
+	res.send(response);
+})
+router.get('/fetchbySemester', async (req, res) => {
+	const response = await sectionController.fetchbySemester(req.query.semester);
+	res.send(response);
+})
 router.delete('/delete', async (req, res) => {
 	const response = await sectionController.delete(req.query.id);
 	res.send(response);
