@@ -176,7 +176,16 @@ class sectionStaffController{
                         foreignField: "_id",
                         as: "subjectd"
                     }
-                }		
+                },
+                {
+                    $lookup:
+                    {
+                        from: "semesters",
+                        localField: "semester",
+                        foreignField: "_id",
+                        as: "semesterd"
+                    }
+                },	
 			]);
 			
 		} catch(error){
