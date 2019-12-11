@@ -61,6 +61,85 @@ class semesterController{
 		}
 	}
 
+	async fetchbyAcademic(academicYear){	
+		try{
+			return await semesterSchema.aggregate([
+
+				{
+					$match: {
+						academicYear: ObjectId(academicYear)
+					}
+				},
+
+				
+				{
+
+					$lookup:
+					{
+						from: "semesters",
+						localField: "semester",
+						foreignField: "_id",
+						as: "semesterd"
+					}
+				},
+
+			]);
+				// {
+				// 	$lookup:
+				// 	{
+				// 		from: "institutions",
+				// 		localField: "institution",
+				// 		foreignField: "_id",
+				// 		as: "institutiond"
+				// 	}
+				// },
+				// {
+				// 	$lookup:
+				// 	{
+				// 		from: "departments",
+				// 		localField: "department",
+				// 		foreignField: "_id",
+				// 		as: "departmentd"
+				// 	}
+				// },
+				// {
+				// 	$lookup:
+				// 	{
+				// 		from: "course_programs",
+				// 		localField: "courseprogram",
+				// 		foreignField: "_id",
+				// 		as: "courseprogramd"
+				// 	}
+				// },
+				
+				// {
+				// 	$lookup:
+				// 	{
+				// 		from: "academicyears",
+				// 		localField: "academicYear",
+				// 		foreignField: "_id",
+				// 		as: "academicYeard"
+				// 	}
+				// },
+				// {
+				// 	$lookup:
+				// 	{
+				// 		from: "batches",
+				// 		localField: "batch",
+				// 		foreignField: "_id",
+				// 		as: "batchd"
+				// 	}
+				// },
+			
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: error
+			};
+		}
+	}
+
 	async delete(id){
 		try{
 			let response = await semesterSchema.deleteOne({_id: id});
