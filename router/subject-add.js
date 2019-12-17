@@ -22,7 +22,7 @@ router.put('/update', async (req, res) => {
 	res.send(response);
 })
 router.get('/aggregation', async function  (req, res) {
-	let response = await subjectAddController.aggregation();
+	let response = await subjectAddController.aggregation(req.query.id);
 	res.send(response);
 })
 router.get('/fetchByDep', async (req, res) => {

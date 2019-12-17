@@ -49,6 +49,25 @@ class timeTableController{
     
    
 
+    async filterSubExist(filterSubExist) {
+
+			try {
+				let period = filterSubExist.period;
+					let day = filterSubExist.day;
+
+					let response = await timeTableSchema.find({'period':period, 'day':day});
+			         return response;			
+				 
+			
+	
+			} catch (error) {
+				return {
+					status: "error",
+					error: error
+				};
+			}
+		}
+
     async fetchSubjectStaff(filterSubject) {
 		//console.log('Filter Subject', filterSubject);
 			try {
@@ -123,23 +142,11 @@ class timeTableController{
 			}
 		}
 
-	// async fetchbyIns(institution){
-	// 	try{
-	// 		let response = await timeTableSchema.find({'institution':institution});
-	// 		return {
-	// 			response: response
-	// 		};
-			
-	// 	} catch(error){
-	// 		return {
-	// 			status: "error",
-	// 			error: errorHandler.parseMongoError(error)
-	// 		};
-	// 	}
-	// }
+	
 
 	async delete(id){
 		try{
+			//console.log('id',id);
 			let response = await timeTableSchema.deleteOne({_id: id});
 			return {
 				status: "success",
@@ -208,107 +215,6 @@ class timeTableController{
             };
         }
     }
-    // async fetchbySection(section){	
-	// 	try{
-	// 		return await timeTableSchema.aggregate([
-
-    //             {
-    //                 $match: {
-    //                     section: ObjectId(section)
-    //                 }
-    //             },
-
-    //             {
-    //                 $lookup:
-    //                 {
-    //                     from: "sections",
-    //                     localField: "section",
-    //                     foreignField: "_id",
-    //                     as: "sectiond"
-    //                 }
-    //             },
-    //             {
-    //                 $lookup:
-    //                 {
-    //                     from: "staff-profiles",
-    //                     localField: "staff",
-    //                     foreignField: "_id",
-    //                     as: "staffd"
-    //                 }
-    //             },
-    //             {
-    //                 $lookup:
-    //                 {
-    //                     from: "subject_details",
-    //                     localField: "subject",
-    //                     foreignField: "_id",
-    //                     as: "subjectd"
-    //                 }
-    //             },
-    //             {
-    //                 $lookup:
-    //                 {
-    //                     from: "semesters",
-    //                     localField: "semester",
-    //                     foreignField: "_id",
-    //                     as: "semesterd"
-    //                 }
-    //             },	
-	// 		]);
-			
-	// 	} catch(error){
-	// 		return {
-	// 			status: "error",
-	// 			error: error
-	// 		};
-	// 	}
-    // }
-    // async fetchbySubject(subject){	
-	// 	try{
-	// 		return await timeTableSchema.aggregate([
-
-    //             {
-    //                 $match: {
-    //                     subject: ObjectId(subject)
-    //                 }
-    //             },
-
-    //             {
-    //                 $lookup:
-    //                 {
-    //                     from: "sections",
-    //                     localField: "section",
-    //                     foreignField: "_id",
-    //                     as: "sectiond"
-    //                 }
-    //             },
-    //             {
-    //                 $lookup:
-    //                 {
-    //                     from: "staff-profiles",
-    //                     localField: "staff",
-    //                     foreignField: "_id",
-    //                     as: "staffd"
-    //                 }
-    //             },
-    //             {
-    //                 $lookup:
-    //                 {
-    //                     from: "subject_details",
-    //                     localField: "subject",
-    //                     foreignField: "_id",
-    //                     as: "subjectd"
-    //                 }
-    //             }		
-	// 		]);
-			
-	// 	} catch(error){
-	// 		return {
-	// 			status: "error",
-	// 			error: error
-	// 		};
-	// 	}
-	// }
 
 }
 module.exports = new timeTableController();

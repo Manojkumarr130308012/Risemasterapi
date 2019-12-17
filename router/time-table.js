@@ -19,22 +19,14 @@ router.post('/fetchSubjectStaff', async (req, res) => {
 	res.send(response);
 })
 
+router.post('/fetchSubjectExist', async (req, res) => {
+	const response = await timeTableController.filterSubExist(req.body);
+	res.send(response);
+})
 
-
-// router.get('/fetchbyIns', async (req, res) => {
-// 	const response = await timeTableController.fetchbyIns(req.query.institution);
-// 	res.send(response);
-// })
-// router.get('/fetchbySection', async (req, res) => {
-// 	const response = await timeTableController.fetchbySection(req.query.section);
-// 	res.send(response);
-// })
-// router.get('/fetchbySubject', async (req, res) => {
-// 	const response = await timeTableController.fetchbySubject(req.query.subject);
-// 	res.send(response);
-// })
 router.delete('/delete', async (req, res) => {
 	const response = await timeTableController.delete(req.query.id);
+	//console.log(response);
 	res.send(response);
 })
 router.put('/update', async (req, res) => {

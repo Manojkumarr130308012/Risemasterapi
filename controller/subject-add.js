@@ -198,9 +198,14 @@ class subjectAddController{
         }
 
 	}
-	async aggregation() {
+	async aggregation(id) {
         try {
 			return await subjectAddSchema.aggregate([
+				{
+					$match: {
+						institution: ObjectId(id)
+					}
+				},
 				{
 					$lookup:
 					{
