@@ -128,6 +128,13 @@ server.use("/weekDay", weekDayRouter);
 server.use("/period", periodRouter);
 server.use("/time-table", timeTableRouter);
 
+//Student Period Attendence
+const studentAttendenceEntry = require('./router/student-attendenceEntry');
+
+//Student Period Attendence
+
+server.use("/studentAttendence", studentAttendenceEntry);
+
 //Login
 server.use("/studentLogin", studentLoginRouter);
 server.use("/staffLogin", staffLoginRouter);

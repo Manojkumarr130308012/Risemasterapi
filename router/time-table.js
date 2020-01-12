@@ -14,6 +14,12 @@ router.get('/fetchdata', async (req, res) => {
 	res.send(response);
 })
 
+router.get('/fetchStudentDetails', async (req, res) => {
+	const response = await timeTableController.fetchStudentDetails(req.query.sectionId);
+	res.send(response);
+})
+
+
 router.post('/fetchSubjectStaff', async (req, res) => {
 	const response = await timeTableController.fetchSubjectStaff(req.body);
 	res.send(response);
@@ -23,6 +29,14 @@ router.post('/fetchSubjectExist', async (req, res) => {
 	const response = await timeTableController.filterSubExist(req.body);
 	res.send(response);
 })
+
+router.post('/filterPeriodExist', async (req, res) => {
+	const response = await timeTableController.filterPeriodSubject(req.body);
+	res.send(response);
+})
+
+
+
 
 router.delete('/delete', async (req, res) => {
 	const response = await timeTableController.delete(req.query.id);
