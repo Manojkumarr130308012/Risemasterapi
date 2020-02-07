@@ -36,8 +36,29 @@ class sectionStaffController{
 
 	async fetchdata(id){
 		try{
-			let response = await sectionStaffSchema.find({'_id':id});
-			return response;
+		//	let response = await sectionStaffSchema.find({'_id':id});
+           // return response;
+            
+            return await sectionStaffSchema.aggregate([
+                {
+
+                    $match: {
+                        _id: ObjectId(id)
+                        
+                    }
+                },	
+                
+                {
+                    $lookup:
+                    {
+                        from: "staff-profiles",
+                        localField: "staff",
+                        foreignField: "_id",
+                        as: "staffDetails"
+                    }
+                },
+                
+            ]);
 			
 		} catch(error){
 			return {

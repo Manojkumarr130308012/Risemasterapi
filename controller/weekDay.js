@@ -43,6 +43,22 @@ class weekDayController{
 		}
 	}
 
+	
+
+	async fetchattendenceDayId(day){
+		try{
+			
+			let response = await weekDaySchema.find({day:day});
+			return response;
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
+
 	async delete(id){
 		try{
 			let response = await weekDaySchema.deleteOne({_id: id});

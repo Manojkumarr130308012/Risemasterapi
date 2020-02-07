@@ -12,6 +12,7 @@ router.get('/', async (req, res) => {
 router.get('/fetchdata', async (req, res) => {
 	const response = await sectionStaffController.fetchdata(req.query.id);
 	res.send(response);
+	console.log(response);
 })
 router.get('/fetchbyIns', async (req, res) => {
 	const response = await sectionStaffController.fetchbyIns(req.query.institution);

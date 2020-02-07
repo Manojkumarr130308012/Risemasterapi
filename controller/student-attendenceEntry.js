@@ -70,6 +70,8 @@ class studentAttendenceController{
 		}
 	}
 
+	
+
 	async delete(id){
 		try{
 			let response = await studentAttendenceSchema.deleteOne({_id: id});
@@ -154,5 +156,162 @@ class studentAttendenceController{
 		}
 	}
 
+	async fetchStudentAttendence(filterStudentAttendence) {
+		//console.log('Filter Subject', filterStudentAttendence);
+			try {
+				let sectionid = filterStudentAttendence.section;	
+				let attendenceDate=filterStudentAttendence.attendenceDate;
+				
+				 
+				return await studentAttendenceSchema.aggregate([
+					{
+
+						$match: {
+							section: ObjectId(sectionid),
+							attendenceDate: attendenceDate						
+						}
+					},				
+					{
+						$lookup:
+						{
+							from: "sections",
+							localField: "sectionid",
+							foreignField: "_id",
+							as: "sectionDetails"
+						}
+					},
+					{
+						$lookup:
+						{
+							from: "periods",
+							localField: "period",
+							foreignField: "_id",
+							as: "periodDetails"
+						}
+					},
+					{
+						$lookup:
+						{
+							from: "week_days",
+							localField: "day",
+							foreignField: "_id",
+							as: "dayDetails"
+						}
+					},
+					{
+						$lookup:
+						{
+							from: "subject_details",
+							localField: "subject",
+							foreignField: "_id",
+							as: "subjectDetails"
+						}
+					},
+					{
+						$lookup:
+						{
+							from: "staff-profiles",
+							localField: "staff",
+							foreignField: "_id",
+							as: "staffDetails"
+						}
+					},
+				
+						
+	
+				]);
+	
+	
+			} catch (error) {
+				return {
+					status: "error",
+					error: error
+				};
+			}
+		}
+
+		
+
+
+		async fetchAttendence(filterAttendence) {
+			//console.log('Filter Attend', filterAttendence);
+				try {
+					let semester = filterAttendence.semester;	
+					let section=filterAttendence.section;
+					let attendenceDay=filterAttendence.attendenceDay;					
+					let attendenceDate = filterAttendence.attendenceDate;
+
+					return await studentAttendenceSchema.aggregate([
+						{
+	
+							$match: {
+								semester: ObjectId(semester),
+								section: ObjectId(section),
+								attendenceDay: attendenceDay,
+								attendenceDate: attendenceDate					
+							}
+						},				
+						{
+							$lookup:
+							{
+								from: "sections",
+								localField: "section",
+								foreignField: "_id",
+								as: "sectionDetails"
+							}
+						},
+						{
+							$lookup:
+							{
+								from: "periods",
+								localField: "period",
+								foreignField: "_id",
+								as: "periodDetails"
+							}
+						},
+						{
+							$lookup:
+							{
+								from: "week_days",
+								localField: "attendenceDay",
+								foreignField: "_id",
+								as: "dayDetails"
+							}
+						},
+						{
+							$lookup:
+							{
+								from: "subject_details",
+								localField: "subjectId",
+								foreignField: "_id",
+								as: "subjectDetails"
+							}
+						},
+						{
+							$lookup:
+							{
+								from: "staff-profiles",
+								localField: "staffId",
+								foreignField: "_id",
+								as: "staffDetails"
+							}
+						},
+					
+							
+		
+					]);
+		
+		
+				} catch (error) {
+					return {
+						status: "error",
+						error: error
+					};
+				}
+			}
+
+		
+
+	
 }
 module.exports = new studentAttendenceController();

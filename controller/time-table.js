@@ -252,7 +252,73 @@ class timeTableController{
 			}
 		}
 
+		async fetchPeriodSubjectStaff(filterSubjectStaff) {
+			//console.log('Filter Subject', filterSubject);
+				try {
+					let section = filterSubjectStaff.section;	
+					let attendenceDay=filterSubjectStaff.attendenceDay;
+					let semester= filterSubjectStaff.semester;
+				
+					return await timeTableSchema.aggregate([
+						{
 	
+							$match: {
+								sectionid: ObjectId(section),
+								semester: ObjectId(semester),
+								day: ObjectId(attendenceDay)						
+							}
+						},				
+						{
+							$lookup:
+							{
+								from: "sections",
+								localField: "sectionid",
+								foreignField: "_id",
+								as: "sectionDetails"
+							}
+						},
+						{
+							$lookup:
+							{
+								from: "periods",
+								localField: "period",
+								foreignField: "_id",
+								as: "periodDetails"
+							}
+						},
+						
+						{
+							$lookup:
+							{
+								from: "subject_details",
+								localField: "subject",
+								foreignField: "_id",
+								as: "subjectDetails"
+							}
+						},
+						{
+							$lookup:
+							{
+								from: "staff-profiles",
+								localField: "staff",
+								foreignField: "_id",
+								as: "staffDetails"
+							}
+						},
+					
+							
+		
+					]);
+		
+		
+				} catch (error) {
+					return {
+						status: "error",
+						error: error
+					};
+				}
+			}
+
 
 	async delete(id){
 		try{

@@ -19,6 +19,12 @@ router.get('/fetchbybatch', async (req, res) => {
 	const response = await academicYearController.fetchbybatch(req.query.batch);
 	res.send(response);
 })
+
+router.get('/fetchbycourseprogram', async (req, res) => {	
+	const response = await academicYearController.fetchbycourseprogram(req.query.courseprogram);
+	res.send(response);
+})
+
 router.delete('/delete', async (req, res) => {
 	const response = await academicYearController.delete(req.query.id);
 	res.send(response);

@@ -167,5 +167,51 @@ class academicYearController{
 		}
 	}
 
+	async fetchbycourseprogram(courseprogram){
+		try{
+			return await academicYearSchema.aggregate([
+
+				{
+					$match: {
+						courseprogram: ObjectId(courseprogram)
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "institutions",
+						localField: "institution",
+						foreignField: "_id",
+						as: "institutiond"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "course_programs",
+						localField: "courseprogram",
+						foreignField: "_id",
+						as: "courseprogramd"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "batches",
+						localField: "batch",
+						foreignField: "_id",
+						as: "batchd"
+					}
+				},
+			]);
+			
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
+
 }
 module.exports = new academicYearController();

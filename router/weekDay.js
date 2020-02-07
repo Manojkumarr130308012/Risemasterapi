@@ -21,4 +21,11 @@ router.put('/update', async (req, res) => {
 	const response = await weekDayController.update(req.query.id, req.body);
 	res.send(response);
 })
+
+router.get('/fetchattendenceDayId', async (req, res) => {
+	const response = await weekDayController.fetchattendenceDayId(req.query.day);	
+	res.send(response);
+	})
+
+
 module.exports = router;

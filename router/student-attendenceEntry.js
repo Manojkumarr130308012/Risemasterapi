@@ -21,6 +21,20 @@ router.get('/fetchdata', async (req, res) => {
 	const response = await studentAttendenceController.fetchStudentAttendenceDetails(req.body);
 	res.send(response);
 })
+
+router.post('/fetchStudentAttendence', async (req, res) => {
+	const response = await studentAttendenceController.fetchStudentAttendence(req.body);
+	res.send(response);	
+})
+
+router.post('/fetchAttendence', async (req, res) => {
+	const response = await studentAttendenceController.fetchAttendence(req.body);
+	res.send(response);	
+	//console.log(response);
+})
+
+
+
 router.delete('/delete', async (req, res) => {
 	const response = await studentAttendenceController.delete(req.query.id);
 	res.send(response);
@@ -38,4 +52,6 @@ router.get('/fetchbyId', async (req, res) => {
 	const response = await studentAttendenceController.fetchbyId(req.query.stuId);
 	res.send(response);
 })
+
+
 module.exports = router;

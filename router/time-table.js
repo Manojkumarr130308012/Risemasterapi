@@ -36,6 +36,11 @@ router.post('/filterPeriodExist', async (req, res) => {
 })
 
 
+router.post('/fetchPeriodSubjectStaff', async (req, res) => {
+	const response = await timeTableController.fetchPeriodSubjectStaff(req.body);
+	res.send(response);
+	//console.log(response);
+})
 
 
 router.delete('/delete', async (req, res) => {
