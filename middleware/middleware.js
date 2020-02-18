@@ -16,7 +16,7 @@ server.use('/', (req, res, next) => {
 
 server.use(cors({
 
-   origin: 'http://localhost:4200'
+   origin: '*'
     
 }));
 
