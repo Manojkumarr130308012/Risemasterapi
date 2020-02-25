@@ -252,6 +252,9 @@ server.use('/certificate', express.static('certificate'));
 server.use('/qdFile', express.static('qdFile'));
 server.set('view engine', 'pug')
 
+server.get('/',function(req, res) {
+	res.send('It works');
+});
 
 server.listen(config.app.port, () => {
 	console.log(`Listening on`, config.app.port);
