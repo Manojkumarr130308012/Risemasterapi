@@ -252,7 +252,7 @@ server.use('/certificate', express.static('certificate'));
 server.use('/qdFile', express.static('qdFile'));
 server.set('view engine', 'pug')
 
-server.get('/',function(req, res) {
+server.get('/',function(req, res) {  
 	res.send('It works');
 });
 

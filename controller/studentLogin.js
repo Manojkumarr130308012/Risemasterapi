@@ -1,25 +1,32 @@
 const studentDetailsSchema = require('./../model/student-details');
-
+const crypto = require('crypto');
 class studentLoginController{
 async StuLogin(credentials){
     try{
+
+       // console.log('credentials',credentials);
         let username = credentials.username;
         let password = credentials.password;
         
         let user = await studentDetailsSchema.findOne({
-            rollNo: username,
-            password: password
+            rollNo: username
+            
         });
+
+        let pass = user.password;
+        let Depassword = this.DecryptPassword(pass);
+        //console.log('Depassword', Depassword);
 
         if(!user){
             throw new Error('invalid creds');
         }
-
-        let token = this.generateToken1();
-
-        this.saveToken1(user._id, token);
-
-        user.token = token;
+       // console.log('password', password);
+        if (password == Depassword) {
+            let token = this.generateToken1();
+           // console.log('token', token);
+            this.saveToken1(user._id, token);
+            user.token = token;
+        }
      
         return {
             status: "success",
@@ -33,6 +40,17 @@ async StuLogin(credentials){
         }
     }
 }
+
+DecryptPassword(password) {
+    let depass = password;
+    var mykey1 = crypto.createDecipher('aes-128-cbc', 'password');
+    var mystr1 = mykey1.update(depass, 'hex', 'utf8')
+    mystr1 += mykey1.final('utf8');
+
+    return mystr1;
+
+}
+
 async saveToken1(userID, token){
     
     try{

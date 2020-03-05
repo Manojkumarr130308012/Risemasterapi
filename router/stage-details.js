@@ -3,6 +3,7 @@ const stageDetailsController = require('./../controller/stage-details');
 
 router.post('/add', async (req, res) => {
 	const response = await stageDetailsController.add(req.body);
+	//console.log('res',response);
 	res.send(response);
 })
 router.get('/', async (req, res) => {

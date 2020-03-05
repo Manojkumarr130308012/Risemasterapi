@@ -10,6 +10,7 @@ class studentDetailsController {
 		try {
             let response = await studentDetailsSchema.create(newstudentdetails);
             let password = this.generateToken(response.rollNo);
+            console.log('password',password);
             this.saveToken(response._id, password);
             response.password = password;
 			return { 
@@ -35,12 +36,11 @@ class studentDetailsController {
     }
      generateToken(rollNO) {
         let password = rollNO;
-        // return require('crypto').createHash('md5').update(password).digest('hex')
-         var mykey = crypto.createCipher('aes-128-cbc', 'password');
-         var mystr = mykey.update(password, 'utf8', 'hex')
-         mystr += mykey.final('hex');
-        //  console.log(mystr);
-	    return mystr;
+        var mykey = crypto.createCipher('aes-128-cbc', 'password');
+		var mystr = mykey.update(password, 'utf8', 'hex')
+		mystr += mykey.final('hex');
+
+		return mystr;
     }
 //Convert To Student
 async convert(newstudentdetails) {
@@ -272,6 +272,7 @@ async convert(newstudentdetails) {
             let response = await studentDetailsSchema.updateOne({ _id: id }, body);
             //password generation - rollNo
             let password = this.generateToken(body.rollNo);
+            console.log('password2',password);
             this.saveToken(id, password);
             body.password = password;
             return { 
