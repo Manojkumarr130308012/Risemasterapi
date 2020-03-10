@@ -118,10 +118,14 @@ const subjectSyllabusRouter = require('./router/subject-syllabus');
 const weekDayRouter = require('./router/weekDay');
 const periodRouter = require('./router/period');
 const timeTableRouter = require('./router/time-table');
+const studentLeaveRouter = require('./router/student-leave');
 
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(middleware);
+
+
+server.use("/student-leave", studentLeaveRouter);
 
 //Timetable
 server.use("/weekDay", weekDayRouter);
