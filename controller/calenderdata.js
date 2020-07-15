@@ -4,10 +4,9 @@ const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 class calenderController{
 
-	
+
 	async add(newdetail){
-		try{
-			console.log('cpnbody',newdetail);
+		try{	
 			let response = await calenderSchema.create(newdetail);
             return  { 
                 status: "success",
