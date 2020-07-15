@@ -158,9 +158,11 @@ const studentLeaveRouter = require('./../router/student-leave');
 // console.log("enter")
  let { protocal, host, port, name,username,password } = config.app.db;
  let db= process.env.MONGODB_URL ||`${protocal}${username}:${password}${host}:${port}/${name}`;
+
+
 console.log('connected to the database',db);
 
-mongoose.connect(db, {
+mongoose.connect("mongodb://localhost:27017/iCampus-app", {
     useUnifiedTopology: true,
     useNewUrlParser: true
     },function(error){

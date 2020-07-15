@@ -28,7 +28,7 @@ const staffProfileSchema = new mongoose.Schema({
         required: true
      },
     firstName: {
-        type: String,
+        type: String, 
         required: true
     },
     lastName: {

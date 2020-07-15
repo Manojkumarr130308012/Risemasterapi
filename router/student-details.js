@@ -33,4 +33,13 @@ router.get('/aggregation', async function  (req, res) {
 	let response = await studentDetailsController.aggregation();
 	res.send(response);
 })
+router.get('/countdtu', async function  (req, res) {
+	let response = await studentDetailsController.countstu();
+	res.send(response);
+})
+
+router.get('/countstuchart', async function  (req, res) {
+	let response = await studentDetailsController.countstuchart();
+	res.send(response);
+})
 module.exports = router;

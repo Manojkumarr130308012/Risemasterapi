@@ -84,7 +84,11 @@ async convert(newstudentdetails) {
 				error: errorHandler.parseMongoError(error)
 			};
 		}
-	}
+    }
+    
+
+
+
 
 	async fetchbyId(id){
 		try{
@@ -291,7 +295,8 @@ async convert(newstudentdetails) {
 
 			return await studentDetailsSchema.aggregate([
                 {
-					$lookup:
+
+           	$lookup:
 					{
 						from: "institutions",
 						localField: "institution",
@@ -602,7 +607,96 @@ async convert(newstudentdetails) {
 				error: errorHandler.parseMongoError(error)
 			};
 		}
+    }
+    
+
+	async countstu() {
+
+		try {
+            let response = await studentDetailsSchema.aggregate([
+                
+                    { $group: { _id: null, count: { $sum: 1 } } }
+
+            ]);
+            return { 
+                status: "success", 
+                result: response
+        };
+           
+
+		} catch (err) {
+			return { status: "error", err: err };
+		}
+
 	}
+
+
+
+    // async countstuchart() {
+
+	// 	try {
+    //         let response = await studentDetailsSchema.aggregate([
+    //             {
+    //                 $lookup:
+    //                      {
+    //                          from: "institutions",
+    //                          localField: "institution",
+    //                          foreignField: "_id",
+    //                          as: "institutiond"
+    //                      }  
+    //                  },
+    //                  { $group: { _id: null, myCount: { $sum: 1 } } }
+
+    //         ]);
+    //         return { 
+    //             status: "success", 
+    //             result: response
+    //     };
+           
+
+	// 	} catch (err) {
+	// 		return { status: "error", err: err };
+	// 	}
+
+    // }
+    
+    async countstuchart() {
+
+		try {
+            let response = await studentDetailsSchema.aggregate([
+             
+                {
+             $lookup:
+                  {
+                      from: "institutions",
+                      localField: "institution",
+                      foreignField: "_id",
+                      as: "institutiond"
+                  }  
+              },
+              {
+                  $group:
+                  {
+                      _id:"$institutiond.institution_name",
+                        "numOfStudent":{$sum:1},
+                      "listOfStudents":{$push:"$firstName"}
+                  }
+              }
+
+
+            ]);
+            return { 
+                status: "success", 
+                result: response
+        };
+           
+
+		} catch (err) {
+			return { status: "error", err: err };
+		}
+
+	}
+
 
 }
 module.exports = new studentDetailsController();
