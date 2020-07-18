@@ -2,7 +2,6 @@ const router = require('express').Router();
 const calenderController = require('./../controller/calenderdata');
 
 router.post('/add', async (req, res) => {
-	console.log('body',req.body);
 	const response = await calenderController.add(req.body);
 	console.log('body',req.body);
 	res.send(response);

@@ -1,10 +1,8 @@
 const calenderSchema = require('./../model/calenderdata');
 const errorHandler = require('./../utils/error.handler');
-const mongoose = require('mongoose');
-const ObjectId = mongoose.Types.ObjectId;
+
 class calenderController{
-
-
+	
 	async add(newdetail){
 		try{	
 			let response = await calenderSchema.create(newdetail);

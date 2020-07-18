@@ -154,6 +154,8 @@ const periodRouter = require('./../router/period');
 const timeTableRouter = require('./../router/time-table');
 const studentLeaveRouter = require('./../router/student-leave');
 
+const calenderRouter = require('./../router/calenderdata');
+const calenderfileRouter = require('./../router/calenderfile');
 
 // console.log("enter")
  let { protocal, host, port, name,username,password } = config.app.db;
@@ -162,7 +164,18 @@ const studentLeaveRouter = require('./../router/student-leave');
 
 console.log('connected to the database',db);
 
-mongoose.connect("mongodb://localhost:27017/iCampus-app", {
+// mongoose.connect("mongodb://localhost:27017/iCampus-app", {
+//     useUnifiedTopology: true,
+//     useNewUrlParser: true
+//     },function(error){
+//         if(error){
+// console.log(error);
+//         }else{
+// 			console.log('connected to the database',db);
+//         }
+// 	});
+	
+mongoose.connect(db, {
     useUnifiedTopology: true,
     useNewUrlParser: true
     },function(error){
@@ -173,7 +186,6 @@ console.log(error);
         }
 	});
 	
-
 
 server.use("/student-leave", studentLeaveRouter);
 
@@ -243,6 +255,7 @@ server.use("/marital-status", maritalStatusRouter);
 server.use("/department", departmentRouter);
 server.use("/fee-type", feeTypeRouter);
 server.use("/mode-of-enquiry", modeOfEnquiryRouter);
+server.use("/mode-of-enquiry", modeOfEnquiryRouter);
 
 //CandidateEnquiry
 server.use("/ce-basicdetails", basicDetailsRouter);
@@ -302,7 +315,14 @@ server.use("/subject-syllabus", subjectSyllabusRouter);
 server.use('/uploads', express.static('uploads'));
 server.use('/driverFiles', express.static('driverFiles'));
 server.use('/studentPhoto', express.static('studentPhoto'));
+server.use('/calenderfile', express.static('calenderfiles'));
+
 server.use('/certificate', express.static('certificate'));
 server.use('/qdFile', express.static('qdFile'));
+
+//calenderdata
+server.use("/calenderdata", calenderRouter);
+server.use("/calenderfile", calenderfileRouter);
+
 
 module.exports= server;
