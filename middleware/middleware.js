@@ -148,6 +148,9 @@ const subjectAddRouter = require('./../router/subject-add');
 const subjectStaffRouter = require('./../router/subject-staff');
 const subjectSyllabusRouter = require('./../router/subject-syllabus');
 
+//locationdata
+const locationdataRouter = require('./../router/locationdata');
+
 //Timetable 
 const weekDayRouter = require('./../router/weekDay');
 const periodRouter = require('./../router/period');
@@ -221,6 +224,9 @@ server.use("/upload", uploadRouter);
 server.use("/driverFileUpload", driverFileUploadRouter);
 server.use("/semester", semesterRouter);
 
+
+//locationdata
+server.use("/locationdata", locationdataRouter);
 
 //Student Master
 server.use("/course-category", courseCategoryRouter);
