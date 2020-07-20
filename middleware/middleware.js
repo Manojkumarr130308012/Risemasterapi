@@ -164,7 +164,7 @@ const calenderfileRouter = require('./../router/calenderfile');
 
 console.log('connected to the database',db);
 
-// mongoose.connect("mongodb://localhost:27017/iCampus-app", {
+// mongoose.connect("mongodb://localhost:27017/testDb", {
 //     useUnifiedTopology: true,
 //     useNewUrlParser: true
 //     },function(error){

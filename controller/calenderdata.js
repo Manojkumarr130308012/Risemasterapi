@@ -108,5 +108,30 @@ class calenderController{
         }
 	}
 
+
+
+	async fetch(){
+		try{
+			let response = await calenderSchema.find({});
+			
+	console.log('hfjdhfjdhjhsjkdfjdddkdkj',response);
+	let count=Object.keys(response).length;
+
+			
+			// console.log('hfjdhfjdhjhsjkdfjdddkdkj',events);
+			
+			return {
+            
+				response: response
+					
+			};
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
+
 }
 module.exports = new calenderController();

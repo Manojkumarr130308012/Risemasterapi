@@ -26,4 +26,9 @@ router.get('/aggregation', async (req, res) =>{
 	let response = await calenderController.aggregation();
 	res.send(response);	
 })
+
+router.get('/calenderdta', async (req, res) =>{
+	let response = await calenderController.aggregationcal();
+	res.send(response);	
+})
 module.exports = router;
