@@ -1,6 +1,7 @@
 var fs = require('fs');
 const Uploadimage  = require('../model/driverFileUpload');
 const config = require('./../config');
+const config1=require("./../config/config.json")
 
 class uploadController{
 
@@ -12,7 +13,8 @@ class uploadController{
             photoLocation : filePath
 
         })
-      
+        let { protocal, host, port, name,username,password } = config1.app.db;
+        let db= process.env.MONGODB_URL ||`${protocal}${username}:${password}${host}:${port}/${name}`;
 
         let FileDetails = await fileloc.save();
         return { status: 'Successfully added', driverFileResult1:`${config.app.protocal}${username}:${password}$${config.app.host}:${config.app.port}/${FileDetails.photoLocation}`};
