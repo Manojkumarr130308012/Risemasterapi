@@ -12,9 +12,10 @@ class uploadController{
             photoLocation : filePath
 
         })
+      
 
         let FileDetails = await fileloc.save();
-        return { status: 'Successfully added', driverFileResult1:`${config.app.protocal}${config.app.host}:${config.app.port}/${FileDetails.photoLocation}`};
+        return { status: 'Successfully added', driverFileResult1:`${config.app.protocal}${username}:${password}$${config.app.host}:${config.app.port}/${FileDetails.photoLocation}`};
     }
     saveProfilePic(fileMeta){
         return fileMeta.path;
