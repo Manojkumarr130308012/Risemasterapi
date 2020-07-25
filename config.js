@@ -1,13 +1,13 @@
 module.exports = {
     app:{
-        port: 3000,
-        protocal: 'http',
-        host: 'localhost',
+        port: 37281,
+        protocal: 'mongodb://',
+        host: '@ds137281.mlab.com',
     },
     db:{
-        host: '127.0.0.1',
-        name: 'iCampus',
-        port: 27017
+        host: '@ds137281.mlab.com',
+        name: 'heroku_cr3mbgg4',
+        port: 37281
     },
     email:{
         host: 'smtp.gmail.com',
