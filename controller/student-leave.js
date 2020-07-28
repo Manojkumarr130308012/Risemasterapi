@@ -23,7 +23,7 @@ class studentLeaveController{
 
 	async fetchdata(id){
 		try{
-			let response = await studentLeaveSchema.find({'_id':id});
+			let response = await studentLeaveSchema.find({'studentId':id});
 			return response;
 			
 		} catch(error){

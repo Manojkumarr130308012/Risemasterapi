@@ -9,6 +9,5 @@ const admissionTypeSchema = new mongoose.Schema({
         type: String,
         required: true
     }
-
 })
 module.exports = new mongoose.model('admission-type', admissionTypeSchema);

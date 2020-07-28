@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
 	res.send(response);
 })
 router.get('/fetchdata', async (req, res) => {
-	const response = await studentLeaveController.fetchdata(req.query.id);
+	const response = await studentLeaveController.fetchdata(req.query.studentId);
 	res.send(response);
 })
  router.post('/fetchAttendenceEntryExist', async (req, res) => {
