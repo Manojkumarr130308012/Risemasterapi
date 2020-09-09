@@ -167,18 +167,7 @@ const calenderfileRouter = require('./../router/calenderfile');
 
 console.log('connected to the database',db);
 
-// mongoose.connect("mongodb://localhost:27017/training2", {
-//     useUnifiedTopology: true,
-//     useNewUrlParser: true
-//     },function(error){
-//         if(error){
-// console.log(error);
-//         }else{
-// 			console.log('connected to the database',db);
-//         }
-// 	});
-	
-mongoose.connect(db, {
+mongoose.connect("mongodb://localhost:27017/training2", {
     useUnifiedTopology: true,
     useNewUrlParser: true
     },function(error){
@@ -188,6 +177,17 @@ console.log(error);
 			console.log('connected to the database',db);
         }
 	});
+	
+// mongoose.connect(db, {
+//     useUnifiedTopology: true,
+//     useNewUrlParser: true
+//     },function(error){
+//         if(error){
+// console.log(error);
+//         }else{
+// 			console.log('connected to the database',db);
+//         }
+// 	});
 	
 
 server.use("/student-leave", studentLeaveRouter);
