@@ -38,7 +38,7 @@ router.put('/update', async (req, res) => {
 	res.send(response);
 })
 // -> Express Upload RestAPIs
-app.post('/api/uploadfile', upload.single("uploadfile"),async (req, res) =>{
+router.post('/api/uploadfile', upload.single("uploadfile"),async (req, res) =>{
 	const response = await bloodgroupController.importExcelData2MongoDB(__basedir + '/uploads/' + req.file.filename);
  
 	res.send(response);
