@@ -1,7 +1,6 @@
+const fs = require('fs');
 const bloodgroupSchema = require('./../model/bloodgroup');
 const errorHandler = require('./../utils/error.handler');
-const fs = require('fs');
-
 const excelToJson = require('convert-excel-to-json');
 
 class bloodgroupController{
@@ -81,7 +80,7 @@ async importExcelData2MongoDB(filePath){
         sourceFile: filePath,
         sheets:[{
             // Excel Sheet Name
-            name: 'Customers',
+            name: 'bloodgroups',
  
             // Header Row -> be skipped and will not be present at our result object.
             header:{
@@ -91,15 +90,14 @@ async importExcelData2MongoDB(filePath){
             // Mapping columns to keys
             columnToKey: {
                 A: '_id',
-                B: 'name',
-                C: 'address',
-                D: 'age'
+                B: 'bloodgroup'
             }
         }]
     });
  
     // -> Log Excel Data to Console
-    console.log(excelData);
+	console.log(excelData);
+	fs.unlinkSync(filePath);
 
 	try{
 		let response = await bloodgroupSchema.insertMany(excelData.Customers);
@@ -112,7 +110,7 @@ async importExcelData2MongoDB(filePath){
 			error: errorHandler.parseMongoError(error)
 		};
 	}
-	fs.unlinkSync(filePath);
+
 }
 
 
