@@ -1,5 +1,8 @@
 const bloodgroupSchema = require('./../model/bloodgroup');
 const errorHandler = require('./../utils/error.handler');
+const fs = require('fs');
+
+const excelToJson = require('convert-excel-to-json');
 
 class bloodgroupController{
 	async add(newBloodgroup){
@@ -68,7 +71,51 @@ class bloodgroupController{
             return { status: "error", error: error };
         }
 
-    }
+	}
+	
+
+// -> Import Excel File to MongoDB database
+async importExcelData2MongoDB(filePath){
+    // -> Read Excel File to Json Data
+    const excelData = excelToJson({
+        sourceFile: filePath,
+        sheets:[{
+            // Excel Sheet Name
+            name: 'Customers',
+ 
+            // Header Row -> be skipped and will not be present at our result object.
+            header:{
+               rows: 1
+            },
+			
+            // Mapping columns to keys
+            columnToKey: {
+                A: '_id',
+                B: 'name',
+                C: 'address',
+                D: 'age'
+            }
+        }]
+    });
+ 
+    // -> Log Excel Data to Console
+    console.log(excelData);
+
+	try{
+		let response = await bloodgroupSchema.insertMany(excelData.Customers);
+
+		return { status: "success", result: response, message: "Added Successfully" };
+
+	} catch(error){
+		return {
+			status: "error",
+			error: errorHandler.parseMongoError(error)
+		};
+	}
+	fs.unlinkSync(filePath);
+}
+
+
 
 }
 module.exports = new bloodgroupController();
