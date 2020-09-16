@@ -159,6 +159,7 @@ const studentLeaveRouter = require('./../router/student-leave');
 
 const calenderRouter = require('./../router/calenderdata');
 const calenderfileRouter = require('./../router/calenderfile');
+const examtypeRouter = require('./../router/examtype');
 
 // console.log("enter")
  let { protocal, host, port, name,username,password } = config.app.db;
@@ -329,6 +330,12 @@ server.use('/qdFile', express.static('qdFile'));
 //calenderdata
 server.use("/calenderdata", calenderRouter);
 server.use("/calenderfile", calenderfileRouter);
+
+
+//examtype
+server.use("/examtype", examtypeRouter);
+
+
 
 
 module.exports= server;
