@@ -2,7 +2,7 @@ const examSchema = require('./../model/exam');
 const errorHandler = require('./../utils/error.handler');
 
 class examController{
-    
+
 	async add(newAdmissionCategory){
 		try{
 			let response = await examSchema.create(newAdmissionCategory);
@@ -88,7 +88,7 @@ class examController{
 		return  await examSchema.aggregate([
 				{$lookup:
 					  {
-						from: "examtype",
+						from: "examtypes",
 						localField: "examtype",
 						foreignField: "_id",
 						as: "examtypeDetails"
