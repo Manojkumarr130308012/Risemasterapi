@@ -2,7 +2,7 @@ const examtypeSchema = require('./../model/examtype');
 const errorHandler = require('./../utils/error.handler');
 
 class examtypeController{
-    
+
 	async add(newBoard){
 		try{
 			let response = await examtypeSchema.create(newBoard);
@@ -20,9 +20,8 @@ class examtypeController{
 	async fetch(){
 		try{
 			let response = await examtypeSchema.find({});
-			return {
-				response: response
-			};
+			return  response;
+		
 		} catch(error){
 			return {
 				status: "error",
