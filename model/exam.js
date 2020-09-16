@@ -5,7 +5,7 @@ const examSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         required: true
     },
-    examname: {
+    exam: {
         type: String,
         required: true
     },
