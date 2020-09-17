@@ -7,11 +7,11 @@ const academicYearSchema = new mongoose.Schema({
     },
     courseprogram: {
         type: mongoose.Schema.ObjectId,
-        required: true
+        required: false
     },
     batch: {
         type: mongoose.Schema.ObjectId,
-        required: true
+        required: false
     },
     year: {
         type: String,
