@@ -45,7 +45,29 @@ class staffLoginController {
         }
     }
 
+    async login2(username, password){
+        try{
+            let user = await staffProfileSchema.findOne({
+                staffCode: username,
+                staffCode: password,
+            });
 
+            if(!user){
+                throw new Error('invalid creds');
+            }
+
+            return {
+                status: "success",
+                data: user
+            };
+
+        } catch(error){
+            return {
+                status: 'error',
+                msg: 'username or password invalid'
+            }
+        }
+    }
 
     async login1(username1,password) {
 
