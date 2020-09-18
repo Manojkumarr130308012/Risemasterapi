@@ -9,7 +9,7 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/stafflogin', async (req, res) => {
-    const response= await staffLoginController.login1(req.query.staffCode,req.query.staffCode);
+    const response= await staffLoginController.login1(req.query.username,req.query.password);
    // console.log(req.body);
     res.send(response);
 

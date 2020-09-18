@@ -47,11 +47,11 @@ class staffLoginController {
 
 
 
-    async login1(stausername,password) {
+    async login1(username1,password) {
 
 
         try {
-            let username =stausername;
+            let username =username1;
             let Inpassword =password;
 
             let user = await staffProfileSchema.findOne({
