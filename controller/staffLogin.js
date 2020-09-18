@@ -56,7 +56,6 @@ class staffLoginController {
 
             let user = await staffProfileSchema.findOne({
                 staffCode: username
-
             });
 
             let pass = user.password;

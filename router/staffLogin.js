@@ -8,13 +8,13 @@ router.post('/login', async (req, res) => {
    
 });
 
-
 router.get('/stafflogin', async (req, res) => {
-    const response= await staffLoginController.login1(req.query.username,req.query.password);
+    const response= await staffLoginController.login1(req.query.staffCode,req.query.staffCode);
    // console.log(req.body);
     res.send(response);
-   
+
 });
+
 router.post('/validateToken', async (req, res) => {
     res.send(await staffLoginController.validateToken(req.body));
    
