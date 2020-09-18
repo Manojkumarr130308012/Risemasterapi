@@ -45,6 +45,48 @@ class staffLoginController {
         }
     }
 
+
+
+    async login1(stausername,password) {
+
+
+        try {
+            let username =stausername;
+            let Inpassword =password;
+
+            let user = await staffProfileSchema.findOne({
+                staffCode: username
+
+            });
+
+            let pass = user.password;
+
+            let Depassword = this.DecryptPassword(pass);
+
+            if (!user) {
+                throw new Error('invalid creds');
+            }
+
+            if (Inpassword == Depassword) {
+                let token = this.generateToken();
+
+                this.saveToken(user._id, token);
+                user.token = token;
+            }
+
+
+            return {
+                status: "success",
+                data: user,
+            };
+
+        } catch (error) {
+            return {
+                status: 'error',
+                msg: 'username or password invalid'
+            }
+        }
+    }
     DecryptPassword(password) {
         let depass = password;
         var mykey1 = crypto.createDecipher('aes-128-cbc', 'password');
