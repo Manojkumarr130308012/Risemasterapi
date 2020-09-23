@@ -16,7 +16,7 @@ router.get('/fetchdata', async (req, res) => {
 	res.send(response);
 })
 router.get('/fetchdataactive', async (req, res) => {	
-	const response = await academicYearController.fetchdataactive();
+	const response = await academicYearController.fetchdataactive(req.query.status);
 	res.send(response);
 })
 router.get('/fetchbybatch', async (req, res) => {	
