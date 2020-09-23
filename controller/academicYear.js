@@ -34,7 +34,7 @@ class academicYearController{
 
 	async fetchdataactive(){
 		try{
-			let response = await academicYearSchema.find({'status':"active"});
+			let response = await academicYearSchema.find({'status':active});
 			return response;
 		} catch(error){
 			return {
