@@ -13,6 +13,10 @@ router.get('/fetchdata', async (req, res) => {
 	const response = await timeTableController.fetchdata(req.query.id);
 	res.send(response);
 })
+router.get('/fetchtimestaffdata', async (req, res) => {
+	const response = await timeTableController.fetchstaffperioddata(req.query.academicYear,req.query.staff,req.query.day);
+	res.send(response);
+})
 
 router.get('/fetchStudentDetails', async (req, res) => {
 	const response = await timeTableController.fetchStudentDetails(req.query.sectionId);
