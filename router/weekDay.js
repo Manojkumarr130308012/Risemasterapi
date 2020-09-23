@@ -26,6 +26,9 @@ router.get('/fetchattendenceDayId', async (req, res) => {
 	const response = await weekDayController.fetchattendenceDayId(req.query.day);	
 	res.send(response);
 	})
-
+	router.get('/afetchattendenceDayId', async (req, res) => {
+		const response = await weekDayController.fetchattendenceDayId1(req.query.day);	
+		res.send(response);
+		})
 
 module.exports = router;
