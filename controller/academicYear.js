@@ -29,6 +29,20 @@ class academicYearController{
 			};
 		}
 	}
+
+
+
+	async fetchdataactive(){
+		try{
+			let response = await academicYearSchema.find({'status':"active"});
+			return response;
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
 	async fetch(){
 		try{
 			let response = await academicYearSchema.find({});

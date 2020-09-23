@@ -15,6 +15,10 @@ router.get('/fetchdata', async (req, res) => {
 	const response = await academicYearController.fetchdata(req.query.id);
 	res.send(response);
 })
+router.get('/fetchdataactive', async (req, res) => {	
+	const response = await academicYearController.fetchdataactive();
+	res.send(response);
+})
 router.get('/fetchbybatch', async (req, res) => {	
 	const response = await academicYearController.fetchbybatch(req.query.batch);
 	res.send(response);
