@@ -60,4 +60,6 @@ router.get('/aggregation', async function  (req, res) {
 	let response = await timeTableController.aggregation();
 	res.send(response);
 })
+
+
 module.exports = router;
