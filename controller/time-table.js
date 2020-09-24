@@ -5,6 +5,7 @@ const errorHandler = require('./../utils/error.handler');
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 class timeTableController{
+
 	async add(newdetail){
 		try{
 			let response = await timeTableSchema.create(newdetail);
@@ -46,8 +47,8 @@ class timeTableController{
 				error: errorHandler.parseMongoError(error)
 			};
 		}
-    }
-    
+	}
+	
 	async fetchstaffperioddata(academicYear,staff,day){
 		try{
 			let response = await timeTableSchema.find({'academicYear':academicYear,'staff':staff,'day':day});
@@ -115,7 +116,7 @@ class timeTableController{
 						{
 	
 							$match: {
-								sectionid: ObjectId(       ),							
+								sectionid: ObjectId(sectionid),							
 								staff: ObjectId(staff)								
 							
 							}
@@ -177,15 +178,7 @@ class timeTableController{
 						}
 					},
 						
-							
-		
 					]);
-							
-					
-					
-					
-			
-	
 			} catch (error) {
 				return {
 					status: "error",
@@ -269,6 +262,7 @@ class timeTableController{
 			}
 		}
 
+
 		async fetchPeriodSubjectStaff(filterSubjectStaff) {
 			//console.log('Filter Subject', filterSubject);
 				try {
@@ -322,13 +316,9 @@ class timeTableController{
 								as: "staffDetails"
 							}
 						},
-					
-							
-		
 					]);
-		
-		
-				} catch (error) {
+				} 
+				catch (error) {
 					return {
 						status: "error",
 						error: error
@@ -353,6 +343,7 @@ class timeTableController{
 		}
 	}
 
+
 	async update(id, body) {
 
         try {
@@ -368,6 +359,8 @@ class timeTableController{
         }
 
 	}
+
+
 	async aggregation() {
         try {
            return  await timeTableSchema.aggregate([
@@ -410,4 +403,6 @@ class timeTableController{
     }
 
 }
+
+
 module.exports = new timeTableController(); 
