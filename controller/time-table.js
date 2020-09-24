@@ -53,7 +53,7 @@ class timeTableController{
 			let response = await timeTableSchema.find({'academicYear':academicYear,'staff':staff,'day':day});
 			return {
 				status: "success",
-				response: response
+				response: response.sectionId
 			};
 			
 		} catch(error){
