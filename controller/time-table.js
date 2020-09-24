@@ -51,6 +51,8 @@ class timeTableController{
 	async fetchstaffperioddata(academicYear,staff,day){
 		try{
 			let response = await timeTableSchema.find({'academicYear':academicYear,'staff':staff,'day':day});
+
+
 			return {
 				status: "success",
 				response: response
