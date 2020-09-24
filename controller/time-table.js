@@ -51,10 +51,80 @@ class timeTableController{
 	async fetchstaffperioddata(academicYear,staff,day){
 		try{
 			let response = await timeTableSchema.find({'academicYear':academicYear,'staff':staff,'day':day});
-			return {
-				status: "success",
-				response: response.sectionId
-			};
+
+			console.log("dddddddddd",response);
+
+			return await timeTableSchema.aggregate([
+				{
+
+					$match: {
+						sectionid: ObjectId(       ),							
+						staff: ObjectId(staff)								
+					
+					}
+				},				
+				
+				{
+					$lookup:
+					{
+						from: "week_days",
+						localField: "day",
+						foreignField: "_id",
+						as: "dayDetails"
+					}
+				},
+				{
+					$unwind : "$dayDetails"
+				},
+				{
+
+					$match: {
+						"dayDetails.day": day			
+					
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "sections",
+						localField: "sectionid",
+						foreignField: "_id",
+						as: "sectionDetails"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "periods",
+						localField: "period",
+						foreignField: "_id",
+						as: "periodDetails"
+					}
+				},
+				{
+				$lookup:
+				{
+					from: "subject_details",
+					localField: "subject",
+					foreignField: "_id",
+					as: "subjectDetails"
+				}
+			},
+			{
+				$lookup:
+				{
+					from: "staff-profiles",
+					localField: "staff",
+					foreignField: "_id",
+					as: "staffDetails"
+				}
+			},
+				
+					
+
+			]);
+					
+			
 			
 		} catch(error){
 			return {
