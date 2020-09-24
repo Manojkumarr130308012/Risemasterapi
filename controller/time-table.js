@@ -59,26 +59,6 @@ class timeTableController{
 						staff: ObjectId(staff)								
 					}
 				},				
-				
-				{
-					$lookup:
-					{
-						from: "week_days",
-						localField: "day",
-						foreignField: "_id",
-						as: "dayDetails"
-					}
-				},
-				{
-					$unwind : "$dayDetails"
-				},
-				{
-
-					$match: {
-						"dayDetails.day": day			
-					
-					}
-				},
 				{
 					$lookup:
 					{
