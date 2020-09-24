@@ -181,62 +181,62 @@ class timeTableController{
 								staff: ObjectId(staff)								
 							
 							}
-						},				
+					// 	},				
 						
-						{
-							$lookup:
-							{
-								from: "week_days",
-								localField: "day",
-								foreignField: "_id",
-								as: "dayDetails"
-							}
-						},
-						{
-							$unwind : "$dayDetails"
-						},
-						{
+					// 	{
+					// 		$lookup:
+					// 		{
+					// 			from: "week_days",
+					// 			localField: "day",
+					// 			foreignField: "_id",
+					// 			as: "dayDetails"
+					// 		}
+					// 	},
+					// 	{
+					// 		$unwind : "$dayDetails"
+					// 	},
+					// 	{
 	
-							$match: {
-								"dayDetails.day": day			
+					// 		$match: {
+					// 			"dayDetails.day": day			
 							
-							}
-						},
-						{
-							$lookup:
-							{
-								from: "sections",
-								localField: "sectionid",
-								foreignField: "_id",
-								as: "sectionDetails"
-							}
-						},
-						{
-							$lookup:
-							{
-								from: "periods",
-								localField: "period",
-								foreignField: "_id",
-								as: "periodDetails"
-							}
-						},
-						{
-						$lookup:
-						{
-							from: "subject_details",
-							localField: "subject",
-							foreignField: "_id",
-							as: "subjectDetails"
-						}
-					},
-					{
-						$lookup:
-						{
-							from: "staff-profiles",
-							localField: "staff",
-							foreignField: "_id",
-							as: "staffDetails"
-						}
+					// 		}
+					// 	},
+					// 	{
+					// 		$lookup:
+					// 		{
+					// 			from: "sections",
+					// 			localField: "sectionid",
+					// 			foreignField: "_id",
+					// 			as: "sectionDetails"
+					// 		}
+					// 	},
+					// 	{
+					// 		$lookup:
+					// 		{
+					// 			from: "periods",
+					// 			localField: "period",
+					// 			foreignField: "_id",
+					// 			as: "periodDetails"
+					// 		}
+					// 	},
+					// 	{
+					// 	$lookup:
+					// 	{
+					// 		from: "subject_details",
+					// 		localField: "subject",
+					// 		foreignField: "_id",
+					// 		as: "subjectDetails"
+					// 	}
+					// },
+					// {
+					// 	$lookup:
+					// 	{
+					// 		from: "staff-profiles",
+					// 		localField: "staff",
+					// 		foreignField: "_id",
+					// 		as: "staffDetails"
+					// 	}
 					},
 						
 					]);
