@@ -56,7 +56,8 @@ class timeTableController{
 
 					$match: {
 						academicYear: ObjectId(academicYear),							
-						staff: ObjectId(staff)								
+						staff: ObjectId(staff),
+						day: ObjectId(day)							
 					}
 				},				
 				{
