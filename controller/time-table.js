@@ -51,7 +51,7 @@ class timeTableController{
 	
 	async fetchstaffperioddata(academicYear,staff,day){
 		try{
-			return await timeTableSchema.aggregate([
+			let response=await timeTableSchema.aggregate([
 				{
 
 					$match: {
@@ -98,6 +98,10 @@ class timeTableController{
 			},
 				
 			]);
+
+			return {
+				response: response
+			};
 			
 		} catch(error){
 			return {
