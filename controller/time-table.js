@@ -132,7 +132,7 @@ class timeTableController{
 				{
 
 					$match: {
-						sectionid: ObjectId(sectionId)				
+						section: ObjectId(sectionId)				
 					}
 				},				
 				{
