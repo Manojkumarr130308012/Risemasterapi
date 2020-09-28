@@ -83,15 +83,15 @@ class studentAttendenceController{
 					subjectId: subjectId,	
 				}
 			},				
-			{
-				$lookup:
-				{
-					from: "student_details",
-					localField: "studentId",
-					foreignField: "_id",
-					as: "studentIdDetails"
-				}
-			}
+			// {
+			// 	$lookup:
+			// 	{
+			// 		from: "student_details",
+			// 		localField: "studentId",
+			// 		foreignField: "_id",
+			// 		as: "studentIdDetails"
+			// 	}
+			// }
 			
 		]);
 		return {
