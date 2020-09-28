@@ -74,14 +74,40 @@ class studentAttendenceController{
 
 		//console.log('fetchAttendenceEntryExist',fetchAttendenceEntryExist);
 
-		try {
+		try{
+		let response=await studentDetailsSchema.aggregate([
+			{
 
-				let response = await studentAttendenceSchema.find({
-				'attendenceDate':attendenceDate,'period':period,'subjectId':subjectId});
-				 return response;		 
+				$match: {
+					attendenceDate: attendenceDate,
+					period: period,
+					subjectId: subjectId,	
+				}
+			},				
+			{
+				$lookup:
+				{
+					from: "student_details",
+					localField: "studentId",
+					foreignField: "_id",
+					as: "studentIdDetails"
+				}
+			}
+			
+		]);
+		return {
+			response: response
+		};
+	}
+
+		// try {
+
+		// 		let response = await studentAttendenceSchema.find({
+		// 		'attendenceDate':attendenceDate,'period':period,'subjectId':subjectId});
+		// 		 return response;		 
 		
-
-		} catch (error) {
+		// } 
+		catch (error) {
 			return {
 				status: "error",
 				error: error
