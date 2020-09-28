@@ -126,7 +126,64 @@ class timeTableController{
 		}
     }
     
+	async fetchStudentDetails1(sectionId){
+		try{
+			let response=await timeTableSchema.aggregate([
+				{
 
+					$match: {
+						sectionid: ObjectId(sectionId)				
+					}
+				},				
+				{
+					$lookup:
+					{
+						from: "course_programs",
+						localField: "courseprogram",
+						foreignField: "_id",
+						as: "courseprogramDetails"
+					}
+				},	{
+					$lookup:
+					{
+						from: "semesters",
+						localField: "semester",
+						foreignField: "_id",
+						as: "semesterDetails"
+					}
+				},
+				{
+					$lookup:
+					{
+						from: "institutions",
+						localField: "institution",
+						foreignField: "_id",
+						as: "institutionDetails"
+					}
+				},
+				
+			{
+				$lookup:
+				{
+					from: "batches",
+					localField: "batch",
+					foreignField: "_id",
+					as: "batchesDetails"
+				}
+			},
+				
+			]);
+			return {
+				response: response
+			};
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+    }
+    
     async filterSubExist(filterSubExist) {
 
 			try {

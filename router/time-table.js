@@ -22,7 +22,10 @@ router.get('/fetchStudentDetails', async (req, res) => {
 	const response = await timeTableController.fetchStudentDetails(req.query.sectionId);
 	res.send(response);
 })
-
+router.get('/fetchStudentDetails1', async (req, res) => {
+	const response = await timeTableController.fetchStudentDetails1(req.query.sectionId);
+	res.send(response);
+})
 
 router.post('/fetchSubjectStaff', async (req, res) => {
 	const response = await timeTableController.fetchSubjectStaff(req.body);
