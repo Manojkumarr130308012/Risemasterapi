@@ -175,9 +175,6 @@ class studentAttendenceController{
 
 	async fetchStudentAttendenceDetails1(section1,attendenceDate1,period1){
 		try{
-
-		
-
 			return await studentAttendenceSchema.aggregate([
 
 				{
