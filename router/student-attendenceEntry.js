@@ -18,7 +18,7 @@ router.get('/fetchdata', async (req, res) => {
  	res.send(response);
  })
  router.post('/fetchAttendenceEntryExist1', async (req, res) => {
-	const response = await studentAttendenceController.fetchAttendenceEntryExist1(req.query.attendenceDate,req.query.period,req.query.subjectId);
+	const response = await studentAttendenceController.fetchAttendenceEntryExist1(req.body);
 	res.send(response);
 })
  router.post('/fetchStudentAttendenceDetails', async (req, res) => {
