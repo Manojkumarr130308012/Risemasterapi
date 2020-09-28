@@ -70,7 +70,24 @@ class studentAttendenceController{
 		}
 	}
 
+	async fetchAttendenceEntryExist1(attendenceDate,period,subjectId) {
+
+		//console.log('fetchAttendenceEntryExist',fetchAttendenceEntryExist);
+
+		try {
 	
+				let response = await studentAttendenceSchema.find({
+				'attendenceDate':attendenceDate,'period':period,'subjectId':subjectId});
+				 return response;		 
+		
+
+		} catch (error) {
+			return {
+				status: "error",
+				error: error
+			};
+		}
+	}
 
 	async delete(id){
 		try{
