@@ -77,7 +77,6 @@ class studentAttendenceController{
 		try{
 		let response=await studentDetailsSchema.aggregate([
 			{
-
 				$match: {
 					attendenceDate: attendenceDate,
 					period: period,
