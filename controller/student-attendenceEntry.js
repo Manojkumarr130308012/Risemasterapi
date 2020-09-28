@@ -51,8 +51,8 @@ class studentAttendenceController{
 		//console.log('fetchAttendenceEntryExist',fetchAttendenceEntryExist);
 
 		try {
-			let semester = fetchAttendenceEntryExist.semester;
-				let section = fetchAttendenceEntryExist.section;
+			// let semester = fetchAttendenceEntryExist.semester;
+			// 	let section = fetchAttendenceEntryExist.section;
 				let attendenceDate = fetchAttendenceEntryExist[0].attendenceDate;
 				let period = fetchAttendenceEntryExist[0].period;
 				let subjectId = fetchAttendenceEntryExist[0].subjectId;
