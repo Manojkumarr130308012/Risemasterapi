@@ -74,39 +74,14 @@ class studentAttendenceController{
 
 		//console.log('fetchAttendenceEntryExist',fetchAttendenceEntryExist);
 
-		try{
-		let response=await studentAttendenceSchema.aggregate([
-			{
-				$match: {
-					attendenceDate: attendenceDate,
-					period: period,
-					subjectId: subjectId,	
-				}
-			},				
-			// {
-			// 	$lookup:
-			// 	{
-			// 		from: "student_details",
-			// 		localField: "studentId",
-			// 		foreignField: "_id",
-			// 		as: "studentIdDetails"
-			// 	}
-			// }
-			
-		]);
-		return {
-			response: response
-		};
-	}
+		try {
 
-		// try {
-
-		// 		let response = await studentAttendenceSchema.find({
-		// 		'attendenceDate':attendenceDate,'period':period,'subjectId':subjectId});
-		// 		 return response;		 
+				let response = await studentAttendenceSchema.find({
+				'attendenceDate':attendenceDate,'period':period,'subjectId':subjectId});
+				 return response;		 
 		
-		// } 
-		catch (error) {
+
+		} catch (error) {
 			return {
 				status: "error",
 				error: error
@@ -169,6 +144,41 @@ class studentAttendenceController{
 			let section = attendenceDetails.section;
 				let attendenceDate = attendenceDetails.attendenceDate;
 				let period = attendenceDetails.period;
+
+			return await studentAttendenceSchema.aggregate([
+
+				{
+					$match: {
+						section: ObjectId(section),
+						period: ObjectId(period),
+						attendenceDate: attendenceDate
+
+					}
+                },
+				{
+					$lookup:
+					  {
+						from: "student_details",
+						localField: "studentId",
+						foreignField: "_id",
+						as: "studentDetails"
+					  }
+				 },	
+			]);
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
+
+	async fetchStudentAttendenceDetails1(section1,attendenceDate1,period1){
+		try{
+
+		    	let section = section1;
+				let attendenceDate = attendenceDate1;
+				let period = period1;
 
 			return await studentAttendenceSchema.aggregate([
 
