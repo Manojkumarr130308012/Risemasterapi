@@ -75,7 +75,7 @@ class studentAttendenceController{
 		//console.log('fetchAttendenceEntryExist',fetchAttendenceEntryExist);
 
 		try{
-		let response=await studentDetailsSchema.aggregate([
+		let response=await studentAttendenceSchema.aggregate([
 			{
 				$match: {
 					attendenceDate: attendenceDate,
