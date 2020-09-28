@@ -128,7 +128,7 @@ class timeTableController{
     
 	async fetchStudentDetails1(sectionId){
 		try{
-			let response=await timeTableSchema.aggregate([
+			let response=await studentDetailsSchema.aggregate([
 				{
 
 					$match: {
