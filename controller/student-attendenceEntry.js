@@ -179,7 +179,8 @@ class studentAttendenceController{
 
 				{
 					$match: {
-						
+						section: ObjectId(section1),
+						period: ObjectId(period1),
 						attendenceDate: attendenceDate1
 
 					}
