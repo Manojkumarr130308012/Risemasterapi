@@ -70,14 +70,12 @@ class studentAttendenceController{
 		}
 	}
 
-	async fetchAttendenceEntryExist1(data) {
+	async fetchAttendenceEntryExist1(attendenceDate,period,subjectId) {
 
 		//console.log('fetchAttendenceEntryExist',fetchAttendenceEntryExist);
 
 		try {
-			let attendenceDate = data.attendenceDate;
-			let period = data.period;
-			let subjectId = data.subjectId;
+
 				let response = await studentAttendenceSchema.find({
 				'attendenceDate':attendenceDate,'period':period,'subjectId':subjectId});
 				 return response;		 
