@@ -177,8 +177,8 @@ class studentAttendenceController{
 
 	async fetchStudentAttendenceDetails1(section1,attendenceDate1,period1){
 		try{
-			var sort={studentId:1};
-			return await studentAttendenceSchema.sort(sort).aggregate([
+		
+			return await studentAttendenceSchema.aggregate([
 
 				{
 					$match: {
@@ -205,6 +205,39 @@ class studentAttendenceController{
 			};
 		}
 	}
+
+
+
+	async fetchStudentAttendenceDetails2(section1,attendenceDate1){
+		try{
+			var sort={studentId:1};
+			return await studentAttendenceSchema.sort(sort).aggregate([
+
+				{
+					$match: {
+						section: ObjectId(section1),
+						attendenceDate: attendenceDate1
+
+					}
+                },
+				{
+					$lookup:
+					  {
+						from: "student_details",
+						localField: "studentId",
+						foreignField: "_id",
+						as: "studentDetails"
+					  }
+				 },	
+			]);
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
+
 
 	async fetchStudentAttendence(filterStudentAttendence) {
 		//console.log('Filter Subject', filterStudentAttendence);

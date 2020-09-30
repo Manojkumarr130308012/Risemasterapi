@@ -29,6 +29,10 @@ router.get('/fetchStudentAttendenceDetails1', async (req, res) => {
 	const response = await studentAttendenceController.fetchStudentAttendenceDetails1(req.query.section,req.query.attendenceDate,req.query.period);
 	res.send(response);
 })
+router.get('/fetchStudentAttendenceDetails2', async (req, res) => {
+	const response = await studentAttendenceController.fetchStudentAttendenceDetails2(req.query.section,req.query.attendenceDate);
+	res.send(response);
+})
 router.post('/fetchStudentAttendence', async (req, res) => {
 	const response = await studentAttendenceController.fetchStudentAttendence(req.body);
 	res.send(response);	
