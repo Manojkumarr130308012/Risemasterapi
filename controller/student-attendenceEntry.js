@@ -210,10 +210,9 @@ class studentAttendenceController{
 
 	async fetchStudentAttendenceDetails2(attendenceDetails){
 		try{
-			var sortt={regNo:1};
 			let section = attendenceDetails.section;
 			let attendenceDate = attendenceDetails.attendenceDate;
-			return await studentAttendenceSchema.aggregate([
+			return await studentAttendenceSchema.aggregate.sort({regNo: 1}([
 
 				{
 					$match: {
