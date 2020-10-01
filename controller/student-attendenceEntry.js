@@ -223,7 +223,7 @@ class studentAttendenceController{
                 },{
 					$group:
 					{
-						_id:"studentId",
+						_id:"regNo",
 						//   "numOfStudent":{$sum:1},
 						"listOfStudents":{$push:"$studentAttendence"}
 					}
