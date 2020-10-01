@@ -245,7 +245,7 @@ class studentAttendenceController{
 			let section = attendenceDetails.section;
 			let attendenceDate = attendenceDetails.attendenceDate;
 			let response = await studentAttendenceSchema.find({'section':section,
-			'attendenceDate':attendenceDate});
+			'attendenceDate':attendenceDate}).sort({regNo: 1});
 			 return response;		
 		} catch(error){
 			return {
