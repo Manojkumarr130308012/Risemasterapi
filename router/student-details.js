@@ -42,4 +42,8 @@ router.get('/countstuchart', async function  (req, res) {
 	let response = await studentDetailsController.countstuchart();
 	res.send(response);
 })
+router.post('/stuattendance', async function  (req, res) {
+	let response = await studentDetailsController.fetchStudentAttendenceDetails2(req.body);
+	res.send(response);
+})
 module.exports = router;

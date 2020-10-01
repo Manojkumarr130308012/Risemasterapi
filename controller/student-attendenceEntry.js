@@ -230,6 +230,14 @@ class studentAttendenceController{
 						as: "studentDetails"
 					  }
 				 },	
+				  {
+					$group:
+					{
+						_id:"$studentDetails.institution_name",
+						  "numOfStudent":{$sum:1},
+						"listOfStudents":{$push:"$firstName"}
+					}
+				}
 			]);
 		} catch(error){
 			return {

@@ -695,6 +695,43 @@ async convert(newstudentdetails) {
 			return { status: "error", err: err };
 		}
 
+    }
+    
+    async fetchStudentAttendenceDetails2(attendenceDetails){
+		try{
+			let section = attendenceDetails.section;
+			let attendenceDate = attendenceDetails.attendenceDate;
+			return await studentAttendenceSchema.aggregate([
+				{
+					$lookup:
+					  {
+						from: "student-attendences",
+						localField: "studentId",
+						foreignField: "_id",
+						as: "studentDetails"
+					  }
+				 },{
+					$match: {
+						section: ObjectId(section),
+						attendenceDate: attendenceDate
+
+					}
+                }	
+            //     {
+            //       $group:
+            //       {
+            //           _id:"$studentDetails.institution_name",
+            //             "numOfStudent":{$sum:1},
+            //           "listOfStudents":{$push:"$firstName"}
+            //       }
+            //   }
+			]);
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
 	}
 
 
