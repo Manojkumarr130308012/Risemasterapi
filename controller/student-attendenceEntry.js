@@ -229,15 +229,15 @@ class studentAttendenceController{
 						foreignField: "_id",
 						as: "studentDetails"
 					  }
-				 },	
-				  {
-					$group:
-					{
-						_id:"$studentDetails.id",
-						//   "numOfStudent":{$sum:1},
-						"listOfStudents":{$push:"$firstName"}
-					}
-				}
+				 }	
+				//   ,{
+				// 	$group:
+				// 	{
+				// 		_id:"$studentDetails.id",
+				// 		//   "numOfStudent":{$sum:1},
+				// 		"listOfStudents":{$push:"$firstName"}
+				// 	}
+				// }
 			]);
 		} catch(error){
 			return {
