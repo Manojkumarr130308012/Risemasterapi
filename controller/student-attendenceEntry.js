@@ -220,14 +220,7 @@ class studentAttendenceController{
 						attendenceDate: attendenceDate
 
 					}
-                },{
-					$group:
-					{
-						_id:"$studentId",
-						//   "numOfStudent":{$sum:1},
-						"listOfStudents":{$push:"$studentAttendence"}
-					}
-				},
+                },
 				{
 					$lookup:
 					  {
@@ -236,7 +229,14 @@ class studentAttendenceController{
 						foreignField: "_id",
 						as: "studentDetails"
 					  }
-				 }	
+				 }	,{
+					$group:
+					{
+						_id:"$studentId",
+						//   "numOfStudent":{$sum:1},
+						"listOfStudents":{$push:"$studentAttendence"}
+					}
+				}
 				  
 			]);
 		} catch(error){
