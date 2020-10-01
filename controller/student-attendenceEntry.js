@@ -229,7 +229,7 @@ class studentAttendenceController{
 						foreignField: "_id",
 						as: "studentDetails"
 					  }
-				 }	,{
+				 },{
 					$group:
 					{
 						_id:"$studentId",
