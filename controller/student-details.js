@@ -710,14 +710,15 @@ async convert(newstudentdetails) {
 						foreignField: "_id",
 						as: "studentDetails"
 					  }
-				 },{
-					$match: {
-						section: ObjectId(section),
-						attendenceDate: attendenceDate
+                 }
+                //  ,{
+				// 	$match: {
+				// 		section: ObjectId(section),
+				// 		attendenceDate: attendenceDate
 
-					}
-                }	
-            //     {
+				// 	}
+                // }	
+            //     ,{
             //       $group:
             //       {
             //           _id:"$studentDetails.institution_name",
