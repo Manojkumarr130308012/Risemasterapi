@@ -244,9 +244,18 @@ class studentAttendenceController{
 		try{
 			let section = attendenceDetails.section;
 			let attendenceDate = attendenceDetails.attendenceDate;
-			let response = await studentAttendenceSchema.find({'section':section,
-			'attendenceDate':attendenceDate}).sort({regNo: 1});
-			 return response;		
+			return await studentAttendenceSchema.find({'section':section,
+			'attendenceDate':attendenceDate}).sort({regNo: 1})([
+							{
+								$lookup:
+								  {
+									from: "student_details",
+									localField: "studentId",
+									foreignField: "_id",
+									as: "studentDetails"
+								  }
+							 },	
+						]);
 		} catch(error){
 			return {
 				status: "error",
