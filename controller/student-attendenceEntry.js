@@ -208,15 +208,17 @@ class studentAttendenceController{
 
 
 
-	async fetchStudentAttendenceDetails2(section1,attendenceDate1){
+	async fetchStudentAttendenceDetails2(attendenceDetails){
 		try{
-			var sort={studentId:1};
-			return await studentAttendenceSchema.sort(sort).aggregate([
+			let section = attendenceDetails.section;
+			let attendenceDate = attendenceDetails.attendenceDate;
+		
+			return await studentAttendenceSchema.aggregate([
 
 				{
 					$match: {
-						section: ObjectId(section1),
-						attendenceDate: attendenceDate1
+						section: ObjectId(section),
+						attendenceDate: attendenceDate
 
 					}
                 },

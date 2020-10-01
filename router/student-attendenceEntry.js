@@ -30,7 +30,7 @@ router.get('/fetchStudentAttendenceDetails1', async (req, res) => {
 	res.send(response);
 })
 router.post('/fetchStudentAttendenceDetails2', async (req, res) => {
-	const response = await studentAttendenceController.fetchStudentAttendenceDetails2(req.query.section,req.query.attendenceDate);
+	const response = await studentAttendenceController.fetchStudentAttendenceDetails2(req.body);
 	res.send(response);
 })
 router.post('/fetchStudentAttendence', async (req, res) => {
