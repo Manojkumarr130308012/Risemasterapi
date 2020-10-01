@@ -212,7 +212,7 @@ class studentAttendenceController{
 		try{
 			let section = attendenceDetails.section;
 			let attendenceDate = attendenceDetails.attendenceDate;
-			return await studentAttendenceSchema.aggregate.sort({regNo: 1})([
+			return await studentAttendenceSchema.aggregate([
 
 				{
 					$match: {
