@@ -701,7 +701,7 @@ async convert(newstudentdetails) {
 		try{
 			let section = attendenceDetails.section;
 			let attendenceDate = attendenceDetails.attendenceDate;
-			return await studentAttendenceSchema.aggregate([
+			return await studentDetailsSchema.aggregate([
 				{
 					$lookup:
 					  {
