@@ -208,54 +208,29 @@ class studentAttendenceController{
 
 
 
-	// async fetchStudentAttendenceDetails2(attendenceDetails){
-	// 	try{
-	// 		let section = attendenceDetails.section;
-	// 		let attendenceDate = attendenceDetails.attendenceDate;
-	// 		return await studentAttendenceSchema.aggregate.sort({regNo: 1})([
-
-	// 			{
-	// 				$match: {
-	// 					section: ObjectId(section),
-	// 					attendenceDate: attendenceDate
-
-	// 				}
-    //             },
-	// 			{
-	// 				$lookup:
-	// 				  {
-	// 					from: "student_details",
-	// 					localField: "studentId",
-	// 					foreignField: "_id",
-	// 					as: "studentDetails"
-	// 				  }
-	// 			 },	
-	// 		]);
-	// 	} catch(error){
-	// 		return {
-	// 			status: "error",
-	// 			error: errorHandler.parseMongoError(error)
-	// 		};
-	// 	}
-	// }
-
-
 	async fetchStudentAttendenceDetails2(attendenceDetails){
 		try{
 			let section = attendenceDetails.section;
 			let attendenceDate = attendenceDetails.attendenceDate;
-			return await studentAttendenceSchema.find({'section':section,
-			'attendenceDate':attendenceDate}).sort({regNo: 1})([
-							{
-								$lookup:
-								  {
-									from: "student_details",
-									localField: "studentId",
-									foreignField: "_id",
-									as: "studentDetails"
-								  }
-							 },	
-						]);
+			return await studentAttendenceSchema.aggregate([
+
+				{
+					$match: {
+						section: ObjectId(section),
+						attendenceDate: attendenceDate
+
+					}
+                },
+				{
+					$lookup:
+					  {
+						from: "student_details",
+						localField: "studentId",
+						foreignField: "_id",
+						as: "studentDetails"
+					  }
+				 },	
+			]);
 		} catch(error){
 			return {
 				status: "error",
@@ -263,6 +238,31 @@ class studentAttendenceController{
 			};
 		}
 	}
+
+
+	// async fetchStudentAttendenceDetails2(attendenceDetails){
+	// 	try{
+	// 		let section = attendenceDetails.section;
+	// 		let attendenceDate = attendenceDetails.attendenceDate;
+	// 		return await studentAttendenceSchema.find({'section':section,
+	// 		'attendenceDate':attendenceDate}).sort({regNo: 1})([
+	// 						{
+	// 							$lookup:
+	// 							  {
+	// 								from: "student_details",
+	// 								localField: "studentId",
+	// 								foreignField: "_id",
+	// 								as: "studentDetails"
+	// 							  }
+	// 						 },	
+	// 					]);
+	// 	} catch(error){
+	// 		return {
+	// 			status: "error",
+	// 			error: errorHandler.parseMongoError(error)
+	// 		};
+	// 	}
+	// }
 
 	async fetchStudentAttendence(filterStudentAttendence) {
 		//console.log('Filter Subject', filterStudentAttendence);
