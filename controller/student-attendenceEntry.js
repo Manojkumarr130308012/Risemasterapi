@@ -234,7 +234,9 @@ class studentAttendenceController{
 					{
 						_id:"$studentDetails._id",
 						//   "numOfStudent":{$sum:1},
-						"listOfStudents":{$push:"$studentAttendence"}
+						"listOfStudents":{$push:"$studentAttendence"},
+						"listOfStudentsname":{$push:"$studentDetails.firstName"}
+
 					}
 				}
 				  
