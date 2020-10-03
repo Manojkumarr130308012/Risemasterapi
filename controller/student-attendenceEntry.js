@@ -106,11 +106,16 @@ class studentAttendenceController{
 	
 	async update(id, body) {
 	
-        try {
+		try 
+		{
             let response = await studentAttendenceSchema.updateOne({_id: id}, body);
-            return { status: "success", result: response };
+            return { 
+				status: "success", result: response
+			 };
 
-        } catch (error) {
+		}
+		 catch (error) 
+		 {
             return { status: "error", error: error };
         }
 
@@ -185,7 +190,6 @@ class studentAttendenceController{
 						section: ObjectId(section1),
 						period: ObjectId(period1),
 						attendenceDate: attendenceDate1
-
 					}
                 },
 				{
