@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const examSchema = new mongoose.Schema({
+const exammasSchema = new mongoose.Schema({
     examtype: {
         type: mongoose.Schema.ObjectId,
         required: true
@@ -18,4 +18,4 @@ const examSchema = new mongoose.Schema({
         required: true
     }
 })
-module.exports = new mongoose.model('exam', examSchema);
+module.exports = new mongoose.model('exammas', exammasSchema);
