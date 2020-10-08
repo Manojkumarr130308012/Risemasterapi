@@ -69,6 +69,19 @@ class examController{
         }
 
 	}
+	async fetchdataactive(status){
+		try{
+			let response = await examSchema.find({'status':status});
+			return {
+				response: response
+			};
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
 	async fetchbyIns(examtype){
 		try{
 			let response = await examSchema.find({'examtype':examtype});

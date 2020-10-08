@@ -16,6 +16,10 @@ const examSchema = new mongoose.Schema({
     end_date: {
         type: String,
         required: true
+    },
+    status: {
+        type: String,
+        required: true
     }
 })
 module.exports = new mongoose.model('exam', examSchema);

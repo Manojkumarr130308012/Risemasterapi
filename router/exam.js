@@ -28,6 +28,10 @@ router.put('/update', async (req, res) => {
 	const response = await examController.update(req.query.id, req.body);
 	res.send(response);
 })
+router.get('/fetchdataactive', async (req, res) => {	
+	const response = await academicYearController.fetchdataactive(req.query.status);
+	res.send(response);
+})
 router.get('/aggregation', async (req, res) =>{
 	let response = await examController.aggregation();
 	res.send(response);
