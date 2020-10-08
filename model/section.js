@@ -28,6 +28,10 @@ const sectionSchema = new mongoose.Schema({
     section: {
         type: String,
         required: true
+    },
+    status: {
+        type: String,
+        required: true
     }
   
 

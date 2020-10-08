@@ -47,6 +47,19 @@ class sectionController{
 			};
 		}
 	}
+	async fetchdataactive(status){
+		try{
+			let response = await sectionSchema.find({'status':status});
+			return {
+				response: response
+			};
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
+	}
 	async fetchdata(id){
 		try{
 			return await sectionSchema.aggregate([
