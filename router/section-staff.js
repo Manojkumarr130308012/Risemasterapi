@@ -18,6 +18,10 @@ router.get('/fetchbyIns', async (req, res) => {
 	const response = await sectionStaffController.fetchbyIns(req.query.institution);
 	res.send(response);
 })
+router.get('/fetchdataactive', async (req, res) => {	
+	const response = await sectionStaffController.fetchdataactive(req.query.status);
+	res.send(response);
+})
 router.get('/fetchbySection', async (req, res) => {
 	const response = await sectionStaffController.fetchbySection(req.query.section);
 	res.send(response);

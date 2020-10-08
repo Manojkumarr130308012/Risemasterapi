@@ -18,6 +18,19 @@ class sectionStaffController{
 				error: errorHandler.parseMongoError(error)
 			};
 		}
+    }
+    async fetchdataactive(status){
+		try{
+			let response = await sectionStaffSchema.find({'status':status});
+			return {
+				response: response
+			};
+		} catch(error){
+			return {
+				status: "error",
+				error: errorHandler.parseMongoError(error)
+			};
+		}
 	}
 	
 	async fetch(){

@@ -12,6 +12,10 @@ const sectionStaffSchema = new mongoose.Schema({
     staff: {
         type: mongoose.Schema.ObjectId,
         required: true
+    },
+    status: {
+        type: String,
+        required: true
     }
 
 })
